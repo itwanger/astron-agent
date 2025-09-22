@@ -22,8 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
-import java.net.URL;
+import java.net.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -255,49 +256,61 @@ public class CoreSystemService {
      * @throws BusinessException if header assembly fails
      */
     public Map<String, String> assembleRequestHeader(String requestUrl, String apiKey, String apiSecret, String method, byte[] body) {
-        URL url = null;
         try {
-            url = new URL(requestUrl);
-            // Get date
+            // 1) 用 URI，拿“原始”path/query，避免 decode 造成签名不一致
+            URI uri = URI.create(requestUrl);
+
+            String scheme = uri.getScheme();
+            String host   = uri.getHost();
+            int port      = uri.getPort(); // -1 表示未显式写端口
+            // Host 头：只有在非默认端口时才带端口
+            int defaultPort = "https".equalsIgnoreCase(scheme) ? 443 : 80;
+            String hostHeader = (port > 0 && port != defaultPort) ? host + ":" + port : host;
+
+            // 原始 path/query（未解码）
+            String rawPath  = uri.getRawPath();
+            if (rawPath == null || rawPath.isEmpty()) rawPath = "/";
+            String rawQuery = uri.getRawQuery();
+            String pathAndQuery = (rawQuery == null || rawQuery.isEmpty()) ? rawPath : rawPath + "?" + rawQuery;
+
+            // 2) Date（GMT）
             SimpleDateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
             format.setTimeZone(TimeZone.getTimeZone("UTC"));
             String date = format.format(new Date());
-            // Calculate body digest (SHA256)
-            MessageDigest instance = MessageDigest.getInstance("SHA-256");
-            instance.update(body);
-            String digest = "SHA256=" + Base64.getEncoder().encodeToString(instance.digest());
-            // date = "Thu, 19 Dec 2024 07:47:57 GMT";
-            String host = url.getHost();
-            int port = url.getPort(); // port >0 means url contains port
-            if (port > 0) {
-                host = host + ":" + port;
-            }
-            String path = url.getPath();
-            if ("".equals(path) || path == null) {
-                path = "/";
-            }
-            // Build parameters required for signature calculation
-            StringBuilder builder = new StringBuilder().append("host: ").append(host).append("\n").//
-                            append("date: ").append(date).append("\n").//
-                            append(method).append(" ").append(path).append(" HTTP/1.1").append("\n").append("digest: ").append(digest);
-            Charset charset = Charset.forName("UTF-8");
 
-            // Use hmac-sha256 to calculate signature
-            Mac mac = Mac.getInstance("hmacsha256");
-            SecretKeySpec spec = new SecretKeySpec(apiSecret.getBytes(charset), "hmacsha256");
-            mac.init(spec);
-            byte[] hexDigits = mac.doFinal(builder.toString().getBytes(charset));
-            String sha = Base64.getEncoder().encodeToString(hexDigits);
-            // Build header
-            String authorization = String.format("hmac-auth api_key=\"%s\", algorithm=\"%s\", headers=\"%s\", signature=\"%s\"", apiKey, "hmac-sha256", "host date request-line digest", sha);
-            Map<String, String> header = new HashMap<String, String>();
+            // 3) Body 摘要（空体也要参与计算）
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(body != null ? body : new byte[0]);
+            String digest = "SHA256=" + Base64.getEncoder().encodeToString(md.digest());
+
+            // 4) request-line 要带上原始 path[?query]
+            String requestLine = method + " " + pathAndQuery + " HTTP/1.1";
+
+            String payloadToSign = new StringBuilder()
+                    .append("host: ").append(hostHeader).append('\n')
+                    .append("date: ").append(date).append('\n')
+                    .append(requestLine).append('\n')
+                    .append("digest: ").append(digest)
+                    .toString();
+
+            // 5) HMAC-SHA256（标准写法）
+            Mac mac = Mac.getInstance("HmacSHA256");
+            mac.init(new SecretKeySpec(apiSecret.getBytes(StandardCharsets.UTF_8), "HmacSHA256"));
+            String signature = Base64.getEncoder().encodeToString(mac.doFinal(payloadToSign.getBytes(StandardCharsets.UTF_8)));
+
+            String authorization = String.format(
+                    "hmac-auth api_key=\"%s\", algorithm=\"%s\", headers=\"%s\", signature=\"%s\"",
+                    apiKey, "hmac-sha256", "host date request-line digest", signature
+            );
+
+            Map<String, String> header = new HashMap<>();
             header.put("authorization", authorization);
-            header.put("host", host);
+            header.put("host", hostHeader);
             header.put("date", date);
             header.put("digest", digest);
             return header;
         } catch (Exception e) {
-            throw new BusinessException(ResponseEnum.RESPONSE_FAILED, "assemble requestHeader  error:" + e.getMessage());
+            throw new BusinessException(ResponseEnum.RESPONSE_FAILED, "assemble requestHeader error: " + e.getMessage());
         }
     }
 

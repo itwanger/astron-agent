@@ -1105,14 +1105,14 @@ public class ModelService extends ServiceImpl<ModelMapper, Model> {
                 if (nodeParam == null) {
                     continue;
                 }
-                // —— Only perform replacement when current node actually references oldServiceId ——
+                //  Only perform replacement when current node actually references oldServiceId
                 boolean hitOld = Objects.equals(llmId, nodeParam.getLong("llmId"));
 
                 if (!hitOld) {
                     continue;
                 }
 
-                // —— Replacement logic
+                //  Replacement logic
                 nodeParam.put("modelEnabled", false);
                 changed = true;
                 if (changed) {

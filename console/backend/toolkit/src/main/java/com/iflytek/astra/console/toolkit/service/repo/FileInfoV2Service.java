@@ -2151,7 +2151,7 @@ public class FileInfoV2Service extends ServiceImpl<FileInfoV2Mapper, FileInfoV2>
             delIdSet.add(directoryTree.getId());
             delDocIdList.add(directoryTree.getFileId());
         }
-        fileDirectoryTreeMapper.deleteBatchIds(delIdSet);
+        fileDirectoryTreeMapper.deleteByIds(delIdSet);
         removeBatchByIds(delIdSet);
 
         // Add back billing metrics after deletion
