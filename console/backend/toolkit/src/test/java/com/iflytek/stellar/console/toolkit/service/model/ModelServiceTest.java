@@ -3,6 +3,7 @@ package com.iflytek.stellar.console.toolkit.service.model;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.iflytek.stellar.console.commons.entity.workflow.Workflow;
 import com.iflytek.stellar.console.commons.exception.BusinessException;
 import com.iflytek.stellar.console.commons.response.ApiResult;
 import com.iflytek.stellar.console.toolkit.entity.biz.modelconfig.LocalModelDto;
@@ -77,54 +78,59 @@ class ModelServiceTest {
         modelServiceUnderTest.env = "env";
     }
 
+    /**
+     * Test scenario: validate model successfully when apiKeyMasked is false
+     * and old model record exists in DB to bypass decryption.
+     *
+     * @throws BusinessException if validation fails unexpectedly
+     */
     @Test
     void testValidateModel_ok_bypassDecrypt() {
-        // 1) 构造请求：设置 id 且 apiKeyMasked=false -> 走“复用库里apiKey”分支
+        // 1) Build request: set apiKeyMasked=false to use DB apiKey directly
         ModelValidationRequest request = new ModelValidationRequest();
-        // request.setId(100L);
         request.setApiKeyMasked(false);
         request.setEndpoint("https://api.deepseek.com/v1/chat/completions");
         request.setModelName("dsv3");
-        request.setApiKey(
-                "KKaiINFjdi1sOTIo2zqBZcQk8TZCRxJ11kYnB82vV6eYyonlhhXA9LsW0xtJX2vj92r7nd+hY7AiF83sQN0sC9K/LBU8uUOmcxm0clY0H2uBHqMPlH0aPv+RQQYwOBCeScFBVguZ73JOod/IgHr3DIw4r2zEfbWDGxXTUVS+/D99E8BRsM7kBZlL8oXbWj9EGRuv0DbFNxkkHhxK4jEo7Uyn3FKr7juk6BQx9xu2n6uyOlxyqVM/1vu/AzCQfE8Ksmq4vdcflYszMMqwwj3koh4umfLgCvCDW5VBz0Z9fjfu9o5BDnGO5wxW9Z0/yQvx58s3X9ZjYy83FYpKSAZchw==");
+        request.setApiKey("...longBase64ApiKey...");
         request.setDomain("deepseek-chat");
         request.setDescription("deepSeek model");
         request.setUid("18879796086");
 
-        // 2) mock 从库里拿旧模型，直接给一个明文 key
+        // 2) Mock DB model: return plain apiKey to bypass decrypt
         Model dbModel = new Model();
         dbModel.setId(100L);
         dbModel.setUid("18879796086");
-        dbModel.setApiKey("sk-test"); // 直接明文，避免 decrypt
+        dbModel.setApiKey("sk-test");
         when(mockMapper.selectById(100L)).thenReturn(dbModel);
 
-        // 3) SSRF黑名单配置（可以返回空，逻辑能兜住）
+        // 3) Mock SSRF blacklist config (return empty list is acceptable)
         when(mockConfigInfoMapper.getListByCategory("NETWORK_SEGMENT_BLACK_LIST"))
                 .thenReturn(Collections.emptyList());
 
-        // 4) 工作流前缀过滤配置（允许为空，为空时 just skip）
+        // 4) Mock workflow prefix filter config (return null is acceptable)
         when(mockConfigInfoMapper.getByCategoryAndCode("LLM_WORKFLOW_FILTER", "self-model"))
                 .thenReturn(null);
         when(mockWorkflowMapper.selectList(any(LambdaQueryWrapper.class)))
                 .thenReturn(Collections.emptyList());
 
-        // 5) mock 调用大模型接口并返回一个合法 JSON（必须包含 choices + usage）
+        // 5) Mock large model API response with valid JSON including choices and usage
         String okJson = "{\"choices\":[], \"usage\": {\"prompt_tokens\":1, \"completion_tokens\":1, \"total_tokens\":2}}";
         when(mockRestTemplate.exchange(
                 eq("https://api.deepseek.com/v1/chat/completions"),
                 eq(HttpMethod.POST),
                 any(HttpEntity.class),
-                eq(String.class))).thenReturn(new ResponseEntity<>(okJson, HttpStatus.OK));
+                eq(String.class)
+        )).thenReturn(new ResponseEntity<>(okJson, HttpStatus.OK));
 
-        // 6) 执行
+        // 6) Execute validation
         String result = modelServiceUnderTest.validateModel(request);
-        assertEquals("模型校验通过", result);
+        assertEquals("Model validation passed", result);
 
-        // 7) 因为是新增（id 只是为了 bypass decrypt，saveOrUpdate 里仍会判定 isNew 与否）
-        // 这里不强求精确实体匹配，避免 verify 失败
+        // 7) Verify insert and category save (entity exact match not required)
         verify(mockMapper).insert(any(Model.class));
         verify(mockModelCategoryService).saveAll(any(ModelCategoryReq.class));
     }
+
 
     @Test
     void testValidateModel_ConfigInfoMapperSelectOneReturnsNull() {

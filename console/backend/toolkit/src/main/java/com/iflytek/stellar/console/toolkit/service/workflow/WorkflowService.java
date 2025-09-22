@@ -3627,7 +3627,7 @@ public class WorkflowService extends ServiceImpl<WorkflowMapper, Workflow> {
 
                     if (authorized != null) {
                         Boolean objAuthorized = jsonObject.getBoolean("authorized");
-                        return objAuthorized != null && objAuthorized == authorized;
+                        return objAuthorized != null && objAuthorized.equals(authorized);
                     }
 
                     return true;
