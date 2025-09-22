@@ -257,33 +257,33 @@ public class CoreSystemService {
      */
     public Map<String, String> assembleRequestHeader(String requestUrl, String apiKey, String apiSecret, String method, byte[] body) {
         try {
-            // 1) 用 URI，拿“原始”path/query，避免 decode 造成签名不一致
+            // 1) Use URI and 'original' path/query to avoid decoding causing inconsistent signatures
             URI uri = URI.create(requestUrl);
 
             String scheme = uri.getScheme();
             String host   = uri.getHost();
-            int port      = uri.getPort(); // -1 表示未显式写端口
-            // Host 头：只有在非默认端口时才带端口
+            int port      = uri.getPort(); // -1 Indicates an implicit write port
+            // Host header: Only includes ports when they are not default ports
             int defaultPort = "https".equalsIgnoreCase(scheme) ? 443 : 80;
             String hostHeader = (port > 0 && port != defaultPort) ? host + ":" + port : host;
 
-            // 原始 path/query（未解码）
+            // Original path/query (not decoded)
             String rawPath  = uri.getRawPath();
             if (rawPath == null || rawPath.isEmpty()) rawPath = "/";
             String rawQuery = uri.getRawQuery();
             String pathAndQuery = (rawQuery == null || rawQuery.isEmpty()) ? rawPath : rawPath + "?" + rawQuery;
 
-            // 2) Date（GMT）
+            // 2) Date -- GMT
             SimpleDateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
             format.setTimeZone(TimeZone.getTimeZone("UTC"));
             String date = format.format(new Date());
 
-            // 3) Body 摘要（空体也要参与计算）
+            // 3) Body Abstract (Empty space also needs to be included in the calculation)
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(body != null ? body : new byte[0]);
             String digest = "SHA256=" + Base64.getEncoder().encodeToString(md.digest());
 
-            // 4) request-line 要带上原始 path[?query]
+            // 4) Request line should include the original path [? Query]
             String requestLine = method + " " + pathAndQuery + " HTTP/1.1";
 
             String payloadToSign = new StringBuilder()
@@ -293,7 +293,7 @@ public class CoreSystemService {
                     .append("digest: ").append(digest)
                     .toString();
 
-            // 5) HMAC-SHA256（标准写法）
+            // 5) HMAC-SHA256(standard notation)
             Mac mac = Mac.getInstance("HmacSHA256");
             mac.init(new SecretKeySpec(apiSecret.getBytes(StandardCharsets.UTF_8), "HmacSHA256"));
             String signature = Base64.getEncoder().encodeToString(mac.doFinal(payloadToSign.getBytes(StandardCharsets.UTF_8)));

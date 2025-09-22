@@ -53,7 +53,5 @@ public class SplitRequest {
     // Default to AIUI value
     public SplitRequest() {
         this.ragType = ProjectContent.FILE_SOURCE_AIUI_RAG2_STR;
-        // this.lengthRange = Arrays.asList(16, 1024); // Set default value to [16, 1024]
-        // this.separator = Arrays.asList("。", "！", "；", "？"); // Set default value to ["。", "！", "；", "？"]
     }
 }

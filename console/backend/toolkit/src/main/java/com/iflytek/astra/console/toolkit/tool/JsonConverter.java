@@ -186,7 +186,7 @@ public class JsonConverter {
                     : convertObjectProperties(propsIfObject, Mode.TYPE);
             default -> {
                 // Unknown type: handle conservatively
-                // Value template → empty object; Type template → return type text as-is
+                // Value template -> empty object; Type template -> return type text as ->is
                 yield (mode == Mode.VALUE) ? new JSONObject() : type;
             }
         };

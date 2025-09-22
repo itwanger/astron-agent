@@ -105,14 +105,14 @@ public class ShelfModelService {
                 if (nodeParam == null) {
                     continue;
                 }
-                // —— Only replace when current node actually references oldServiceId ——
+                //  Only replace when current node actually references oldServiceId
                 boolean hitOld = Objects.equals(llmId, nodeParam.getLong("llmId"));
 
                 if (!hitOld) {
                     continue;
                 }
 
-                // —— Replacement logic
+                //Replacement logic
                 nodeParam.put("modelEnabled", false);
                 changed = true;
                 if (changed) {
