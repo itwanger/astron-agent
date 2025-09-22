@@ -88,7 +88,7 @@ public final class SidGenerator2 {
         int ip4 = ipBytes[3] & 0xFF;
         this.shortLocalIP = String.format("%02x%02x", ip3, ip4);
 
-        // Historical logic: require port length ≥ 4, use only first 2 chars
+        // Historical logic: require port length >= 4, use only first 2 chars
         if (localPort == null || localPort.length() < 4) {
             throw new IllegalArgumentException("Bad Port!!");
         }

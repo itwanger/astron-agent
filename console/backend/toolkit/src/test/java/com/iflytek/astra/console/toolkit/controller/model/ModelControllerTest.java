@@ -30,6 +30,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit tests for {@link ModelController}.
+ */
 @ExtendWith(MockitoExtension.class)
 class ModelControllerTest {
 
@@ -45,11 +48,20 @@ class ModelControllerTest {
         new SpringContextHolder().setApplicationContext(ctx);
     }
 
+    /**
+     * Bind a mock request with required headers to the current thread context.
+     *
+     * @param req mock HttpServletRequest
+     */
     private static void bindRequest(MockHttpServletRequest req) {
         req.addHeader("space-id", "1001");
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(req));
     }
 
+    /**
+     * Test validateModel with ModelValidationRequest input.
+     * <p>Does not set uid to simulate real-world behavior where the controller/context injects it.</p>
+     */
     @Test
     void testValidateModel1() {
         // Arrange
@@ -58,17 +70,17 @@ class ModelControllerTest {
         request.setApiKey("apiKey");
         request.setModelName("modelName");
         request.setDomain("domain");
-        // 不设置 uid，模拟真实请求里由控制器/上下文注入导致的差异
+        // Do not set uid, simulating the difference where controller/context injects it
 
         final MockHttpServletRequest httpServletRequest = new MockHttpServletRequest();
 
-        // 放宽参数匹配，避免严格桩报错
+        // Relax parameter matching to avoid strict stubbing failure
         when(mockModelService.validateModel(any(ModelValidationRequest.class))).thenReturn("result");
 
         // Act
         final ApiResult result = modelControllerUnderTest.validateModel(request, httpServletRequest);
 
-        // Assert 基于 ArgumentCaptor 校验关键入参确实被传递
+        // Assert - use ArgumentCaptor to check that key parameters were passed correctly
         ArgumentCaptor<ModelValidationRequest> captor = ArgumentCaptor.forClass(ModelValidationRequest.class);
         verify(mockModelService, times(1)).validateModel(captor.capture());
         ModelValidationRequest passed = captor.getValue();
@@ -76,12 +88,15 @@ class ModelControllerTest {
         assertEquals("apiKey", passed.getApiKey());
         assertEquals("modelName", passed.getModelName());
         assertEquals("domain", passed.getDomain());
-        // 这里根据你的控制器逻辑校验 uid，如果控制器从上下文注入，则可能为 null 或某个值
+        // Depending on controller logic, uid may be null or injected from context
         // assertNull(passed.getUid());
 
         assertNotNull(result);
     }
 
+    /**
+     * Test validateModel with id input, service returns ApiResult.
+     */
     @Test
     void testValidateModel2() {
         final MockHttpServletRequest request = new MockHttpServletRequest();
@@ -93,6 +108,9 @@ class ModelControllerTest {
         assertEquals(apiResult, result);
     }
 
+    /**
+     * Test validateModel when service returns a successful response with no data.
+     */
     @Test
     void testValidateModel2_ModelServiceReturnsNoItem() {
         final MockHttpServletRequest request = new MockHttpServletRequest();
@@ -102,13 +120,16 @@ class ModelControllerTest {
 
         final ApiResult result = modelControllerUnderTest.validateModel(0L, request);
 
-        assertEquals(ok, result); // ★ 改这里
-        // 或者只断关键字段，避免 equals 受 timestamp 影响：
+        assertEquals(ok, result);
+        // Or check only key fields to avoid equals affected by timestamp
         assertEquals(0, result.code());
         assertEquals("OK", result.message());
         assertNull(result.data());
     }
 
+    /**
+     * Test validateModel when service returns error.
+     */
     @Test
     void testValidateModel2_ModelServiceReturnsError() {
         final MockHttpServletRequest request = new MockHttpServletRequest();
@@ -120,6 +141,9 @@ class ModelControllerTest {
         assertEquals(apiResult, result);
     }
 
+    /**
+     * Test list method with service returning data.
+     */
     @Test
     void testList() {
         final ModelDto dto = new ModelDto();
@@ -131,20 +155,23 @@ class ModelControllerTest {
         final MockHttpServletRequest request = new MockHttpServletRequest();
         bindRequest(request);
         final ApiResult<Page<LLMInfoVo>> pageApiResult =
-                        new ApiResult<>(0, "message", new Page<>(0L, 0L, 0L, false), 0L);
+                new ApiResult<>(0, "message", new Page<>(0L, 0L, 0L, false), 0L);
 
-        // 放宽匹配，避免 eq(new ModelDto()) 造成 equals 不一致
+        // Relax matching to avoid eq(new ModelDto()) causing equals mismatch
         when(mockModelService.getList(any(ModelDto.class), any(HttpServletRequest.class))).thenReturn(pageApiResult);
 
         final ApiResult result = modelControllerUnderTest.list(dto, request);
 
         assertEquals(pageApiResult, result);
-        // 也可以用 captor 校验 dto 的关键字段
+        // Use captor to verify key fields in dto
         ArgumentCaptor<ModelDto> dtoCaptor = ArgumentCaptor.forClass(ModelDto.class);
         verify(mockModelService).getList(dtoCaptor.capture(), any(HttpServletRequest.class));
         assertEquals("name", dtoCaptor.getValue().getName());
     }
 
+    /**
+     * Test list method when service returns a success with no data.
+     */
     @Test
     void testList_ModelServiceReturnsNoItem() {
         final ModelDto dto = new ModelDto();
@@ -155,22 +182,21 @@ class ModelControllerTest {
         dto.setSpaceId(0L);
 
         final MockHttpServletRequest request = new MockHttpServletRequest();
-        bindRequest(request); // ★ 绑定到线程并补上 space-id 头
+        bindRequest(request); // Bind to thread and add space-id header
 
-        // ★ 不要在 thenReturn 里调用 ApiResult.success()
+        // Do not call ApiResult.success() directly in thenReturn
         ApiResult<?> ok = new ApiResult<>(0, "OK", null, 0L);
         when(mockModelService.getList(any(ModelDto.class), any(HttpServletRequest.class)))
-                        .thenReturn((ApiResult<Page<LLMInfoVo>>) ok);
+                .thenReturn((ApiResult<Page<LLMInfoVo>>) ok);
 
         final ApiResult result = modelControllerUnderTest.list(dto, request);
 
         assertEquals(ok, result);
-        // 或更稳妥地按字段断言，避免 equals 受 timestamp 影响：
-        // assertEquals(0, result.code());
-        // assertEquals("OK", result.message());
-        // assertNull(result.data());
     }
 
+    /**
+     * Test list method when service returns error.
+     */
     @Test
     void testList_ModelServiceReturnsError() {
         final ModelDto dto = new ModelDto();
@@ -183,15 +209,18 @@ class ModelControllerTest {
         final MockHttpServletRequest request = new MockHttpServletRequest();
 
         final ApiResult<Page<LLMInfoVo>> pageApiResult =
-                        ApiResult.error(new BusinessException(ResponseEnum.SUCCESS, "args"));
+                ApiResult.error(new BusinessException(ResponseEnum.SUCCESS, "args"));
         when(mockModelService.getList(any(ModelDto.class), any(HttpServletRequest.class)))
-                        .thenReturn(pageApiResult);
+                .thenReturn(pageApiResult);
 
         final ApiResult result = modelControllerUnderTest.list(dto, request);
 
         assertEquals(pageApiResult, result);
     }
 
+    /**
+     * Test detail method with service returning data.
+     */
     @Test
     void testDetail() {
         final MockHttpServletRequest request = new MockHttpServletRequest();
@@ -203,6 +232,9 @@ class ModelControllerTest {
         assertEquals(apiResult, result);
     }
 
+    /**
+     * Test detail method when service returns a success with no data.
+     */
     @Test
     void testDetail_ModelServiceReturnsNoItem() {
         final MockHttpServletRequest request = new MockHttpServletRequest();
@@ -214,6 +246,9 @@ class ModelControllerTest {
         assertEquals(ok, result);
     }
 
+    /**
+     * Test detail method when service returns error.
+     */
     @Test
     void testDetail_ModelServiceReturnsError() {
         final MockHttpServletRequest request = new MockHttpServletRequest();
@@ -225,6 +260,9 @@ class ModelControllerTest {
         assertEquals(apiResult, result);
     }
 
+    /**
+     * Test getRsaPublicKey method.
+     */
     @Test
     void testGetRsaPublicKey() {
         when(mockModelService.getPublicKey()).thenReturn("result");
@@ -235,6 +273,9 @@ class ModelControllerTest {
         verify(mockModelService).getPublicKey();
     }
 
+    /**
+     * Test checkModelBase with specific parameters.
+     */
     @Test
     void testCheckModelBase1() {
         when(mockModelService.checkModelBase(0L, "serviceId", "url", "0L", 0L)).thenReturn(false);
@@ -245,6 +286,9 @@ class ModelControllerTest {
         verify(mockModelService).checkModelBase(0L, "serviceId", "url", "0L", 0L);
     }
 
+    /**
+     * Test getAllCategoryTree method with service returning data.
+     */
     @Test
     void testGetAllCategoryTree() {
         final CategoryTreeVO categoryTreeVO = new CategoryTreeVO();
@@ -269,6 +313,9 @@ class ModelControllerTest {
         assertEquals(expectedResult, result);
     }
 
+    /**
+     * Test getAllCategoryTree method when service returns no items.
+     */
     @Test
     void testGetAllCategoryTree_ModelServiceReturnsNoItems() {
         when(mockModelService.getAllCategoryTree()).thenReturn(Collections.emptyList());
@@ -277,43 +324,55 @@ class ModelControllerTest {
         assertEquals(Collections.emptyList(), result);
     }
 
+    /**
+     * Test switchModel method with service returning data.
+     */
     @Test
     void testSwitchModel() {
         final MockHttpServletRequest request = new MockHttpServletRequest();
         final ApiResult apiResult = new ApiResult<>(0, "message", "data", 0L);
         when(mockModelService.switchModel(eq(0L), eq(0), eq("option"), any(HttpServletRequest.class)))
-                        .thenReturn(apiResult);
+                .thenReturn(apiResult);
 
         final ApiResult result = modelControllerUnderTest.switchModel("option", 0, 0L, request);
 
         assertEquals(apiResult, result);
     }
 
+    /**
+     * Test switchModel method when service returns a success with no data.
+     */
     @Test
     void testSwitchModel_ModelServiceReturnsNoItem() {
         final MockHttpServletRequest request = new MockHttpServletRequest();
 
-        // 不要在 thenReturn 里调用 ApiResult.success()
+        // Do not call ApiResult.success() directly in thenReturn
         ApiResult<?> ok = new ApiResult<>(0, "OK", null, 0L);
         when(mockModelService.switchModel(eq(0L), eq(0), eq("on"), any(HttpServletRequest.class)))
-                        .thenReturn(ok);
+                .thenReturn(ok);
 
         final ApiResult result = modelControllerUnderTest.switchModel("on", 0, 0L, request);
         assertEquals(ok, result);
     }
 
+    /**
+     * Test switchModel method when service returns error.
+     */
     @Test
     void testSwitchModel_ModelServiceReturnsError() {
         final MockHttpServletRequest request = new MockHttpServletRequest();
         final ApiResult apiResult = ApiResult.error(new BusinessException(ResponseEnum.SUCCESS, "args"));
         when(mockModelService.switchModel(eq(0L), eq(0), eq("option"), any(HttpServletRequest.class)))
-                        .thenReturn(apiResult);
+                .thenReturn(apiResult);
 
         final ApiResult result = modelControllerUnderTest.switchModel("option", 0, 0L, request);
 
         assertEquals(apiResult, result);
     }
 
+    /**
+     * Test checkModelBase overload for offShelfModel.
+     */
     @Test
     void testCheckModelBase2() {
         when(mockModelService.offShelfModel(0L, "flowId", "serviceId")).thenReturn("result");

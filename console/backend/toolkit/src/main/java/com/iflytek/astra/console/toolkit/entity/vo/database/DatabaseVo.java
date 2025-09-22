@@ -2,8 +2,10 @@ package com.iflytek.astra.console.toolkit.entity.vo.database;
 
 import com.iflytek.astra.console.toolkit.entity.table.database.DbInfo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class DatabaseVo extends DbInfo {
 
     String address;

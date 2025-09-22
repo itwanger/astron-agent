@@ -37,7 +37,7 @@ public class JooqBatchExecutor {
                     int chunkSize,
                     int maxRetries,
                     Function<Map<String, Object>, Query> builder,
-                    SqlSender sender // ★ New: Delegate "how to execute SQL" to the caller
+                    SqlSender sender // New: Delegate "how to execute SQL" to the caller
     ) {
         ResultSummary sum = new ResultSummary();
         if (rows == null || rows.isEmpty())
@@ -54,7 +54,7 @@ public class JooqBatchExecutor {
                 while (true) {
                     try {
                         Query q = builder.apply(row);
-                        // ★ No longer q.execute(), but render template + parameters
+                        //  No longer q.execute(), but render template + parameters
                         String sql = q.getSQL(); // Template with ?
                         List<Object> params = q.getBindValues(); // Bind parameters
                         // Send to core system

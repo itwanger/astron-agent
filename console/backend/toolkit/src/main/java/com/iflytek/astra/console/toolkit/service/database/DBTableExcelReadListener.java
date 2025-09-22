@@ -10,26 +10,49 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
+/**
+ * Excel read listener for importing database table fields.
+ * <p>
+ * It validates headers according to the language context (Chinese or English),
+ * validates each row of field metadata, and converts them into
+ * {@link DbTableFieldDto} objects.
+ */
 public class DBTableExcelReadListener extends AnalysisEventListener<Map<Integer, String>> {
 
+    /** Expected headers in Chinese format. */
     private static final List<String> expectedHeaders = Arrays.asList(
-                    "字段名*", "数据类型*", "描述*", "默认值", "是否必填*");
+            "字段名*", "数据类型*", "描述*", "默认值", "是否必填*");
+
+    /** Expected headers in English format. */
     private static final List<String> expectedHeadersEn = Arrays.asList(
-                    "Field Name*", "Data Type*", "Description*", "Default Value", "Required*");
+            "Field Name*", "Data Type*", "Description*", "Default Value", "Required*");
 
+    /** Allowed field types. */
     private static final List<String> fieldType = Arrays.asList(
-                    "String", "Integer", "Time", "Number", "Boolean");
+            "String", "Integer", "Time", "Number", "Boolean");
 
-    private List<DbTableFieldDto> tableFields;
+    private final List<DbTableFieldDto> tableFields;
 
+    /**
+     * Construct a new listener with a sink list for parsed table fields.
+     *
+     * @param tableFields list to store parsed table fields
+     */
     public DBTableExcelReadListener(List<DbTableFieldDto> tableFields) {
         this.tableFields = tableFields;
     }
 
+    /**
+     * Validate header row when reading Excel.
+     *
+     * @param headMap header row map (column index → header name)
+     * @param context analysis context
+     * @throws BusinessException if header format does not match expectations
+     */
     @Override
     public void invokeHeadMap(Map<Integer, String> headMap, AnalysisContext context) {
         List<String> actualHeaders = new ArrayList<>(headMap.values());
-        List<String> expectedHeadersFormat = new ArrayList<>();
+        List<String> expectedHeadersFormat;
         if (LanguageContext.isEn()) {
             expectedHeadersFormat = expectedHeadersEn;
         } else {
@@ -40,10 +63,17 @@ public class DBTableExcelReadListener extends AnalysisEventListener<Map<Integer,
         }
     }
 
-
+    /**
+     * Parse and validate a single Excel row representing a table field.
+     *
+     * @param row     row data (column index → cell value)
+     * @param context analysis context
+     * @throws BusinessException if required fields are missing, type is invalid,
+     *                           or default value format is illegal
+     */
     @Override
     public void invoke(Map<Integer, String> row, AnalysisContext context) {
-        // 校验必填项是否为空
+        // Validate required fields are not empty
         DbTableFieldDto dbTableFieldDto = new DbTableFieldDto();
         if (row.get(0) == null || row.get(1) == null || row.get(2) == null || row.get(4) == null) {
             throw new BusinessException(ResponseEnum.DATABASE_CANNOT_EMPTY);
@@ -78,10 +108,16 @@ public class DBTableExcelReadListener extends AnalysisEventListener<Map<Integer,
         tableFields.add(dbTableFieldDto);
     }
 
+    /**
+     * Final callback after all rows are analyzed.
+     *
+     * @param analysisContext analysis context
+     * @throws IllegalArgumentException if no table fields are parsed
+     */
     @Override
     public void doAfterAllAnalysed(AnalysisContext analysisContext) {
         if (tableFields.isEmpty()) {
-            throw new IllegalArgumentException("没有字段相关信息，请检查数据是否正确！");
+            throw new IllegalArgumentException("No field information found, please check the Excel data!");
         }
     }
 }
