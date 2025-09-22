@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.service.chat;
+package com.iflytek.astra.console.hub.service.chat;
 
 public interface ChatReqRespService {
 

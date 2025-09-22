@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.mapper.relation;
+package com.iflytek.astra.console.toolkit.mapper.relation;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.iflytek.stellar.console.toolkit.entity.table.relation.FlowToolRel;
+import com.iflytek.astra.console.toolkit.entity.table.relation.FlowToolRel;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

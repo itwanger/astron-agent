@@ -1,9 +1,9 @@
-package com.iflytek.stellar.console.hub.service.space;
+package com.iflytek.astra.console.hub.service.space;
 
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.commons.dto.space.SpaceAddDTO;
-import com.iflytek.stellar.console.commons.dto.space.SpaceUpdateDTO;
-import com.iflytek.stellar.console.commons.entity.space.Space;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.commons.dto.space.SpaceAddDTO;
+import com.iflytek.astra.console.commons.dto.space.SpaceUpdateDTO;
+import com.iflytek.astra.console.commons.entity.space.Space;
 
 public interface SpaceBizService {
 

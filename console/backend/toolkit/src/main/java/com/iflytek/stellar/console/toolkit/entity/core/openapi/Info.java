@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.core.openapi;
+package com.iflytek.astra.console.toolkit.entity.core.openapi;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import lombok.Data;

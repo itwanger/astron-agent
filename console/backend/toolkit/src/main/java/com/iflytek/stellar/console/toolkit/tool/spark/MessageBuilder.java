@@ -1,11 +1,11 @@
-package com.iflytek.stellar.console.toolkit.tool.spark;
+package com.iflytek.astra.console.toolkit.tool.spark;
 
 import com.alibaba.fastjson2.JSON;
 
-import com.iflytek.stellar.console.toolkit.common.constant.ChatConstant;
-import com.iflytek.stellar.console.toolkit.entity.spark.*;
-import com.iflytek.stellar.console.toolkit.entity.spark.request.Chat;
-import com.iflytek.stellar.console.toolkit.entity.spark.request.Message;
+import com.iflytek.astra.console.toolkit.common.constant.ChatConstant;
+import com.iflytek.astra.console.toolkit.entity.spark.*;
+import com.iflytek.astra.console.toolkit.entity.spark.request.Chat;
+import com.iflytek.astra.console.toolkit.entity.spark.request.Message;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;

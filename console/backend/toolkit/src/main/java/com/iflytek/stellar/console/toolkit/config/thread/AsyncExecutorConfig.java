@@ -1,7 +1,7 @@
-// com.iflytek.stellar.console.toolkit.config.thread.AsyncExecutorConfig
-package com.iflytek.stellar.console.toolkit.config.thread;
+// com.iflytek.astra.console.toolkit.config.thread.AsyncExecutorConfig
+package com.iflytek.astra.console.toolkit.config.thread;
 
-import com.iflytek.stellar.console.toolkit.config.properties.AsyncExecutorProperties;
+import com.iflytek.astra.console.toolkit.config.properties.AsyncExecutorProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;

@@ -1,11 +1,11 @@
-package com.iflytek.stellar.console.toolkit.task.scheduler;
+package com.iflytek.astra.console.toolkit.task.scheduler;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.iflytek.stellar.console.toolkit.entity.enumVo.ModelStatusEnum;
-import com.iflytek.stellar.console.toolkit.entity.table.model.Model;
-import com.iflytek.stellar.console.toolkit.service.model.ModelService;
-import com.iflytek.stellar.console.toolkit.util.RedisUtil;
+import com.iflytek.astra.console.toolkit.entity.enumVo.ModelStatusEnum;
+import com.iflytek.astra.console.toolkit.entity.table.model.Model;
+import com.iflytek.astra.console.toolkit.service.model.ModelService;
+import com.iflytek.astra.console.toolkit.util.RedisUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.TaskScheduler;

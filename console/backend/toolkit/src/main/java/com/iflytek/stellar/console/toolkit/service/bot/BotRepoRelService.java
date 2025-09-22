@@ -1,8 +1,8 @@
-package com.iflytek.stellar.console.toolkit.service.bot;
+package com.iflytek.astra.console.toolkit.service.bot;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.iflytek.stellar.console.toolkit.entity.table.relation.BotRepoRel;
-import com.iflytek.stellar.console.toolkit.mapper.relation.BotRepoRelMapper;
+import com.iflytek.astra.console.toolkit.entity.table.relation.BotRepoRel;
+import com.iflytek.astra.console.toolkit.mapper.relation.BotRepoRelMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

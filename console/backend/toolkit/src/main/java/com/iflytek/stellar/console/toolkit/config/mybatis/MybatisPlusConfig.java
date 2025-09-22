@@ -1,10 +1,10 @@
-// package com.iflytek.stellar.console.toolkit.config.mybatis;
+// package com.iflytek.astra.console.toolkit.config.mybatis;
 //
 // import com.baomidou.mybatisplus.annotation.DbType;
 // import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 // import com.baomidou.mybatisplus.extension.plugins.inner.DynamicTableNameInnerInterceptor;
 // import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-// import com.iflytek.stellar.console.toolkit.handler.language.LanguageContext;
+// import com.iflytek.astra.console.toolkit.handler.language.LanguageContext;
 // import org.mybatis.spring.annotation.MapperScan;
 // import org.springframework.context.annotation.Bean;
 // import org.springframework.context.annotation.Configuration;
@@ -12,8 +12,8 @@
 // import java.util.*;
 //
 // @MapperScan({
-// "com.iflytek.stellar.console.toolkit.mapper",
-// "com.iflytek.stellar.console.commons.mapper"
+// "com.iflytek.astra.console.toolkit.mapper",
+// "com.iflytek.astra.console.commons.mapper"
 // })
 // @Configuration
 // public class MybatisPlusConfig {

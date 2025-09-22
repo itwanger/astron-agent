@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.tool;
+package com.iflytek.astra.console.toolkit.tool;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -12,7 +12,7 @@ import java.util.Objects;
  * OpenPlatformTool provides cryptographic utilities for open platform authentication. This class
  * contains methods for generating signatures using MD5 and HMAC-SHA1 algorithms.
  *
- * @author stellar-console-toolkit
+ * @author astra-console-toolkit
  */
 public class OpenPlatformTool {
 

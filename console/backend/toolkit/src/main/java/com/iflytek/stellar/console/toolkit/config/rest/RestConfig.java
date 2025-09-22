@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.config.rest;
+package com.iflytek.astra.console.toolkit.config.rest;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

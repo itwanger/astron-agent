@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.toolkit.entity.pojo;
+package com.iflytek.astra.console.toolkit.entity.pojo;
 
-import com.iflytek.stellar.console.toolkit.entity.table.repo.FileInfoV2;
+import com.iflytek.astra.console.toolkit.entity.table.repo.FileInfoV2;
 import lombok.Data;
 
 import java.util.List;

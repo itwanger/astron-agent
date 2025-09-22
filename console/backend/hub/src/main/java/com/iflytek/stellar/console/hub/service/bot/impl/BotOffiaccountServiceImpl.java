@@ -1,10 +1,10 @@
-package com.iflytek.stellar.console.hub.service.bot.impl;
+package com.iflytek.astra.console.hub.service.bot.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.iflytek.stellar.console.hub.dto.bot.BotOffiaccountStatusEnum;
-import com.iflytek.stellar.console.hub.entity.BotOffiaccount;
-import com.iflytek.stellar.console.hub.mapper.BotOffiaccountMapper;
-import com.iflytek.stellar.console.hub.service.bot.BotOffiaccountService;
+import com.iflytek.astra.console.hub.dto.bot.BotOffiaccountStatusEnum;
+import com.iflytek.astra.console.hub.entity.BotOffiaccount;
+import com.iflytek.astra.console.hub.mapper.BotOffiaccountMapper;
+import com.iflytek.astra.console.hub.service.bot.BotOffiaccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

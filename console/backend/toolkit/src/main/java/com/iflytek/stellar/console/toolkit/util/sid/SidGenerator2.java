@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.util.sid;
+package com.iflytek.astra.console.toolkit.util.sid;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;

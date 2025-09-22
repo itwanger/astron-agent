@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.hub.mapper.notification;
+package com.iflytek.astra.console.hub.mapper.notification;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.iflytek.stellar.console.hub.entity.notification.Notification;
+import com.iflytek.astra.console.hub.entity.notification.Notification;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

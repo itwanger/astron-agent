@@ -1,11 +1,11 @@
-package com.iflytek.stellar.console.toolkit.entity.table.eval;
+package com.iflytek.astra.console.toolkit.entity.table.eval;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.iflytek.stellar.console.toolkit.common.anno.ExcelHeader;
+import com.iflytek.astra.console.toolkit.common.anno.ExcelHeader;
 import lombok.Data;
 
 import java.util.Date;

@@ -1,10 +1,10 @@
-package com.iflytek.stellar.console.toolkit.tool.http;
+package com.iflytek.astra.console.toolkit.tool.http;
 
 /**
  * Parameter class for assembling authenticated HTTP requests. This class holds the necessary
  * information for generating HMAC signature authentication.
  *
- * @author stellar-console-toolkit
+ * @author astra-console-toolkit
  */
 public class AssembleParam {
     /**

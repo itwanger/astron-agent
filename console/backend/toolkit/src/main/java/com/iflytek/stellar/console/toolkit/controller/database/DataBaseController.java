@@ -1,15 +1,15 @@
-package com.iflytek.stellar.console.toolkit.controller.database;
+package com.iflytek.astra.console.toolkit.controller.database;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.iflytek.stellar.console.commons.annotation.space.SpacePreAuth;
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.toolkit.common.anno.ResponseResultBody;
-import com.iflytek.stellar.console.toolkit.entity.dto.database.*;
-import com.iflytek.stellar.console.toolkit.entity.table.database.DbInfo;
-import com.iflytek.stellar.console.toolkit.entity.table.database.DbTableField;
-import com.iflytek.stellar.console.toolkit.entity.vo.database.*;
-import com.iflytek.stellar.console.toolkit.service.database.DatabaseService;
+import com.iflytek.astra.console.commons.annotation.space.SpacePreAuth;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.toolkit.common.anno.ResponseResultBody;
+import com.iflytek.astra.console.toolkit.entity.dto.database.*;
+import com.iflytek.astra.console.toolkit.entity.table.database.DbInfo;
+import com.iflytek.astra.console.toolkit.entity.table.database.DbTableField;
+import com.iflytek.astra.console.toolkit.entity.vo.database.*;
+import com.iflytek.astra.console.toolkit.service.database.DatabaseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;

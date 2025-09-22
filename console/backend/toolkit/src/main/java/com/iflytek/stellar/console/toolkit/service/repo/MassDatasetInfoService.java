@@ -1,10 +1,10 @@
-package com.iflytek.stellar.console.toolkit.service.repo;
+package com.iflytek.astra.console.toolkit.service.repo;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.iflytek.stellar.console.commons.entity.bot.DatasetInfo;
-import com.iflytek.stellar.console.commons.entity.dataset.BotDatasetMaas;
-import com.iflytek.stellar.console.commons.mapper.dataset.BotDatasetMaasMapper;
-import com.iflytek.stellar.console.toolkit.entity.dto.RepoDto;
+import com.iflytek.astra.console.commons.entity.bot.DatasetInfo;
+import com.iflytek.astra.console.commons.entity.dataset.BotDatasetMaas;
+import com.iflytek.astra.console.commons.mapper.dataset.BotDatasetMaasMapper;
+import com.iflytek.astra.console.toolkit.entity.dto.RepoDto;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;

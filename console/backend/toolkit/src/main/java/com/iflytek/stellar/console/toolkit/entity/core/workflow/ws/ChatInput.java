@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.entity.core.workflow.ws;
+package com.iflytek.astra.console.toolkit.entity.core.workflow.ws;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.iflytek.stellar.console.toolkit.entity.biz.workflow.ChatInputHistory;
+import com.iflytek.astra.console.toolkit.entity.biz.workflow.ChatInputHistory;
 import lombok.Data;
 
 import java.util.List;

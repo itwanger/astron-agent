@@ -1,10 +1,10 @@
-package com.iflytek.stellar.console.hub.service.chat.impl;
+package com.iflytek.astra.console.hub.service.chat.impl;
 
-import com.iflytek.stellar.console.commons.service.data.ChatDataService;
-import com.iflytek.stellar.console.commons.entity.chat.ChatReasonRecords;
-import com.iflytek.stellar.console.commons.entity.chat.ChatReqRecords;
-import com.iflytek.stellar.console.commons.entity.chat.ChatRespRecords;
-import com.iflytek.stellar.console.commons.service.ChatRecordModelService;
+import com.iflytek.astra.console.commons.service.data.ChatDataService;
+import com.iflytek.astra.console.commons.entity.chat.ChatReasonRecords;
+import com.iflytek.astra.console.commons.entity.chat.ChatReqRecords;
+import com.iflytek.astra.console.commons.entity.chat.ChatRespRecords;
+import com.iflytek.astra.console.commons.service.ChatRecordModelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

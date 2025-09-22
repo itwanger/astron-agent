@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.dto;
+package com.iflytek.astra.console.toolkit.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

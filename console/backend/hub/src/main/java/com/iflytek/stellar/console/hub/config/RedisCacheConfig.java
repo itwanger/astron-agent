@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.config;
+package com.iflytek.astra.console.hub.config;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;

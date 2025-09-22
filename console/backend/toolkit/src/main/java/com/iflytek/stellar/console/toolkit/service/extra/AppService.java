@@ -1,15 +1,15 @@
-package com.iflytek.stellar.console.toolkit.service.extra;
+package com.iflytek.astra.console.toolkit.service.extra;
 
 
 import com.alibaba.fastjson2.*;
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
-import com.iflytek.stellar.console.toolkit.config.properties.ApiUrl;
-import com.iflytek.stellar.console.toolkit.config.properties.CommonConfig;
-import com.iflytek.stellar.console.toolkit.entity.biz.external.app.*;
-import com.iflytek.stellar.console.toolkit.tool.CommonTool;
-import com.iflytek.stellar.console.toolkit.tool.http.HeaderAuthHttpTool;
-import com.iflytek.stellar.console.toolkit.util.RedisUtil;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.toolkit.config.properties.ApiUrl;
+import com.iflytek.astra.console.toolkit.config.properties.CommonConfig;
+import com.iflytek.astra.console.toolkit.entity.biz.external.app.*;
+import com.iflytek.astra.console.toolkit.tool.CommonTool;
+import com.iflytek.astra.console.toolkit.tool.http.HeaderAuthHttpTool;
+import com.iflytek.astra.console.toolkit.util.RedisUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;

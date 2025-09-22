@@ -1,9 +1,9 @@
-package com.iflytek.stellar.console.hub.controller;
+package com.iflytek.astra.console.hub.controller;
 
-import com.iflytek.stellar.console.commons.entity.workflow.WorkflowChatRequest;
-import com.iflytek.stellar.console.commons.entity.workflow.WorkflowResumeReq;
-import com.iflytek.stellar.console.commons.util.SseEmitterUtil;
-import com.iflytek.stellar.console.hub.service.WorkflowChatService;
+import com.iflytek.astra.console.commons.entity.workflow.WorkflowChatRequest;
+import com.iflytek.astra.console.commons.entity.workflow.WorkflowResumeReq;
+import com.iflytek.astra.console.commons.util.SseEmitterUtil;
+import com.iflytek.astra.console.hub.service.WorkflowChatService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,15 +1,15 @@
-package com.iflytek.stellar.console.toolkit.service.extra;
+package com.iflytek.astra.console.toolkit.service.extra;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.entity.workflow.CloneSynchronize;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
-import com.iflytek.stellar.console.commons.service.workflow.WorkflowBotService;
-import com.iflytek.stellar.console.toolkit.config.properties.ApiUrl;
-import com.iflytek.stellar.console.toolkit.entity.common.FlagResponseEntity;
-import com.iflytek.stellar.console.toolkit.tool.OpenPlatformTool;
-import com.iflytek.stellar.console.toolkit.util.OkHttpUtil;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.entity.workflow.CloneSynchronize;
+import com.iflytek.astra.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.commons.service.workflow.WorkflowBotService;
+import com.iflytek.astra.console.toolkit.config.properties.ApiUrl;
+import com.iflytek.astra.console.toolkit.entity.common.FlagResponseEntity;
+import com.iflytek.astra.console.toolkit.tool.OpenPlatformTool;
+import com.iflytek.astra.console.toolkit.util.OkHttpUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

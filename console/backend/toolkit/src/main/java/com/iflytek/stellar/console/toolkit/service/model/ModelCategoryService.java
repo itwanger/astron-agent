@@ -1,15 +1,15 @@
-package com.iflytek.stellar.console.toolkit.service.model;
+package com.iflytek.astra.console.toolkit.service.model;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
-import com.iflytek.stellar.console.toolkit.entity.table.model.ModelCategory;
-import com.iflytek.stellar.console.toolkit.entity.table.model.ModelCustomCategory;
-import com.iflytek.stellar.console.toolkit.entity.vo.CategoryTreeVO;
-import com.iflytek.stellar.console.toolkit.entity.vo.ModelCategoryReq;
-import com.iflytek.stellar.console.toolkit.mapper.model.ModelCategoryMapper;
-import com.iflytek.stellar.console.toolkit.mapper.model.ModelCustomCategoryMapper;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.toolkit.entity.table.model.ModelCategory;
+import com.iflytek.astra.console.toolkit.entity.table.model.ModelCustomCategory;
+import com.iflytek.astra.console.toolkit.entity.vo.CategoryTreeVO;
+import com.iflytek.astra.console.toolkit.entity.vo.ModelCategoryReq;
+import com.iflytek.astra.console.toolkit.mapper.model.ModelCategoryMapper;
+import com.iflytek.astra.console.toolkit.mapper.model.ModelCustomCategoryMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;

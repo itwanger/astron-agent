@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.dto.notification;
+package com.iflytek.astra.console.hub.dto.notification;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

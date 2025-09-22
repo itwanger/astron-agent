@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.common.constant.http;
+package com.iflytek.astra.console.toolkit.common.constant.http;
 
 public class CustomHeader {
     public static final String X_AUTH_TOKEN = "x-auth-token";

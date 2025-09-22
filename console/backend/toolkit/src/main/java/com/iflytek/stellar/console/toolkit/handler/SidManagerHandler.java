@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.handler;
+package com.iflytek.astra.console.toolkit.handler;
 
 
 public class SidManagerHandler {

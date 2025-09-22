@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.hub.mapper;
+package com.iflytek.astra.console.hub.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.iflytek.stellar.console.hub.entity.AiPromptTemplate;
+import com.iflytek.astra.console.hub.entity.AiPromptTemplate;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

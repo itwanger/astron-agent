@@ -1,9 +1,9 @@
-package com.iflytek.stellar.console.hub.service.notification;
+package com.iflytek.astra.console.hub.service.notification;
 
-import com.iflytek.stellar.console.hub.dto.notification.MarkReadRequest;
-import com.iflytek.stellar.console.hub.dto.notification.NotificationPageResponse;
-import com.iflytek.stellar.console.hub.dto.notification.NotificationQueryRequest;
-import com.iflytek.stellar.console.hub.dto.notification.SendNotificationRequest;
+import com.iflytek.astra.console.hub.dto.notification.MarkReadRequest;
+import com.iflytek.astra.console.hub.dto.notification.NotificationPageResponse;
+import com.iflytek.astra.console.hub.dto.notification.NotificationQueryRequest;
+import com.iflytek.astra.console.hub.dto.notification.SendNotificationRequest;
 
 /**
  * Notification center business service interface

@@ -1,8 +1,8 @@
-package com.iflytek.stellar.console.toolkit.common;
+package com.iflytek.astra.console.toolkit.common;
 
 
-import com.iflytek.stellar.console.toolkit.handler.language.LanguageContext;
-import com.iflytek.stellar.console.toolkit.tool.CommonTool;
+import com.iflytek.astra.console.toolkit.handler.language.LanguageContext;
+import com.iflytek.astra.console.toolkit.tool.CommonTool;
 import lombok.Data;
 
 /**

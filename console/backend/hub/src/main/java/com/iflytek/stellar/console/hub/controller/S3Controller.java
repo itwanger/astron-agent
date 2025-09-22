@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.hub.controller;
+package com.iflytek.astra.console.hub.controller;
 
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.commons.util.S3ClientUtil;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.commons.util.S3ClientUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

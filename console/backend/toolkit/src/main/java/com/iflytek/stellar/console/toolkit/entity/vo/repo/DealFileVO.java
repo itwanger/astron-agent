@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.toolkit.entity.vo.repo;
+package com.iflytek.astra.console.toolkit.entity.vo.repo;
 
-import com.iflytek.stellar.console.toolkit.entity.pojo.SliceConfig;
+import com.iflytek.astra.console.toolkit.entity.pojo.SliceConfig;
 import lombok.Data;
 
 import java.util.List;

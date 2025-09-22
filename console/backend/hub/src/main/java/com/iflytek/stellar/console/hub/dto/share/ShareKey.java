@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.dto.share;
+package com.iflytek.astra.console.hub.dto.share;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

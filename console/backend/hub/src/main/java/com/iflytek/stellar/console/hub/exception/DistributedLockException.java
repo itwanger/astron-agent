@@ -1,11 +1,11 @@
-package com.iflytek.stellar.console.hub.exception;
+package com.iflytek.astra.console.hub.exception;
 
 /**
  * Distributed lock exception
  *
  * Thrown when exceptions occur during distributed lock acquisition, release, or processing
  *
- * @author Stellar Console Team
+ * @author Astra Console Team
  * @since 1.0.0
  */
 public class DistributedLockException extends RuntimeException {

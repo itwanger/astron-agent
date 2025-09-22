@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.dto.database;
+package com.iflytek.astra.console.toolkit.entity.dto.database;
 
 
 import lombok.Data;

@@ -1,12 +1,12 @@
-package com.iflytek.stellar.console.hub.controller.space;
+package com.iflytek.astra.console.hub.controller.space;
 
-import com.iflytek.stellar.console.commons.annotation.RateLimit;
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.commons.annotation.space.EnterprisePreAuth;
-import com.iflytek.stellar.console.commons.dto.space.EnterpriseAddDTO;
-import com.iflytek.stellar.console.commons.dto.space.EnterpriseVO;
-import com.iflytek.stellar.console.commons.service.space.EnterpriseService;
-import com.iflytek.stellar.console.hub.service.space.EnterpriseBizService;
+import com.iflytek.astra.console.commons.annotation.RateLimit;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.commons.annotation.space.EnterprisePreAuth;
+import com.iflytek.astra.console.commons.dto.space.EnterpriseAddDTO;
+import com.iflytek.astra.console.commons.dto.space.EnterpriseVO;
+import com.iflytek.astra.console.commons.service.space.EnterpriseService;
+import com.iflytek.astra.console.hub.service.space.EnterpriseBizService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;

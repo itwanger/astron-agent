@@ -1,8 +1,8 @@
-package com.iflytek.stellar.console.hub.service.chat.impl;
+package com.iflytek.astra.console.hub.service.chat.impl;
 
-import com.iflytek.stellar.console.commons.entity.chat.ChatRespModelDto;
-import com.iflytek.stellar.console.commons.entity.chat.ChatTraceSource;
-import com.iflytek.stellar.console.hub.service.chat.TraceToSourceService;
+import com.iflytek.astra.console.commons.entity.chat.ChatRespModelDto;
+import com.iflytek.astra.console.commons.entity.chat.ChatTraceSource;
+import com.iflytek.astra.console.hub.service.chat.TraceToSourceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

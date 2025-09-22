@@ -1,10 +1,10 @@
-package com.iflytek.stellar.console.hub.service.chat.impl;
+package com.iflytek.astra.console.hub.service.chat.impl;
 
 import com.alibaba.fastjson2.JSON;
-import com.iflytek.stellar.console.commons.entity.chat.ChatReqModelDto;
-import com.iflytek.stellar.console.commons.entity.chat.ChatRespModelDto;
-import com.iflytek.stellar.console.commons.entity.workflow.WorkflowEventData;
-import com.iflytek.stellar.console.hub.service.chat.ChatHistoryMultiModalService;
+import com.iflytek.astra.console.commons.entity.chat.ChatReqModelDto;
+import com.iflytek.astra.console.commons.entity.chat.ChatRespModelDto;
+import com.iflytek.astra.console.commons.entity.workflow.WorkflowEventData;
+import com.iflytek.astra.console.hub.service.chat.ChatHistoryMultiModalService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

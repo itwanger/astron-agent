@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.hub.service.chat;
+package com.iflytek.astra.console.hub.service.chat;
 
-import com.iflytek.stellar.console.commons.dto.bot.ChatBotApi;
+import com.iflytek.astra.console.commons.dto.bot.ChatBotApi;
 
 import java.util.List;
 

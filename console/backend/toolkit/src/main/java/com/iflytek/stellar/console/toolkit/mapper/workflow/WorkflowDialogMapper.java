@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.mapper.workflow;
+package com.iflytek.astra.console.toolkit.mapper.workflow;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.iflytek.stellar.console.toolkit.entity.table.workflow.WorkflowDialog;
+import com.iflytek.astra.console.toolkit.entity.table.workflow.WorkflowDialog;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

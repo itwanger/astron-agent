@@ -1,9 +1,9 @@
-package com.iflytek.stellar.console.toolkit.tool;
+package com.iflytek.astra.console.toolkit.tool;
 
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
-import com.iflytek.stellar.console.toolkit.entity.table.ConfigInfo;
-import com.iflytek.stellar.console.toolkit.mapper.ConfigInfoMapper;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.toolkit.entity.table.ConfigInfo;
+import com.iflytek.astra.console.toolkit.mapper.ConfigInfoMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -38,7 +38,7 @@ import java.util.regex.Pattern;
  * robustness and readability.
  * </p>
  *
- * @author stellar-console-toolkit
+ * @author astra-console-toolkit
  */
 @Slf4j
 @Component

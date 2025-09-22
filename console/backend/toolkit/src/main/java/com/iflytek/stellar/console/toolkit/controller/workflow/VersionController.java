@@ -1,11 +1,11 @@
-package com.iflytek.stellar.console.toolkit.controller.workflow;
+package com.iflytek.astra.console.toolkit.controller.workflow;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.toolkit.common.anno.ResponseResultBody;
-import com.iflytek.stellar.console.toolkit.entity.table.workflow.WorkflowVersion;
-import com.iflytek.stellar.console.toolkit.service.workflow.VersionService;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.toolkit.common.anno.ResponseResultBody;
+import com.iflytek.astra.console.toolkit.entity.table.workflow.WorkflowVersion;
+import com.iflytek.astra.console.toolkit.service.workflow.VersionService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

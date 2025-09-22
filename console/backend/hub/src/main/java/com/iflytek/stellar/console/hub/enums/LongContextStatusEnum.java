@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.enums;
+package com.iflytek.astra.console.hub.enums;
 
 /**
  * Error related

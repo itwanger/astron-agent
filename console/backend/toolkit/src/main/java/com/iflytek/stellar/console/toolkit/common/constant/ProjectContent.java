@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.toolkit.common.constant;
+package com.iflytek.astra.console.toolkit.common.constant;
 
-import com.iflytek.stellar.console.toolkit.config.properties.BizConfig;
+import com.iflytek.astra.console.toolkit.config.properties.BizConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,8 +1,8 @@
-package com.iflytek.stellar.console.toolkit.config.mybatis;
+package com.iflytek.astra.console.toolkit.config.mybatis;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
-import com.iflytek.stellar.console.toolkit.handler.MySqlJsonHandler;
+import com.iflytek.astra.console.toolkit.handler.MySqlJsonHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

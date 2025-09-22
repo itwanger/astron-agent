@@ -1,14 +1,14 @@
-package com.iflytek.stellar.console.toolkit.controller.knowledge;
+package com.iflytek.astra.console.toolkit.controller.knowledge;
 
 
-import com.iflytek.stellar.console.commons.annotation.space.SpacePreAuth;
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.toolkit.common.anno.ResponseResultBody;
-import com.iflytek.stellar.console.toolkit.entity.mongo.Knowledge;
-import com.iflytek.stellar.console.toolkit.entity.vo.repo.KnowledgeVO;
-import com.iflytek.stellar.console.toolkit.service.repo.KnowledgeService;
+import com.iflytek.astra.console.commons.annotation.space.SpacePreAuth;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.toolkit.common.anno.ResponseResultBody;
+import com.iflytek.astra.console.toolkit.entity.mongo.Knowledge;
+import com.iflytek.astra.console.toolkit.entity.vo.repo.KnowledgeVO;
+import com.iflytek.astra.console.toolkit.service.repo.KnowledgeService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -22,7 +22,7 @@ import java.util.concurrent.ExecutionException;
  * This controller handles HTTP requests related to knowledge management operations including
  * creating, updating, enabling/disabling, and deleting knowledge entries.
  *
- * @author OpenStellar Team
+ * @author Astra Team
  * @since 1.0.0
  */
 @RestController

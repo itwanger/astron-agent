@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.util;
+package com.iflytek.astra.console.toolkit.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;

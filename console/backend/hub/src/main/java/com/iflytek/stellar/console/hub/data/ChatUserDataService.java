@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.hub.data;
+package com.iflytek.astra.console.hub.data;
 
-import com.iflytek.stellar.console.commons.entity.user.ChatUser;
+import com.iflytek.astra.console.commons.entity.user.ChatUser;
 
 import java.util.List;
 import java.util.Optional;

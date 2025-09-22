@@ -1,18 +1,18 @@
-package com.iflytek.stellar.console.hub.controller.space;
+package com.iflytek.astra.console.hub.controller.space;
 
 
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.commons.annotation.RateLimit;
-import com.iflytek.stellar.console.commons.annotation.space.EnterprisePreAuth;
-import com.iflytek.stellar.console.commons.annotation.space.SpacePreAuth;
-import com.iflytek.stellar.console.commons.dto.space.SpaceAddDTO;
-import com.iflytek.stellar.console.commons.dto.space.SpaceUpdateDTO;
-import com.iflytek.stellar.console.commons.entity.space.Space;
-import com.iflytek.stellar.console.commons.util.space.EnterpriseInfoUtil;
-import com.iflytek.stellar.console.commons.dto.space.EnterpriseSpaceCountVO;
-import com.iflytek.stellar.console.commons.dto.space.SpaceVO;
-import com.iflytek.stellar.console.commons.service.space.SpaceService;
-import com.iflytek.stellar.console.hub.service.space.SpaceBizService;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.commons.annotation.RateLimit;
+import com.iflytek.astra.console.commons.annotation.space.EnterprisePreAuth;
+import com.iflytek.astra.console.commons.annotation.space.SpacePreAuth;
+import com.iflytek.astra.console.commons.dto.space.SpaceAddDTO;
+import com.iflytek.astra.console.commons.dto.space.SpaceUpdateDTO;
+import com.iflytek.astra.console.commons.entity.space.Space;
+import com.iflytek.astra.console.commons.util.space.EnterpriseInfoUtil;
+import com.iflytek.astra.console.commons.dto.space.EnterpriseSpaceCountVO;
+import com.iflytek.astra.console.commons.dto.space.SpaceVO;
+import com.iflytek.astra.console.commons.service.space.SpaceService;
+import com.iflytek.astra.console.hub.service.space.SpaceBizService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;

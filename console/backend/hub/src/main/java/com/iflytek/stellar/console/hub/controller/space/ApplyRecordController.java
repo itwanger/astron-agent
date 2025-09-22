@@ -1,15 +1,15 @@
-package com.iflytek.stellar.console.hub.controller.space;
+package com.iflytek.astra.console.hub.controller.space;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.iflytek.stellar.console.commons.annotation.RateLimit;
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.commons.annotation.space.EnterprisePreAuth;
-import com.iflytek.stellar.console.commons.annotation.space.SpacePreAuth;
-import com.iflytek.stellar.console.commons.dto.space.ApplyRecordParam;
-import com.iflytek.stellar.console.commons.dto.space.ApplyRecordVO;
-import com.iflytek.stellar.console.commons.service.space.ApplyRecordService;
-import com.iflytek.stellar.console.hub.service.space.ApplyRecordBizService;
+import com.iflytek.astra.console.commons.annotation.RateLimit;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.commons.annotation.space.EnterprisePreAuth;
+import com.iflytek.astra.console.commons.annotation.space.SpacePreAuth;
+import com.iflytek.astra.console.commons.dto.space.ApplyRecordParam;
+import com.iflytek.astra.console.commons.dto.space.ApplyRecordVO;
+import com.iflytek.astra.console.commons.service.space.ApplyRecordService;
+import com.iflytek.astra.console.hub.service.space.ApplyRecordBizService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

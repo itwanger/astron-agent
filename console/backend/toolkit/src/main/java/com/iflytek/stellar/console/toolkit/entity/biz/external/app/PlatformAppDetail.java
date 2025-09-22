@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.biz.external.app;
+package com.iflytek.astra.console.toolkit.entity.biz.external.app;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

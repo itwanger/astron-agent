@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.toolkit.entity.es.agentBuilder;
+package com.iflytek.astra.console.toolkit.entity.es.agentBuilder;
 
-import com.iflytek.stellar.console.toolkit.entity.spark.SparkApiProtocol;
+import com.iflytek.astra.console.toolkit.entity.spark.SparkApiProtocol;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

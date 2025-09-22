@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.biz;
+package com.iflytek.astra.console.toolkit.entity.biz;
 
 import com.alibaba.fastjson2.JSONObject;
 import lombok.AllArgsConstructor;

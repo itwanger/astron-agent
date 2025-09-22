@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.hub.service.share;
+package com.iflytek.astra.console.hub.service.share;
 
-import com.iflytek.stellar.console.commons.entity.space.AgentShareRecord;
+import com.iflytek.astra.console.commons.entity.space.AgentShareRecord;
 
 /**
  * @author yingpeng

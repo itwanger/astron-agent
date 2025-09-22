@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.util;
+package com.iflytek.astra.console.toolkit.util;
 
 import jakarta.servlet.http.HttpServletResponse;
 

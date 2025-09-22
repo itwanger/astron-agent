@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.vo.repo;
+package com.iflytek.astra.console.toolkit.entity.vo.repo;
 
 import lombok.Data;
 

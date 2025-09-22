@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.dto;
+package com.iflytek.astra.console.toolkit.entity.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.biz.modelconfig;
+package com.iflytek.astra.console.toolkit.entity.biz.modelconfig;
 
 import lombok.Data;
 

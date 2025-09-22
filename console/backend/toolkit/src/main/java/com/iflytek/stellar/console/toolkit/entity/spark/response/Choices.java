@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.toolkit.entity.spark.response;
+package com.iflytek.astra.console.toolkit.entity.spark.response;
 
-import com.iflytek.stellar.console.toolkit.entity.spark.Text;
+import com.iflytek.astra.console.toolkit.entity.spark.Text;
 import lombok.Data;
 
 import java.util.List;

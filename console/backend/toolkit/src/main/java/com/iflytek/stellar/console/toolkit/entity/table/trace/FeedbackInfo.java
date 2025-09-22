@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.table.trace;
+package com.iflytek.astra.console.toolkit.entity.table.trace;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;

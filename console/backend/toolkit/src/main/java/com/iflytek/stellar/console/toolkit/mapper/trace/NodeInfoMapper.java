@@ -1,11 +1,11 @@
-package com.iflytek.stellar.console.toolkit.mapper.trace;
+package com.iflytek.astra.console.toolkit.mapper.trace;
 
 import com.github.pagehelper.Page;
 import com.github.yulichang.base.MPJBaseMapper;
-import com.iflytek.stellar.console.toolkit.entity.dto.WorkflowModelErrorReq;
-import com.iflytek.stellar.console.toolkit.entity.dto.eval.NodeDataDto;
-import com.iflytek.stellar.console.toolkit.entity.table.trace.NodeInfo;
-import com.iflytek.stellar.console.toolkit.entity.vo.WorkflowErrorModelVo;
+import com.iflytek.astra.console.toolkit.entity.dto.WorkflowModelErrorReq;
+import com.iflytek.astra.console.toolkit.entity.dto.eval.NodeDataDto;
+import com.iflytek.astra.console.toolkit.entity.table.trace.NodeInfo;
+import com.iflytek.astra.console.toolkit.entity.vo.WorkflowErrorModelVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

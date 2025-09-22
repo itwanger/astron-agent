@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.handler.language;
+package com.iflytek.astra.console.toolkit.handler.language;
 
 import org.springframework.context.i18n.LocaleContextHolder;
 

@@ -1,11 +1,11 @@
-package com.iflytek.stellar.console.toolkit.service.database;
+package com.iflytek.astra.console.toolkit.service.database;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
-import com.iflytek.stellar.console.toolkit.entity.dto.database.DbTableFieldDto;
-import com.iflytek.stellar.console.toolkit.handler.language.LanguageContext;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.toolkit.entity.dto.database.DbTableFieldDto;
+import com.iflytek.astra.console.toolkit.handler.language.LanguageContext;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;

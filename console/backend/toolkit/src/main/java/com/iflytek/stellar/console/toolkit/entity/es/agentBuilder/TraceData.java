@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.es.agentBuilder;
+package com.iflytek.astra.console.toolkit.entity.es.agentBuilder;
 
 import com.alibaba.fastjson2.JSONObject;
 import lombok.Data;

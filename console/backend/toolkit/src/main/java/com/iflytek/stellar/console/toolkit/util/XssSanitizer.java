@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.util;
+package com.iflytek.astra.console.toolkit.util;
 
 import org.owasp.html.PolicyFactory;
 import org.owasp.html.Sanitizers;

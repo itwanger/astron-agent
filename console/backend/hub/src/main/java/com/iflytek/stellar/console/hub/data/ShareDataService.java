@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.hub.data;
+package com.iflytek.astra.console.hub.data;
 
-import com.iflytek.stellar.console.commons.entity.space.AgentShareRecord;
+import com.iflytek.astra.console.commons.entity.space.AgentShareRecord;
 
 public interface ShareDataService {
 

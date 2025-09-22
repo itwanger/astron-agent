@@ -1,8 +1,8 @@
-package com.iflytek.stellar.console.hub.config;
+package com.iflytek.astra.console.hub.config;
 
-import com.iflytek.stellar.console.commons.config.JwtClaimsFilter;
-import com.iflytek.stellar.console.hub.config.security.RestfulAccessDeniedHandler;
-import com.iflytek.stellar.console.hub.config.security.RestfulAuthenticationEntryPoint;
+import com.iflytek.astra.console.commons.config.JwtClaimsFilter;
+import com.iflytek.astra.console.hub.config.security.RestfulAccessDeniedHandler;
+import com.iflytek.astra.console.hub.config.security.RestfulAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

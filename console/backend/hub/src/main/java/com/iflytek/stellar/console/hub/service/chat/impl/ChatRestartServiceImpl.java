@@ -1,13 +1,13 @@
-package com.iflytek.stellar.console.hub.service.chat.impl;
+package com.iflytek.astra.console.hub.service.chat.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
-import com.iflytek.stellar.console.commons.service.data.ChatListDataService;
-import com.iflytek.stellar.console.commons.entity.chat.ChatListCreateResponse;
-import com.iflytek.stellar.console.commons.entity.chat.ChatTreeIndex;
-import com.iflytek.stellar.console.hub.service.chat.ChatListService;
-import com.iflytek.stellar.console.hub.service.chat.ChatRestartService;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.commons.service.data.ChatListDataService;
+import com.iflytek.astra.console.commons.entity.chat.ChatListCreateResponse;
+import com.iflytek.astra.console.commons.entity.chat.ChatTreeIndex;
+import com.iflytek.astra.console.hub.service.chat.ChatListService;
+import com.iflytek.astra.console.hub.service.chat.ChatRestartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

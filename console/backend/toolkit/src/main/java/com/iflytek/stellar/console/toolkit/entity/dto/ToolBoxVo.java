@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.toolkit.entity.dto;
+package com.iflytek.astra.console.toolkit.entity.dto;
 
-import com.iflytek.stellar.console.toolkit.entity.table.tool.ToolBox;
+import com.iflytek.astra.console.toolkit.entity.table.tool.ToolBox;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.config.exception;
+package com.iflytek.astra.console.toolkit.config.exception;
 
 public class OpenApiException extends RuntimeException {
     /**

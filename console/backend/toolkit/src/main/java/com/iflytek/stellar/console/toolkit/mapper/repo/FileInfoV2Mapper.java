@@ -1,8 +1,8 @@
-package com.iflytek.stellar.console.toolkit.mapper.repo;
+package com.iflytek.astra.console.toolkit.mapper.repo;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.iflytek.stellar.console.toolkit.entity.table.repo.FileInfoV2;
+import com.iflytek.astra.console.toolkit.entity.table.repo.FileInfoV2;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

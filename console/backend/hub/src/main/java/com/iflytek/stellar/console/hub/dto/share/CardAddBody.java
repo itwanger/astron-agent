@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.dto.share;
+package com.iflytek.astra.console.hub.dto.share;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;

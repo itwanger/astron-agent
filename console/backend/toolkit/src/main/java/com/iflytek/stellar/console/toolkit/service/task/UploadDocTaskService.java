@@ -1,11 +1,11 @@
-package com.iflytek.stellar.console.toolkit.service.task;
+package com.iflytek.astra.console.toolkit.service.task;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.iflytek.stellar.console.toolkit.entity.dto.UploadDocTaskDto;
-import com.iflytek.stellar.console.toolkit.entity.table.repo.UploadDocTask;
-import com.iflytek.stellar.console.toolkit.mapper.repo.UploadDocTaskMapper;
+import com.iflytek.astra.console.toolkit.entity.dto.UploadDocTaskDto;
+import com.iflytek.astra.console.toolkit.entity.table.repo.UploadDocTask;
+import com.iflytek.astra.console.toolkit.mapper.repo.UploadDocTaskMapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

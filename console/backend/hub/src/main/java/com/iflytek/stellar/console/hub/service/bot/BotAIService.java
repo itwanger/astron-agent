@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.hub.service.bot;
+package com.iflytek.astra.console.hub.service.bot;
 
-import com.iflytek.stellar.console.hub.dto.bot.BotGenerationDTO;
+import com.iflytek.astra.console.hub.dto.bot.BotGenerationDTO;
 
 /**
  * Chatbot AI service interface

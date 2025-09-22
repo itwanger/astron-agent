@@ -1,12 +1,12 @@
-package com.iflytek.stellar.console.toolkit.service.model;
+package com.iflytek.astra.console.toolkit.service.model;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.iflytek.stellar.console.toolkit.entity.table.model.ModelCommon;
-import com.iflytek.stellar.console.toolkit.mapper.model.ModelCommonMapper;
+import com.iflytek.astra.console.toolkit.entity.table.model.ModelCommon;
+import com.iflytek.astra.console.toolkit.mapper.model.ModelCommonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

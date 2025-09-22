@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.util;
+package com.iflytek.astra.console.toolkit.util;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;

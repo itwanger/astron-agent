@@ -1,10 +1,10 @@
-package com.iflytek.stellar.console.hub.controller.bot;
+package com.iflytek.astra.console.hub.controller.bot;
 
-import com.iflytek.stellar.console.commons.dto.bot.BotFavoritePageDto;
-import com.iflytek.stellar.console.commons.entity.bot.BotMarketForm;
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.commons.service.bot.BotFavoriteService;
-import com.iflytek.stellar.console.commons.util.RequestContextUtil;
+import com.iflytek.astra.console.commons.dto.bot.BotFavoritePageDto;
+import com.iflytek.astra.console.commons.entity.bot.BotMarketForm;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.commons.service.bot.BotFavoriteService;
+import com.iflytek.astra.console.commons.util.RequestContextUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;

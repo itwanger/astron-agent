@@ -1,12 +1,12 @@
-package com.iflytek.stellar.console.hub.util;
+package com.iflytek.astra.console.hub.util;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
-import com.iflytek.stellar.console.commons.mapper.bot.ChatBotBaseMapper;
-import com.iflytek.stellar.console.commons.util.RequestContextUtil;
-import com.iflytek.stellar.console.commons.util.space.SpaceInfoUtil;
-import com.iflytek.stellar.console.commons.entity.bot.ChatBotBase;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.commons.mapper.bot.ChatBotBaseMapper;
+import com.iflytek.astra.console.commons.util.RequestContextUtil;
+import com.iflytek.astra.console.commons.util.space.SpaceInfoUtil;
+import com.iflytek.astra.console.commons.entity.bot.ChatBotBase;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,11 +1,11 @@
-package com.iflytek.stellar.console.hub.service.space;
+package com.iflytek.astra.console.hub.service.space;
 
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.commons.dto.space.InviteRecordAddDTO;
-import com.iflytek.stellar.console.commons.enums.space.InviteRecordTypeEnum;
-import com.iflytek.stellar.console.commons.dto.space.BatchChatUserVO;
-import com.iflytek.stellar.console.commons.dto.space.ChatUserVO;
-import com.iflytek.stellar.console.commons.dto.space.InviteRecordVO;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.commons.dto.space.InviteRecordAddDTO;
+import com.iflytek.astra.console.commons.enums.space.InviteRecordTypeEnum;
+import com.iflytek.astra.console.commons.dto.space.BatchChatUserVO;
+import com.iflytek.astra.console.commons.dto.space.ChatUserVO;
+import com.iflytek.astra.console.commons.dto.space.InviteRecordVO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

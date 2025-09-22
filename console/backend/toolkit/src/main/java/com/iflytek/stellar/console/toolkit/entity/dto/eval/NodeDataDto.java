@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.toolkit.entity.dto.eval;
+package com.iflytek.astra.console.toolkit.entity.dto.eval;
 
-import com.iflytek.stellar.console.toolkit.entity.table.trace.NodeInfo;
+import com.iflytek.astra.console.toolkit.entity.table.trace.NodeInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

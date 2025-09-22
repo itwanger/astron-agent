@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.hub.controller.publish;
+package com.iflytek.astra.console.hub.controller.publish;
 
-import com.iflytek.stellar.console.commons.response.ApiResult;
+import com.iflytek.astra.console.commons.response.ApiResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;

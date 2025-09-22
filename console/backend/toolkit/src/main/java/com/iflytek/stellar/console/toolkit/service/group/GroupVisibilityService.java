@@ -1,13 +1,13 @@
-package com.iflytek.stellar.console.toolkit.service.group;
+package com.iflytek.astra.console.toolkit.service.group;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.iflytek.stellar.console.commons.util.space.SpaceInfoUtil;
-import com.iflytek.stellar.console.toolkit.entity.table.group.GroupVisibility;
-import com.iflytek.stellar.console.toolkit.entity.vo.group.GroupUserTagVO;
-import com.iflytek.stellar.console.toolkit.handler.UserInfoManagerHandler;
-import com.iflytek.stellar.console.toolkit.mapper.group.GroupVisibilityMapper;
+import com.iflytek.astra.console.commons.util.space.SpaceInfoUtil;
+import com.iflytek.astra.console.toolkit.entity.table.group.GroupVisibility;
+import com.iflytek.astra.console.toolkit.entity.vo.group.GroupUserTagVO;
+import com.iflytek.astra.console.toolkit.handler.UserInfoManagerHandler;
+import com.iflytek.astra.console.toolkit.mapper.group.GroupVisibilityMapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

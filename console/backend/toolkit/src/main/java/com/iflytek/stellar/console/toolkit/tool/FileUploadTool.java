@@ -1,9 +1,9 @@
-package com.iflytek.stellar.console.toolkit.tool;
+package com.iflytek.astra.console.toolkit.tool;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.iflytek.stellar.console.commons.util.S3ClientUtil;
-import com.iflytek.stellar.console.toolkit.common.constant.ProjectContent;
-import com.iflytek.stellar.console.toolkit.util.S3Util;
+import com.iflytek.astra.console.commons.util.S3ClientUtil;
+import com.iflytek.astra.console.toolkit.common.constant.ProjectContent;
+import com.iflytek.astra.console.toolkit.util.S3Util;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.tool.http;
+package com.iflytek.astra.console.toolkit.tool.http;
 
 import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ import java.util.*;
  * HTTP client tool with header-based authentication. This tool provides authenticated HTTP
  * operations (GET, POST, PUT, DELETE, PATCH) with HMAC signature authentication.
  *
- * @author stellar-console-toolkit
+ * @author astra-console-toolkit
  */
 @Slf4j
 public class HeaderAuthHttpTool {

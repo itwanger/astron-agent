@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.table.relation;
+package com.iflytek.astra.console.toolkit.entity.table.relation;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

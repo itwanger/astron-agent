@@ -1,8 +1,8 @@
-package com.iflytek.stellar.console.toolkit.entity.enumVo;
+package com.iflytek.astra.console.toolkit.entity.enumVo;
 
 
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.exception.BusinessException;
 
 import java.util.Objects;
 

@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.toolkit.config.thread;
+package com.iflytek.astra.console.toolkit.config.thread;
 
-import com.iflytek.stellar.console.toolkit.config.properties.SchedulingPoolProperties;
+import com.iflytek.astra.console.toolkit.config.properties.SchedulingPoolProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

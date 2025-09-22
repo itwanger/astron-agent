@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.core.workflow.node;
+package com.iflytek.astra.console.toolkit.entity.core.workflow.node;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;

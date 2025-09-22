@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.dto.homepage;
+package com.iflytek.astra.console.hub.dto.homepage;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

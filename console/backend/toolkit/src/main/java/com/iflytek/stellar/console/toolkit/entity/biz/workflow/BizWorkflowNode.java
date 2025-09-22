@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.entity.biz.workflow;
+package com.iflytek.astra.console.toolkit.entity.biz.workflow;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.iflytek.stellar.console.toolkit.entity.biz.workflow.node.BizNodeData;
+import com.iflytek.astra.console.toolkit.entity.biz.workflow.node.BizNodeData;
 import lombok.Data;
 
 @Data

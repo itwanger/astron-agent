@@ -1,5 +1,5 @@
-// com.iflytek.stellar.console.toolkit.config.properties.AsyncExecutorProperties
-package com.iflytek.stellar.console.toolkit.config.properties;
+// com.iflytek.astra.console.toolkit.config.properties.AsyncExecutorProperties
+package com.iflytek.astra.console.toolkit.config.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.config;
+package com.iflytek.astra.console.hub.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 @Configuration
-@OpenAPIDefinition(info = @Info(title = "Stellar Agent Console Server", version = "1.0", description = "Stellar Agent Console Server API Document"))
+@OpenAPIDefinition(info = @Info(title = "Astra Agent Console Server", version = "1.0", description = "Astra Agent Console Server API Document"))
 public class SpringDocConfig {
 
     @Bean

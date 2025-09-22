@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.hub.controller.space;
+package com.iflytek.astra.console.hub.controller.space;
 
-import com.iflytek.stellar.console.commons.service.space.EnterprisePermissionService;
+import com.iflytek.astra.console.commons.service.space.EnterprisePermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

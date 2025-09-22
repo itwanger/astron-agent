@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.table.eval;
+package com.iflytek.astra.console.toolkit.entity.table.eval;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;

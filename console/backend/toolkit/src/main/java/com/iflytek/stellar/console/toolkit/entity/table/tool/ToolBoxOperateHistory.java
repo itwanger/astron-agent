@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.table.tool;
+package com.iflytek.astra.console.toolkit.entity.table.tool;
 
 import lombok.Data;
 

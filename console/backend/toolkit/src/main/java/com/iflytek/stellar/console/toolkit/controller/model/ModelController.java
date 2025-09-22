@@ -1,15 +1,15 @@
-package com.iflytek.stellar.console.toolkit.controller.model;
+package com.iflytek.astra.console.toolkit.controller.model;
 
-import com.iflytek.stellar.console.commons.annotation.space.SpacePreAuth;
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.commons.util.space.SpaceInfoUtil;
-import com.iflytek.stellar.console.toolkit.common.anno.ResponseResultBody;
-import com.iflytek.stellar.console.toolkit.entity.biz.modelconfig.*;
-import com.iflytek.stellar.console.toolkit.entity.vo.CategoryTreeVO;
-import com.iflytek.stellar.console.toolkit.handler.UserInfoManagerHandler;
-import com.iflytek.stellar.console.toolkit.service.model.ModelService;
+import com.iflytek.astra.console.commons.annotation.space.SpacePreAuth;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.commons.util.space.SpaceInfoUtil;
+import com.iflytek.astra.console.toolkit.common.anno.ResponseResultBody;
+import com.iflytek.astra.console.toolkit.entity.biz.modelconfig.*;
+import com.iflytek.astra.console.toolkit.entity.vo.CategoryTreeVO;
+import com.iflytek.astra.console.toolkit.handler.UserInfoManagerHandler;
+import com.iflytek.astra.console.toolkit.service.model.ModelService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;

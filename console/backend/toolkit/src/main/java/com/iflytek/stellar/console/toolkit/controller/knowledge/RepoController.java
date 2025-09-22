@@ -1,15 +1,15 @@
-package com.iflytek.stellar.console.toolkit.controller.knowledge;
+package com.iflytek.astra.console.toolkit.controller.knowledge;
 
 
-import com.iflytek.stellar.console.commons.annotation.space.SpacePreAuth;
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.toolkit.common.anno.ResponseResultBody;
-import com.iflytek.stellar.console.toolkit.entity.common.PageData;
-import com.iflytek.stellar.console.toolkit.entity.dto.RepoDto;
-import com.iflytek.stellar.console.toolkit.entity.table.repo.HitTestHistory;
-import com.iflytek.stellar.console.toolkit.entity.table.repo.Repo;
-import com.iflytek.stellar.console.toolkit.entity.vo.knowledge.RepoVO;
-import com.iflytek.stellar.console.toolkit.service.repo.RepoService;
+import com.iflytek.astra.console.commons.annotation.space.SpacePreAuth;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.toolkit.common.anno.ResponseResultBody;
+import com.iflytek.astra.console.toolkit.entity.common.PageData;
+import com.iflytek.astra.console.toolkit.entity.dto.RepoDto;
+import com.iflytek.astra.console.toolkit.entity.table.repo.HitTestHistory;
+import com.iflytek.astra.console.toolkit.entity.table.repo.Repo;
+import com.iflytek.astra.console.toolkit.entity.vo.knowledge.RepoVO;
+import com.iflytek.astra.console.toolkit.service.repo.RepoService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
  * management in the knowledge base system.
  * </p>
  *
- * @author OpenStellar Team
+ * @author Astra Team
  * @version 1.0
  * @since 2024
  */

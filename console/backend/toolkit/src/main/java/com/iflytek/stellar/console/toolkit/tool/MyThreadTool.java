@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.tool;
+package com.iflytek.astra.console.toolkit.tool;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -8,7 +8,7 @@ import java.util.concurrent.*;
  * Thread pool utility for managing asynchronous task execution. This class provides a configured
  * thread pool with custom exception handling.
  *
- * @author stellar-console-toolkit
+ * @author astra-console-toolkit
  */
 public class MyThreadTool {
 
@@ -38,7 +38,7 @@ public class MyThreadTool {
  * Custom uncaught exception handler for threads in the thread pool. This handler logs any uncaught
  * exceptions that occur during thread execution.
  *
- * @author stellar-console-toolkit
+ * @author astra-console-toolkit
  */
 @Slf4j
 class CustomUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {

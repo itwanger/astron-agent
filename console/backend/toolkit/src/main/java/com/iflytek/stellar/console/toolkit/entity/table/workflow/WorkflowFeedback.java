@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.table.workflow;
+package com.iflytek.astra.console.toolkit.entity.table.workflow;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

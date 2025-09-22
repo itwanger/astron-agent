@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.entity;
+package com.iflytek.astra.console.hub.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @TableName("workflow_template_group")
-@Schema(name = "WorkflowTemplateGroup", description = "Stellar workflow template group (general management control)")
+@Schema(name = "WorkflowTemplateGroup", description = "Astra workflow template group (general management control)")
 public class WorkflowTemplateGroup {
 
     @TableId(type = IdType.AUTO)

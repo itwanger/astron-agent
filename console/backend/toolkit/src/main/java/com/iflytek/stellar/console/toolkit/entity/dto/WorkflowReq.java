@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.entity.dto;
+package com.iflytek.astra.console.toolkit.entity.dto;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.iflytek.stellar.console.toolkit.entity.biz.workflow.BizWorkflowData;
+import com.iflytek.astra.console.toolkit.entity.biz.workflow.BizWorkflowData;
 import lombok.Data;
 
 import java.util.Map;

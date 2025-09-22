@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.util;
+package com.iflytek.astra.console.hub.util;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.RandomUtil;

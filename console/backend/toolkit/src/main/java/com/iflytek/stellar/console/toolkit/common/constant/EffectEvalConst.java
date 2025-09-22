@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.common.constant;
+package com.iflytek.astra.console.toolkit.common.constant;
 
 import com.alibaba.fastjson2.JSONObject;
 

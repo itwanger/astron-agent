@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.hub.service.workflow;
+package com.iflytek.astra.console.hub.service.workflow;
 
 
-import com.iflytek.stellar.console.hub.entity.WorkflowTemplateGroup;
+import com.iflytek.astra.console.hub.entity.WorkflowTemplateGroup;
 
 import java.util.List;
 

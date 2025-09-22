@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.mapper.bot;
+package com.iflytek.astra.console.toolkit.mapper.bot;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.iflytek.stellar.console.toolkit.entity.table.bot.UserFavoriteBot;
+import com.iflytek.astra.console.toolkit.entity.table.bot.UserFavoriteBot;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,11 +1,11 @@
-package com.iflytek.stellar.console.toolkit.handler;
+package com.iflytek.astra.console.toolkit.handler;
 
 import com.alibaba.fastjson2.JSON;
-import com.iflytek.stellar.console.toolkit.config.properties.RepoAuthorizedConfig;
-import com.iflytek.stellar.console.toolkit.config.properties.ApiUrl;
-import com.iflytek.stellar.console.toolkit.entity.core.knowledge.*;
-import com.iflytek.stellar.console.toolkit.tool.http.HttpAuthTool;
-import com.iflytek.stellar.console.toolkit.util.OkHttpUtil;
+import com.iflytek.astra.console.toolkit.config.properties.RepoAuthorizedConfig;
+import com.iflytek.astra.console.toolkit.config.properties.ApiUrl;
+import com.iflytek.astra.console.toolkit.entity.core.knowledge.*;
+import com.iflytek.astra.console.toolkit.tool.http.HttpAuthTool;
+import com.iflytek.astra.console.toolkit.util.OkHttpUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

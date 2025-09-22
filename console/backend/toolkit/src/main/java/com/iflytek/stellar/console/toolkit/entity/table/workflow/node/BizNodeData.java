@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.entity.table.workflow.node;
+package com.iflytek.astra.console.toolkit.entity.table.workflow.node;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.iflytek.stellar.console.toolkit.entity.biz.workflow.node.BizInputOutput;
+import com.iflytek.astra.console.toolkit.entity.biz.workflow.node.BizInputOutput;
 import lombok.Data;
 
 import java.util.List;

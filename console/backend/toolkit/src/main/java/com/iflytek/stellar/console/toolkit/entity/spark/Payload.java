@@ -1,9 +1,9 @@
-package com.iflytek.stellar.console.toolkit.entity.spark;
+package com.iflytek.astra.console.toolkit.entity.spark;
 
-import com.iflytek.stellar.console.toolkit.entity.spark.request.FcFunction;
-import com.iflytek.stellar.console.toolkit.entity.spark.request.Message;
-import com.iflytek.stellar.console.toolkit.entity.spark.response.Choices;
-import com.iflytek.stellar.console.toolkit.entity.spark.response.Usage;
+import com.iflytek.astra.console.toolkit.entity.spark.request.FcFunction;
+import com.iflytek.astra.console.toolkit.entity.spark.request.Message;
+import com.iflytek.astra.console.toolkit.entity.spark.response.Choices;
+import com.iflytek.astra.console.toolkit.entity.spark.response.Usage;
 import lombok.Data;
 
 @Data

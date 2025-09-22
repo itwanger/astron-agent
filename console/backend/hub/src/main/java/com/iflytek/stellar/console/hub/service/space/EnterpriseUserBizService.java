@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.hub.service.space;
+package com.iflytek.astra.console.hub.service.space;
 
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.commons.dto.space.UserLimitVO;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.commons.dto.space.UserLimitVO;
 
 public interface EnterpriseUserBizService {
 

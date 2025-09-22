@@ -1,13 +1,13 @@
-package com.iflytek.stellar.console.toolkit.handler;
+package com.iflytek.astra.console.toolkit.handler;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.iflytek.stellar.console.toolkit.config.properties.RepoAuthorizedConfig;
-import com.iflytek.stellar.console.toolkit.config.properties.ApiUrl;
-import com.iflytek.stellar.console.toolkit.entity.core.knowledge.SplitRequest;
-import com.iflytek.stellar.console.toolkit.entity.dto.RelatedDocDto;
-import com.iflytek.stellar.console.toolkit.util.OkHttpUtil;
+import com.iflytek.astra.console.toolkit.config.properties.RepoAuthorizedConfig;
+import com.iflytek.astra.console.toolkit.config.properties.ApiUrl;
+import com.iflytek.astra.console.toolkit.entity.core.knowledge.SplitRequest;
+import com.iflytek.astra.console.toolkit.entity.dto.RelatedDocDto;
+import com.iflytek.astra.console.toolkit.util.OkHttpUtil;
 import jakarta.annotation.Resource;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

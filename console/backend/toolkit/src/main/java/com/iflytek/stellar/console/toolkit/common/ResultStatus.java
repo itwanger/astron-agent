@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.common;
+package com.iflytek.astra.console.toolkit.common;
 
 import lombok.*;
 

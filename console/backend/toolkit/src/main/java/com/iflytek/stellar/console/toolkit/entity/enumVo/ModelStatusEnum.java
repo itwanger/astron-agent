@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.enumVo;
+package com.iflytek.astra.console.toolkit.entity.enumVo;
 
 import java.util.Objects;
 

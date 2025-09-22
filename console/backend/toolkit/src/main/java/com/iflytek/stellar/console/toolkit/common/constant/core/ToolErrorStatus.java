@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.common.constant.core;
+package com.iflytek.astra.console.toolkit.common.constant.core;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

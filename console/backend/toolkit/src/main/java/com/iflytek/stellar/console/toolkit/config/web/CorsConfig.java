@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.config.web;
+package com.iflytek.astra.console.toolkit.config.web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

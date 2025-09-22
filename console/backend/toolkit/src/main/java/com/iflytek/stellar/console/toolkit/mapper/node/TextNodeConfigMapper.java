@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.mapper.node;
+package com.iflytek.astra.console.toolkit.mapper.node;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.iflytek.stellar.console.toolkit.entity.table.node.TextNodeConfig;
+import com.iflytek.astra.console.toolkit.entity.table.node.TextNodeConfig;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.entity.vo;
+package com.iflytek.astra.console.toolkit.entity.vo;
 
 
-import com.iflytek.stellar.console.toolkit.handler.SidManagerHandler;
+import com.iflytek.astra.console.toolkit.handler.SidManagerHandler;
 import lombok.Data;
 
 @Data

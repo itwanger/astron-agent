@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.biz.external.shelf;
+package com.iflytek.astra.console.toolkit.entity.biz.external.shelf;
 
 import lombok.Data;
 

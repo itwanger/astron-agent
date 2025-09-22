@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.hub.service.chat;
+package com.iflytek.astra.console.hub.service.chat;
 
-import com.iflytek.stellar.console.commons.entity.chat.ChatFileUser;
-import com.iflytek.stellar.console.hub.dto.chat.ChatEnhanceSaveFileVo;
+import com.iflytek.astra.console.commons.entity.chat.ChatFileUser;
+import com.iflytek.astra.console.hub.dto.chat.ChatEnhanceSaveFileVo;
 
 import java.util.List;
 import java.util.Map;

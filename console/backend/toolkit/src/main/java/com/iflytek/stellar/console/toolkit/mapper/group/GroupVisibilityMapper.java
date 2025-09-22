@@ -1,9 +1,9 @@
-package com.iflytek.stellar.console.toolkit.mapper.group;
+package com.iflytek.astra.console.toolkit.mapper.group;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.iflytek.stellar.console.toolkit.entity.table.group.GroupVisibility;
-import com.iflytek.stellar.console.toolkit.entity.vo.group.GroupUserTagVO;
+import com.iflytek.astra.console.toolkit.entity.table.group.GroupVisibility;
+import com.iflytek.astra.console.toolkit.entity.vo.group.GroupUserTagVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

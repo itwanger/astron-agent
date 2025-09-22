@@ -1,8 +1,8 @@
-package com.iflytek.stellar.console.toolkit.mapper.relation;
+package com.iflytek.astra.console.toolkit.mapper.relation;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.iflytek.stellar.console.toolkit.entity.dto.database.FlowDbRelCountDto;
-import com.iflytek.stellar.console.toolkit.entity.table.relation.FlowDbRel;
+import com.iflytek.astra.console.toolkit.entity.dto.database.FlowDbRelCountDto;
+import com.iflytek.astra.console.toolkit.entity.table.relation.FlowDbRel;
 
 import java.util.List;
 

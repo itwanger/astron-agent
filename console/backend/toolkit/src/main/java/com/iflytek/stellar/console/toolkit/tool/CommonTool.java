@@ -1,18 +1,18 @@
-package com.iflytek.stellar.console.toolkit.tool;
+package com.iflytek.astra.console.toolkit.tool;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson2.*;
 
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
-import com.iflytek.stellar.console.toolkit.common.constant.CommonConst;
-import com.iflytek.stellar.console.toolkit.common.constant.LLMConstant;
-import com.iflytek.stellar.console.toolkit.entity.biz.modelconfig.*;
-import com.iflytek.stellar.console.toolkit.entity.botConfigProtocol.*;
-import com.iflytek.stellar.console.toolkit.mapper.ConfigInfoMapper;
-import com.iflytek.stellar.console.toolkit.util.*;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.toolkit.common.constant.CommonConst;
+import com.iflytek.astra.console.toolkit.common.constant.LLMConstant;
+import com.iflytek.astra.console.toolkit.entity.biz.modelconfig.*;
+import com.iflytek.astra.console.toolkit.entity.botConfigProtocol.*;
+import com.iflytek.astra.console.toolkit.mapper.ConfigInfoMapper;
+import com.iflytek.astra.console.toolkit.util.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.mock.web.MockMultipartFile;

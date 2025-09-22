@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.dto.bot;
+package com.iflytek.astra.console.hub.dto.bot;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.hub.util;
+package com.iflytek.astra.console.hub.util;
 
-import com.iflytek.stellar.console.hub.annotation.DistributedLock;
+import com.iflytek.astra.console.hub.annotation.DistributedLock;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  *
  * Demonstrates various usage patterns of the @DistributedLock annotation
  *
- * @author Stellar Console Team
+ * @author Astra Console Team
  * @since 1.0.0
  */
 @Slf4j

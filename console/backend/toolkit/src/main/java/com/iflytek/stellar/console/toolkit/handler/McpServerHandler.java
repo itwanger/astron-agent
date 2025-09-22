@@ -1,12 +1,12 @@
-package com.iflytek.stellar.console.toolkit.handler;
+package com.iflytek.astra.console.toolkit.handler;
 
 import com.alibaba.fastjson2.*;
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
-import com.iflytek.stellar.console.toolkit.config.properties.ApiUrl;
-import com.iflytek.stellar.console.toolkit.entity.common.PageData;
-import com.iflytek.stellar.console.toolkit.entity.tool.McpServerTool;
-import com.iflytek.stellar.console.toolkit.util.OkHttpUtil;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.toolkit.config.properties.ApiUrl;
+import com.iflytek.astra.console.toolkit.entity.common.PageData;
+import com.iflytek.astra.console.toolkit.entity.tool.McpServerTool;
+import com.iflytek.astra.console.toolkit.util.OkHttpUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

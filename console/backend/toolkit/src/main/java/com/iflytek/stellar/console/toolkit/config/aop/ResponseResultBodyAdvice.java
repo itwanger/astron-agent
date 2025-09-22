@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.config.aop;
+package com.iflytek.astra.console.toolkit.config.aop;
 
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.toolkit.common.anno.ResponseResultBody;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.toolkit.common.anno.ResponseResultBody;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotatedElementUtils;

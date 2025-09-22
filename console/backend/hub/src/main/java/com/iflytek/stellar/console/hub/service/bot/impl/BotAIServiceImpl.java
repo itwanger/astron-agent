@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.service.bot.impl;
+package com.iflytek.astra.console.hub.service.bot.impl;
 
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
@@ -6,17 +6,17 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
-import com.iflytek.stellar.console.commons.util.I18nUtil;
-import com.iflytek.stellar.console.commons.util.S3ClientUtil;
-import com.iflytek.stellar.console.hub.dto.bot.BotGenerationDTO;
-import com.iflytek.stellar.console.hub.dto.bot.PromptStructDTO;
-import com.iflytek.stellar.console.hub.entity.AiPromptTemplate;
-import com.iflytek.stellar.console.hub.mapper.AiPromptTemplateMapper;
-import com.iflytek.stellar.console.hub.service.bot.BotAIService;
-import com.iflytek.stellar.console.hub.util.BotAIServiceClient;
-import com.iflytek.stellar.console.hub.util.ImageUtil;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.commons.util.I18nUtil;
+import com.iflytek.astra.console.commons.util.S3ClientUtil;
+import com.iflytek.astra.console.hub.dto.bot.BotGenerationDTO;
+import com.iflytek.astra.console.hub.dto.bot.PromptStructDTO;
+import com.iflytek.astra.console.hub.entity.AiPromptTemplate;
+import com.iflytek.astra.console.hub.mapper.AiPromptTemplateMapper;
+import com.iflytek.astra.console.hub.service.bot.BotAIService;
+import com.iflytek.astra.console.hub.util.BotAIServiceClient;
+import com.iflytek.astra.console.hub.util.ImageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 import java.io.InputStream;
 import java.util.*;
 
-import static com.iflytek.stellar.console.commons.constant.ResponseEnum.PARAMETER_ERROR;
+import static com.iflytek.astra.console.commons.constant.ResponseEnum.PARAMETER_ERROR;
 
 /**
  * AI service implementation class for creating intelligent agents

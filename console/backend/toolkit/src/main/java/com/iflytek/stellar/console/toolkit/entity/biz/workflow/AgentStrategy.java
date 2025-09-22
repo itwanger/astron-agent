@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.biz.workflow;
+package com.iflytek.astra.console.toolkit.entity.biz.workflow;
 
 import lombok.Data;
 

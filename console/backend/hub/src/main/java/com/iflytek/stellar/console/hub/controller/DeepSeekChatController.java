@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.hub.controller;
+package com.iflytek.astra.console.hub.controller;
 
-import com.iflytek.stellar.console.hub.dto.DeepSeekChatRequest;
-import com.iflytek.stellar.console.hub.service.DeepSeekChatService;
+import com.iflytek.astra.console.hub.dto.DeepSeekChatRequest;
+import com.iflytek.astra.console.hub.service.DeepSeekChatService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

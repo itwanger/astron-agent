@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.spark.chat;
+package com.iflytek.astra.console.toolkit.entity.spark.chat;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.annotation.JSONField;

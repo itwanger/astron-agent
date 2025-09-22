@@ -1,9 +1,9 @@
-package com.iflytek.stellar.console.hub.service.chat;
+package com.iflytek.astra.console.hub.service.chat;
 
-import com.iflytek.stellar.console.commons.entity.bot.BotInfoDto;
-import com.iflytek.stellar.console.commons.entity.chat.ChatBotListDto;
-import com.iflytek.stellar.console.commons.entity.chat.ChatListCreateResponse;
-import com.iflytek.stellar.console.commons.entity.chat.ChatListResponseDto;
+import com.iflytek.astra.console.commons.entity.bot.BotInfoDto;
+import com.iflytek.astra.console.commons.entity.chat.ChatBotListDto;
+import com.iflytek.astra.console.commons.entity.chat.ChatListCreateResponse;
+import com.iflytek.astra.console.commons.entity.chat.ChatListResponseDto;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

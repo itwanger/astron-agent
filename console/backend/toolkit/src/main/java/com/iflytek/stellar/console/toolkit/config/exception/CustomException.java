@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.toolkit.config.exception;
+package com.iflytek.astra.console.toolkit.config.exception;
 
-import com.iflytek.stellar.console.toolkit.common.CustomExceptionCode;
+import com.iflytek.astra.console.toolkit.common.CustomExceptionCode;
 import lombok.Getter;
 
 /**

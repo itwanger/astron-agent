@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.finetune;
+package com.iflytek.astra.console.toolkit.entity.finetune;
 
 import lombok.Data;
 

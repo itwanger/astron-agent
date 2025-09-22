@@ -1,10 +1,10 @@
-package com.iflytek.stellar.console.toolkit.controller.node;
+package com.iflytek.astra.console.toolkit.controller.node;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.iflytek.stellar.console.toolkit.common.anno.ResponseResultBody;
-import com.iflytek.stellar.console.toolkit.entity.table.node.TextNodeConfig;
-import com.iflytek.stellar.console.toolkit.handler.UserInfoManagerHandler;
-import com.iflytek.stellar.console.toolkit.service.node.TextNodeConfigService;
+import com.iflytek.astra.console.toolkit.common.anno.ResponseResultBody;
+import com.iflytek.astra.console.toolkit.entity.table.node.TextNodeConfig;
+import com.iflytek.astra.console.toolkit.handler.UserInfoManagerHandler;
+import com.iflytek.astra.console.toolkit.service.node.TextNodeConfigService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;

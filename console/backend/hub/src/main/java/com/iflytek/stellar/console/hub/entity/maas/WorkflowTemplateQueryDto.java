@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.entity.maas;
+package com.iflytek.astra.console.hub.entity.maas;
 
 import lombok.Data;
 

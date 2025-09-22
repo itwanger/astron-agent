@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.table.node;
+package com.iflytek.astra.console.toolkit.entity.table.node;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;

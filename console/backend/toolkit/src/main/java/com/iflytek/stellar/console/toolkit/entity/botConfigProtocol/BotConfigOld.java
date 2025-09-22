@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.botConfigProtocol;
+package com.iflytek.astra.console.toolkit.entity.botConfigProtocol;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import lombok.Data;

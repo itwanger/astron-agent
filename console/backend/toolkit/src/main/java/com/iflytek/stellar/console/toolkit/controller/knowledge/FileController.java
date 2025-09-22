@@ -1,21 +1,21 @@
-package com.iflytek.stellar.console.toolkit.controller.knowledge;
+package com.iflytek.astra.console.toolkit.controller.knowledge;
 
 
-import com.iflytek.stellar.console.commons.annotation.space.SpacePreAuth;
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.toolkit.common.Result;
-import com.iflytek.stellar.console.toolkit.common.anno.ResponseResultBody;
-import com.iflytek.stellar.console.toolkit.entity.common.PageData;
-import com.iflytek.stellar.console.toolkit.entity.dto.FileInfoV2Dto;
-import com.iflytek.stellar.console.toolkit.entity.dto.KnowledgeDto;
-import com.iflytek.stellar.console.toolkit.entity.pojo.FileSummary;
-import com.iflytek.stellar.console.toolkit.entity.table.repo.FileDirectoryTree;
-import com.iflytek.stellar.console.toolkit.entity.table.repo.FileInfoV2;
-import com.iflytek.stellar.console.toolkit.entity.vo.HtmlFileVO;
-import com.iflytek.stellar.console.toolkit.entity.vo.repo.*;
-import com.iflytek.stellar.console.toolkit.service.repo.FileInfoV2Service;
+import com.iflytek.astra.console.commons.annotation.space.SpacePreAuth;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.toolkit.common.Result;
+import com.iflytek.astra.console.toolkit.common.anno.ResponseResultBody;
+import com.iflytek.astra.console.toolkit.entity.common.PageData;
+import com.iflytek.astra.console.toolkit.entity.dto.FileInfoV2Dto;
+import com.iflytek.astra.console.toolkit.entity.dto.KnowledgeDto;
+import com.iflytek.astra.console.toolkit.entity.pojo.FileSummary;
+import com.iflytek.astra.console.toolkit.entity.table.repo.FileDirectoryTree;
+import com.iflytek.astra.console.toolkit.entity.table.repo.FileInfoV2;
+import com.iflytek.astra.console.toolkit.entity.vo.HtmlFileVO;
+import com.iflytek.astra.console.toolkit.entity.vo.repo.*;
+import com.iflytek.astra.console.toolkit.service.repo.FileInfoV2Service;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -34,7 +34,7 @@ import java.util.concurrent.ExecutionException;
  * File management controller Provides REST APIs for file operations including upload, download,
  * slicing, embedding, and management
  *
- * @author OpenStellar Team
+ * @author Astra Team
  * @since 1.0.0
  */
 @RestController

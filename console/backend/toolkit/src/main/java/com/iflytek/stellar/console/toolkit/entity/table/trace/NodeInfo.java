@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.entity.table.trace;
+package com.iflytek.astra.console.toolkit.entity.table.trace;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.iflytek.stellar.console.toolkit.common.anno.ExcelHeader;
+import com.iflytek.astra.console.toolkit.common.anno.ExcelHeader;
 import lombok.Data;
 
 import java.util.Date;

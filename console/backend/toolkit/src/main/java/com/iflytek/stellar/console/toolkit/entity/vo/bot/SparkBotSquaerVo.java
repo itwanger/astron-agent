@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.toolkit.entity.vo.bot;
+package com.iflytek.astra.console.toolkit.entity.vo.bot;
 
-import com.iflytek.stellar.console.toolkit.entity.table.bot.SparkBot;
+import com.iflytek.astra.console.toolkit.entity.table.bot.SparkBot;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

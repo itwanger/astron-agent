@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.common;
+package com.iflytek.astra.console.toolkit.entity.common;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

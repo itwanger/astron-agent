@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.mapper.knowledge;
+package com.iflytek.astra.console.toolkit.mapper.knowledge;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.iflytek.stellar.console.toolkit.entity.table.knowledge.MysqlKnowledge;
+import com.iflytek.astra.console.toolkit.entity.table.knowledge.MysqlKnowledge;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

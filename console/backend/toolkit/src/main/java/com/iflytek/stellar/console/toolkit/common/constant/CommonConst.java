@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.common.constant;
+package com.iflytek.astra.console.toolkit.common.constant;
 
 public class CommonConst {
     public static final String[] FIXED_APPID_ENV = new String[] {"dev", "test", "custom"};

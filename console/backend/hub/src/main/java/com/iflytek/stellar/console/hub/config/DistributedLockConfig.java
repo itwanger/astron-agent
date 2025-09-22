@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.config;
+package com.iflytek.astra.console.hub.config;
 
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * Ensures proper initialization and configuration of distributed lock related components Enables
  * AspectJ auto proxy to support AOP processing of @DistributedLock annotation
  *
- * @author Stellar Console Team
+ * @author Astra Console Team
  * @since 1.0.0
  */
 @Slf4j

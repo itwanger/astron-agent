@@ -1,8 +1,8 @@
-package com.iflytek.stellar.console.toolkit.entity.table.model;
+package com.iflytek.astra.console.toolkit.entity.table.model;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.iflytek.stellar.console.toolkit.entity.vo.CategoryTreeVO;
+import com.iflytek.astra.console.toolkit.entity.vo.CategoryTreeVO;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 

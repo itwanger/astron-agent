@@ -1,10 +1,10 @@
-package com.iflytek.stellar.console.toolkit.service.common;
+package com.iflytek.astra.console.toolkit.service.common;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.iflytek.stellar.console.toolkit.entity.table.ConfigInfo;
-import com.iflytek.stellar.console.toolkit.mapper.ConfigInfoMapper;
+import com.iflytek.astra.console.toolkit.entity.table.ConfigInfo;
+import com.iflytek.astra.console.toolkit.mapper.ConfigInfoMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;

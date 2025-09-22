@@ -1,10 +1,10 @@
-package com.iflytek.stellar.console.hub.config;
+package com.iflytek.astra.console.hub.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.DynamicTableNameInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import com.iflytek.stellar.console.toolkit.handler.language.LanguageContext;
+import com.iflytek.astra.console.toolkit.handler.language.LanguageContext;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,7 @@ import java.util.List;
 
 /** MyBatis-Plus basic configuration and Mapper scanning. */
 @Configuration
-@MapperScan({"com.iflytek.stellar.console.hub.mapper", "com.iflytek.stellar.console.commons.mapper", "com.iflytek.stellar.console.toolkit.mapper"})
+@MapperScan({"com.iflytek.astra.console.hub.mapper", "com.iflytek.astra.console.commons.mapper", "com.iflytek.astra.console.toolkit.mapper"})
 public class MyBatisPlusConfig {
 
     @Bean(name = "mybatisPlusInterceptor")

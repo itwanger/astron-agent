@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.table.relation;
+package com.iflytek.astra.console.toolkit.entity.table.relation;
 
 import lombok.*;
 

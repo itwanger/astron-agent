@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.config.spring;
+package com.iflytek.astra.console.toolkit.config.spring;
 
-import com.iflytek.stellar.console.toolkit.service.workflow.WorkflowService;
-import com.iflytek.stellar.console.toolkit.util.RedisUtil;
+import com.iflytek.astra.console.toolkit.service.workflow.WorkflowService;
+import com.iflytek.astra.console.toolkit.util.RedisUtil;
 import jakarta.annotation.PreDestroy;
 import java.time.Duration;
 import java.util.Arrays;

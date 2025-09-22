@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.entity.notification;
+package com.iflytek.astra.console.hub.entity.notification;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

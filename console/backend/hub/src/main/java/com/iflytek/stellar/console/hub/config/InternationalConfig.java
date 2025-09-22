@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.config;
+package com.iflytek.astra.console.hub.config;
 
 import java.util.Locale;
 import org.springframework.context.annotation.Bean;

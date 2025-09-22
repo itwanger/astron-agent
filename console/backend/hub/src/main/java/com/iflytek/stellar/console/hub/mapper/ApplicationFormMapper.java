@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.hub.mapper;
+package com.iflytek.astra.console.hub.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.iflytek.stellar.console.hub.entity.ApplicationForm;
+import com.iflytek.astra.console.hub.entity.ApplicationForm;
 
 /**
  * <p>

@@ -1,10 +1,10 @@
-package com.iflytek.stellar.console.hub.data;
+package com.iflytek.astra.console.hub.data;
 
-import com.iflytek.stellar.console.hub.dto.notification.NotificationDto;
-import com.iflytek.stellar.console.hub.dto.notification.NotificationQueryRequest;
-import com.iflytek.stellar.console.hub.entity.notification.Notification;
-import com.iflytek.stellar.console.hub.entity.notification.UserBroadcastRead;
-import com.iflytek.stellar.console.hub.entity.notification.UserNotification;
+import com.iflytek.astra.console.hub.dto.notification.NotificationDto;
+import com.iflytek.astra.console.hub.dto.notification.NotificationQueryRequest;
+import com.iflytek.astra.console.hub.entity.notification.Notification;
+import com.iflytek.astra.console.hub.entity.notification.UserBroadcastRead;
+import com.iflytek.astra.console.hub.entity.notification.UserNotification;
 
 import java.time.LocalDateTime;
 import java.util.List;

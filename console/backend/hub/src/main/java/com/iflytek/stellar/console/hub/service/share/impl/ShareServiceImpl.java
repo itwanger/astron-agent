@@ -1,13 +1,13 @@
-package com.iflytek.stellar.console.hub.service.share.impl;
+package com.iflytek.astra.console.hub.service.share.impl;
 
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.entity.bot.BotDetail;
-import com.iflytek.stellar.console.commons.entity.space.AgentShareRecord;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
-import com.iflytek.stellar.console.commons.service.bot.ChatBotDataService;
-import com.iflytek.stellar.console.hub.data.ShareDataService;
-import com.iflytek.stellar.console.hub.service.share.ShareService;
-import com.iflytek.stellar.console.hub.util.Md5Util;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.entity.bot.BotDetail;
+import com.iflytek.astra.console.commons.entity.space.AgentShareRecord;
+import com.iflytek.astra.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.commons.service.bot.ChatBotDataService;
+import com.iflytek.astra.console.hub.data.ShareDataService;
+import com.iflytek.astra.console.hub.service.share.ShareService;
+import com.iflytek.astra.console.hub.util.Md5Util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

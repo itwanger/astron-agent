@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.service.knowledge;
+package com.iflytek.astra.console.hub.service.knowledge;
 
 import java.util.List;
 

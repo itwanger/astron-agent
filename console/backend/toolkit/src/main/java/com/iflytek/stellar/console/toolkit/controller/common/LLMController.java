@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.controller.common;
+package com.iflytek.astra.console.toolkit.controller.common;
 
-import com.iflytek.stellar.console.toolkit.common.anno.ResponseResultBody;
-import com.iflytek.stellar.console.toolkit.service.model.LLMService;
+import com.iflytek.astra.console.toolkit.common.anno.ResponseResultBody;
+import com.iflytek.astra.console.toolkit.service.model.LLMService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;

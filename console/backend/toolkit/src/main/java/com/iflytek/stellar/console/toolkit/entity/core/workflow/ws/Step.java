@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.core.workflow.ws;
+package com.iflytek.astra.console.toolkit.entity.core.workflow.ws;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import lombok.Data;

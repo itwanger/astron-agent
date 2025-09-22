@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.mapper.eval;
+package com.iflytek.astra.console.toolkit.mapper.eval;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.iflytek.stellar.console.toolkit.entity.table.eval.EvalSetVerData;
+import com.iflytek.astra.console.toolkit.entity.table.eval.EvalSetVerData;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

@@ -1,10 +1,10 @@
-package com.iflytek.stellar.console.hub.service.chat.impl;
+package com.iflytek.astra.console.hub.service.chat.impl;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.iflytek.stellar.console.commons.dto.llm.SparkChatRequest;
-import com.iflytek.stellar.console.commons.entity.chat.*;
-import com.iflytek.stellar.console.commons.service.data.ChatDataService;
-import com.iflytek.stellar.console.commons.service.data.ChatHistoryService;
+import com.iflytek.astra.console.commons.dto.llm.SparkChatRequest;
+import com.iflytek.astra.console.commons.entity.chat.*;
+import com.iflytek.astra.console.commons.service.data.ChatDataService;
+import com.iflytek.astra.console.commons.service.data.ChatHistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.util.Base64Util;

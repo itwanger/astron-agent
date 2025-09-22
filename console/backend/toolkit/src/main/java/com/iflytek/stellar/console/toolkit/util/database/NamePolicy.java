@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.util.database;
+package com.iflytek.astra.console.toolkit.util.database;
 
 import org.apache.commons.lang3.StringUtils;
 

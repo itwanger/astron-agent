@@ -1,10 +1,10 @@
-package com.iflytek.stellar.console.hub.service;
+package com.iflytek.astra.console.hub.service;
 
 import com.alibaba.fastjson2.JSON;
-import com.iflytek.stellar.console.commons.util.SseEmitterUtil;
-import com.iflytek.stellar.console.hub.config.DeepSeekConfig;
-import com.iflytek.stellar.console.hub.dto.DeepSeekChatRequest;
-import com.iflytek.stellar.console.hub.dto.DeepSeekChatResponse;
+import com.iflytek.astra.console.commons.util.SseEmitterUtil;
+import com.iflytek.astra.console.hub.config.DeepSeekConfig;
+import com.iflytek.astra.console.hub.dto.DeepSeekChatRequest;
+import com.iflytek.astra.console.hub.dto.DeepSeekChatResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;

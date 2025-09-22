@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.dto.chat;
+package com.iflytek.astra.console.hub.dto.chat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

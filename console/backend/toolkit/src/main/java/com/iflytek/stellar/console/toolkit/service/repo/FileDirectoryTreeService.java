@@ -1,10 +1,10 @@
-package com.iflytek.stellar.console.toolkit.service.repo;
+package com.iflytek.astra.console.toolkit.service.repo;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.iflytek.stellar.console.toolkit.entity.table.repo.FileDirectoryTree;
-import com.iflytek.stellar.console.toolkit.mapper.repo.FileDirectoryTreeMapper;
+import com.iflytek.astra.console.toolkit.entity.table.repo.FileDirectoryTree;
+import com.iflytek.astra.console.toolkit.mapper.repo.FileDirectoryTreeMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

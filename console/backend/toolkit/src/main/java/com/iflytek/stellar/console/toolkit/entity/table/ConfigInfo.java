@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.table;
+package com.iflytek.astra.console.toolkit.entity.table;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;

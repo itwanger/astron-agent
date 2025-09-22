@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.spark;
+package com.iflytek.astra.console.toolkit.entity.spark;
 
 
 import lombok.Data;

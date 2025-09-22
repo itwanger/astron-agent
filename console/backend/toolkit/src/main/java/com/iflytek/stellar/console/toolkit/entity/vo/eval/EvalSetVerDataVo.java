@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.vo.eval;
+package com.iflytek.astra.console.toolkit.entity.vo.eval;
 
 import lombok.Data;
 

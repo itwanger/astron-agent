@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.toolkit.entity.vo.database;
+package com.iflytek.astra.console.toolkit.entity.vo.database;
 
-import com.iflytek.stellar.console.toolkit.entity.table.database.DbTable;
+import com.iflytek.astra.console.toolkit.entity.table.database.DbTable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

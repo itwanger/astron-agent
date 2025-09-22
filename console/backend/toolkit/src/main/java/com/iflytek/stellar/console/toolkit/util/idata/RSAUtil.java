@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.util.idata;
+package com.iflytek.astra.console.toolkit.util.idata;
 
 import lombok.extern.slf4j.Slf4j;
 

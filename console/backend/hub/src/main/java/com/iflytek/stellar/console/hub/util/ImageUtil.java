@@ -1,8 +1,8 @@
-package com.iflytek.stellar.console.hub.util;
+package com.iflytek.astra.console.hub.util;
 
 import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.io.IoUtil;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.commons.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayInputStream;
@@ -10,7 +10,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Base64;
 
-import static com.iflytek.stellar.console.commons.constant.ResponseEnum.SYSTEM_ERROR;
+import static com.iflytek.astra.console.commons.constant.ResponseEnum.SYSTEM_ERROR;
 
 /**
  * Image processing utility class

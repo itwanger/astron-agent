@@ -1,15 +1,15 @@
-package com.iflytek.stellar.console.hub.controller.space;
+package com.iflytek.astra.console.hub.controller.space;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.commons.annotation.RateLimit;
-import com.iflytek.stellar.console.commons.annotation.space.EnterprisePreAuth;
-import com.iflytek.stellar.console.commons.dto.space.EnterpriseUserParam;
-import com.iflytek.stellar.console.commons.util.space.EnterpriseInfoUtil;
-import com.iflytek.stellar.console.commons.dto.space.EnterpriseUserVO;
-import com.iflytek.stellar.console.commons.dto.space.UserLimitVO;
-import com.iflytek.stellar.console.commons.service.space.EnterpriseUserService;
-import com.iflytek.stellar.console.hub.service.space.EnterpriseUserBizService;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.commons.annotation.RateLimit;
+import com.iflytek.astra.console.commons.annotation.space.EnterprisePreAuth;
+import com.iflytek.astra.console.commons.dto.space.EnterpriseUserParam;
+import com.iflytek.astra.console.commons.util.space.EnterpriseInfoUtil;
+import com.iflytek.astra.console.commons.dto.space.EnterpriseUserVO;
+import com.iflytek.astra.console.commons.dto.space.UserLimitVO;
+import com.iflytek.astra.console.commons.service.space.EnterpriseUserService;
+import com.iflytek.astra.console.hub.service.space.EnterpriseUserBizService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;

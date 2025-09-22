@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.common.anno;
+package com.iflytek.astra.console.toolkit.common.anno;
 
 import java.lang.annotation.*;
 

@@ -1,8 +1,8 @@
-package com.iflytek.stellar.console.toolkit.mapper.users;
+package com.iflytek.astra.console.toolkit.mapper.users;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.iflytek.stellar.console.toolkit.entity.table.users.SystemUser;
+import com.iflytek.astra.console.toolkit.entity.table.users.SystemUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

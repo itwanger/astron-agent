@@ -1,10 +1,10 @@
-package com.iflytek.stellar.console.toolkit.service.bot;
+package com.iflytek.astra.console.toolkit.service.bot;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.iflytek.stellar.console.toolkit.entity.table.relation.BotToolRel;
-import com.iflytek.stellar.console.toolkit.mapper.relation.BotToolRelMapper;
+import com.iflytek.astra.console.toolkit.entity.table.relation.BotToolRel;
+import com.iflytek.astra.console.toolkit.mapper.relation.BotToolRelMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;

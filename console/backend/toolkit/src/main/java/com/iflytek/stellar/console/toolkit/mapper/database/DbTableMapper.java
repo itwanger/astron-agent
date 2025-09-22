@@ -1,9 +1,9 @@
-package com.iflytek.stellar.console.toolkit.mapper.database;
+package com.iflytek.astra.console.toolkit.mapper.database;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.iflytek.stellar.console.toolkit.entity.dto.database.DbTableCountDto;
-import com.iflytek.stellar.console.toolkit.entity.table.database.DbTable;
+import com.iflytek.astra.console.toolkit.entity.dto.database.DbTableCountDto;
+import com.iflytek.astra.console.toolkit.entity.table.database.DbTable;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

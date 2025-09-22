@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.properties;
+package com.iflytek.astra.console.hub.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

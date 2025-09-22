@@ -1,8 +1,8 @@
-package com.iflytek.stellar.console.toolkit.entity.core.workflow.ws;
+package com.iflytek.astra.console.toolkit.entity.core.workflow.ws;
 
 
-import com.iflytek.stellar.console.toolkit.entity.spark.Parameter;
-import com.iflytek.stellar.console.toolkit.entity.spark.chat.Payload;
+import com.iflytek.astra.console.toolkit.entity.spark.Parameter;
+import com.iflytek.astra.console.toolkit.entity.spark.chat.Payload;
 import lombok.Data;
 
 @Data

@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.toolkit.entity.spark.chat;
+package com.iflytek.astra.console.toolkit.entity.spark.chat;
 
-import com.iflytek.stellar.console.toolkit.common.constant.ChatConstant;
+import com.iflytek.astra.console.toolkit.common.constant.ChatConstant;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

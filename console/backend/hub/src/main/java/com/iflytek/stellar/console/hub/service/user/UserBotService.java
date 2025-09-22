@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.hub.service.user;
+package com.iflytek.astra.console.hub.service.user;
 
-import com.iflytek.stellar.console.hub.dto.user.MyBotPageDTO;
-import com.iflytek.stellar.console.hub.dto.user.MyBotParamDTO;
+import com.iflytek.astra.console.hub.dto.user.MyBotPageDTO;
+import com.iflytek.astra.console.hub.dto.user.MyBotParamDTO;
 
 
 /**

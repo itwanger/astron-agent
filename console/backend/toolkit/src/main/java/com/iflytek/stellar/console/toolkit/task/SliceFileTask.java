@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.task;
+package com.iflytek.astra.console.toolkit.task;
 
-import com.iflytek.stellar.console.toolkit.entity.pojo.SliceConfig;
-import com.iflytek.stellar.console.toolkit.service.repo.FileInfoV2Service;
+import com.iflytek.astra.console.toolkit.entity.pojo.SliceConfig;
+import com.iflytek.astra.console.toolkit.service.repo.FileInfoV2Service;
 
 import java.util.concurrent.Callable;
 

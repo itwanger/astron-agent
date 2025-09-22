@@ -1,9 +1,9 @@
-package com.iflytek.stellar.console.hub.controller.homepage;
+package com.iflytek.astra.console.hub.controller.homepage;
 
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.hub.dto.homepage.BotListPageDto;
-import com.iflytek.stellar.console.hub.dto.homepage.BotTypeDto;
-import com.iflytek.stellar.console.hub.service.homepage.AgentSquareService;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.hub.dto.homepage.BotListPageDto;
+import com.iflytek.astra.console.hub.dto.homepage.BotTypeDto;
+import com.iflytek.astra.console.hub.service.homepage.AgentSquareService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;

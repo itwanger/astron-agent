@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.hub.aspect;
+package com.iflytek.astra.console.hub.aspect;
 
-import com.iflytek.stellar.console.hub.annotation.DistributedLock;
-import com.iflytek.stellar.console.hub.exception.DistributedLockException;
+import com.iflytek.astra.console.hub.annotation.DistributedLock;
+import com.iflytek.astra.console.hub.exception.DistributedLockException;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
  * Supports multiple lock types: reentrant lock, fair lock, read-write lock. Supports SpEL
  * expression parsing for lock key values
  *
- * @author Stellar Console Team
+ * @author Astra Console Team
  * @since 1.0.0
  */
 @Slf4j

@@ -1,11 +1,11 @@
-package com.iflytek.stellar.console.toolkit.mapper.bot;
+package com.iflytek.astra.console.toolkit.mapper.bot;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.pagehelper.Page;
-import com.iflytek.stellar.console.toolkit.entity.dto.SparkBotVO;
-import com.iflytek.stellar.console.toolkit.entity.table.bot.SparkBot;
-import com.iflytek.stellar.console.toolkit.entity.vo.bot.SparkBotSquaerVo;
+import com.iflytek.astra.console.toolkit.entity.dto.SparkBotVO;
+import com.iflytek.astra.console.toolkit.entity.table.bot.SparkBot;
+import com.iflytek.astra.console.toolkit.entity.vo.bot.SparkBotSquaerVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

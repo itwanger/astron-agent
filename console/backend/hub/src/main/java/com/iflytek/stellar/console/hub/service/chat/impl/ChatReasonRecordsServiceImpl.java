@@ -1,11 +1,11 @@
-package com.iflytek.stellar.console.hub.service.chat.impl;
+package com.iflytek.astra.console.hub.service.chat.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson2.JSONObject;
-import com.iflytek.stellar.console.commons.entity.chat.ChatRespModelDto;
-import com.iflytek.stellar.console.commons.entity.chat.ChatReasonRecords;
-import com.iflytek.stellar.console.commons.entity.chat.ChatTraceSource;
-import com.iflytek.stellar.console.hub.service.chat.ChatReasonRecordsService;
+import com.iflytek.astra.console.commons.entity.chat.ChatRespModelDto;
+import com.iflytek.astra.console.commons.entity.chat.ChatReasonRecords;
+import com.iflytek.astra.console.commons.entity.chat.ChatTraceSource;
+import com.iflytek.astra.console.hub.service.chat.ChatReasonRecordsService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

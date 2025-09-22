@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.data.impl;
+package com.iflytek.astra.console.hub.data.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
@@ -6,15 +6,15 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.entity.bot.BotChatFileParam;
-import com.iflytek.stellar.console.commons.entity.chat.*;
-import com.iflytek.stellar.console.commons.exception.BusinessException;
-import com.iflytek.stellar.console.commons.mapper.chat.ChatListMapper;
-import com.iflytek.stellar.console.commons.mapper.chat.ChatTreeIndexMapper;
-import com.iflytek.stellar.console.commons.service.data.ChatDataService;
-import com.iflytek.stellar.console.hub.enums.LongContextStatusEnum;
-import com.iflytek.stellar.console.hub.mapper.*;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.entity.bot.BotChatFileParam;
+import com.iflytek.astra.console.commons.entity.chat.*;
+import com.iflytek.astra.console.commons.exception.BusinessException;
+import com.iflytek.astra.console.commons.mapper.chat.ChatListMapper;
+import com.iflytek.astra.console.commons.mapper.chat.ChatTreeIndexMapper;
+import com.iflytek.astra.console.commons.service.data.ChatDataService;
+import com.iflytek.astra.console.hub.enums.LongContextStatusEnum;
+import com.iflytek.astra.console.hub.mapper.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

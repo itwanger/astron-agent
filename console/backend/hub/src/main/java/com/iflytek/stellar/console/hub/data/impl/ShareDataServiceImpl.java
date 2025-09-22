@@ -1,9 +1,9 @@
-package com.iflytek.stellar.console.hub.data.impl;
+package com.iflytek.astra.console.hub.data.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.iflytek.stellar.console.commons.entity.space.AgentShareRecord;
-import com.iflytek.stellar.console.commons.mapper.AgentShareRecordMapper;
-import com.iflytek.stellar.console.hub.data.ShareDataService;
+import com.iflytek.astra.console.commons.entity.space.AgentShareRecord;
+import com.iflytek.astra.console.commons.mapper.AgentShareRecordMapper;
+import com.iflytek.astra.console.hub.data.ShareDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

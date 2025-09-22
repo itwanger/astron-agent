@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.common.constant;
+package com.iflytek.astra.console.toolkit.common.constant;
 
 public class ToolConst {
     public static final class CreationMethod {

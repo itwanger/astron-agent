@@ -1,8 +1,8 @@
-package com.iflytek.stellar.console.hub.service.chat;
+package com.iflytek.astra.console.hub.service.chat;
 
-import com.iflytek.stellar.console.commons.entity.bot.ChatBotBase;
-import com.iflytek.stellar.console.commons.entity.bot.ChatBotReqDto;
-import com.iflytek.stellar.console.commons.entity.chat.ChatListCreateResponse;
+import com.iflytek.astra.console.commons.entity.bot.ChatBotBase;
+import com.iflytek.astra.console.commons.entity.bot.ChatBotReqDto;
+import com.iflytek.astra.console.commons.entity.chat.ChatListCreateResponse;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.util.List;

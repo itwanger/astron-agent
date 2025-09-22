@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.vo;
+package com.iflytek.astra.console.toolkit.entity.vo;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.annotation.JSONField;

@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.entity.vo;
+package com.iflytek.astra.console.toolkit.entity.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.iflytek.stellar.console.toolkit.entity.biz.external.shelf.LLMServerInfo;
+import com.iflytek.astra.console.toolkit.entity.biz.external.shelf.LLMServerInfo;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;

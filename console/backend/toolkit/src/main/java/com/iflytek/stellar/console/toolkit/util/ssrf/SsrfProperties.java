@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.util.ssrf;
+package com.iflytek.astra.console.toolkit.util.ssrf;
 
 import lombok.Data;
 

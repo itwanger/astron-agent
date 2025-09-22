@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.hub.entity.maas;
+package com.iflytek.astra.console.hub.entity.maas;
 
-import com.iflytek.stellar.console.commons.entity.bot.BotCreateForm;
+import com.iflytek.astra.console.commons.entity.bot.BotCreateForm;
 import lombok.Data;
 
 @Data

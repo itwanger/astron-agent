@@ -1,9 +1,9 @@
-package com.iflytek.stellar.console.toolkit.sse;
+package com.iflytek.astra.console.toolkit.sse;
 
 
-import com.iflytek.stellar.console.commons.util.SseEmitterUtil;
-import com.iflytek.stellar.console.toolkit.entity.spark.chat.ChatResponse;
-import com.iflytek.stellar.console.toolkit.util.JacksonUtil;
+import com.iflytek.astra.console.commons.util.SseEmitterUtil;
+import com.iflytek.astra.console.toolkit.entity.spark.chat.ChatResponse;
+import com.iflytek.astra.console.toolkit.util.JacksonUtil;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Response;

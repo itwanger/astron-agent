@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.common.constant;
+package com.iflytek.astra.console.toolkit.common.constant;
 
 public class WorkflowConst {
     public static final int LLM_RESP_FORMAT_TEXT = 0;

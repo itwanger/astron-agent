@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.handler;
+package com.iflytek.astra.console.toolkit.handler;
 
 import com.alibaba.fastjson2.JSONObject;
 import org.apache.ibatis.type.BaseTypeHandler;

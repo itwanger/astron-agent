@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.common.constant;
+package com.iflytek.astra.console.toolkit.common.constant;
 
 public class LLMConstant {
     public static final String DOMAIN_SPARK_1_5 = "general";

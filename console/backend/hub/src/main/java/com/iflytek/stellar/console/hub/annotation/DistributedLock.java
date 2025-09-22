@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.annotation;
+package com.iflytek.astra.console.hub.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * timeout: @DistributedLock(key = "order:#{#orderId}", waitTime = 10, leaseTime = 30) 3. Fair
  * lock: @DistributedLock(key = "fair:#{#id}", lockType = LockType.FAIR)
  *
- * @author Stellar Console Team
+ * @author Astra Console Team
  * @since 1.0.0
  */
 @Target({ElementType.METHOD})

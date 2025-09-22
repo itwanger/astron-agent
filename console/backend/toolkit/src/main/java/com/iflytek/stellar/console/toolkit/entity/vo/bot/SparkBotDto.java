@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.vo.bot;
+package com.iflytek.astra.console.toolkit.entity.vo.bot;
 
 import lombok.Data;
 

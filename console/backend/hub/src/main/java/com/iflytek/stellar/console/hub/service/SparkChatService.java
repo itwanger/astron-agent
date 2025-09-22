@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.service;
+package com.iflytek.astra.console.hub.service;
 
 import cn.xfyun.api.SparkChatClient;
 import cn.xfyun.config.SparkModel;
@@ -9,12 +9,12 @@ import cn.xfyun.model.sparkmodel.response.SparkChatResponse;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
-import com.iflytek.stellar.console.commons.service.data.ChatDataService;
-import com.iflytek.stellar.console.commons.dto.llm.SparkChatRequest;
-import com.iflytek.stellar.console.commons.entity.chat.ChatReqRecords;
-import com.iflytek.stellar.console.commons.entity.chat.ChatTraceSource;
-import com.iflytek.stellar.console.commons.service.ChatRecordModelService;
-import com.iflytek.stellar.console.commons.util.SseEmitterUtil;
+import com.iflytek.astra.console.commons.service.data.ChatDataService;
+import com.iflytek.astra.console.commons.dto.llm.SparkChatRequest;
+import com.iflytek.astra.console.commons.entity.chat.ChatReqRecords;
+import com.iflytek.astra.console.commons.entity.chat.ChatTraceSource;
+import com.iflytek.astra.console.commons.service.ChatRecordModelService;
+import com.iflytek.astra.console.commons.util.SseEmitterUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;

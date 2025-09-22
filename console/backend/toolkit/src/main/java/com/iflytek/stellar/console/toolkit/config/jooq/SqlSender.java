@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.config.jooq;
+package com.iflytek.astra.console.toolkit.config.jooq;
 
 import java.util.List;
 

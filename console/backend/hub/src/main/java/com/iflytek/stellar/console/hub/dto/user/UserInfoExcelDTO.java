@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.dto.user;
+package com.iflytek.astra.console.hub.dto.user;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;

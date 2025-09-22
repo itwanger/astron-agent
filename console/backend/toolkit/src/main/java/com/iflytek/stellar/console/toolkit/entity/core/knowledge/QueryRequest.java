@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.toolkit.entity.core.knowledge;
+package com.iflytek.astra.console.toolkit.entity.core.knowledge;
 
-import com.iflytek.stellar.console.toolkit.common.constant.ProjectContent;
+import com.iflytek.astra.console.toolkit.common.constant.ProjectContent;
 import lombok.Data;
 
 @Data

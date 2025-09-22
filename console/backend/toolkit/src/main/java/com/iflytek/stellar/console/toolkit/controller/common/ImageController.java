@@ -1,11 +1,11 @@
-package com.iflytek.stellar.console.toolkit.controller.common;
+package com.iflytek.astra.console.toolkit.controller.common;
 
 
 import com.alibaba.fastjson2.JSONObject;
-import com.iflytek.stellar.console.toolkit.common.Result;
-import com.iflytek.stellar.console.toolkit.common.anno.ResponseResultBody;
-import com.iflytek.stellar.console.toolkit.service.common.ImageService;
-import com.iflytek.stellar.console.toolkit.util.S3Util;
+import com.iflytek.astra.console.toolkit.common.Result;
+import com.iflytek.astra.console.toolkit.common.anno.ResponseResultBody;
+import com.iflytek.astra.console.toolkit.service.common.ImageService;
+import com.iflytek.astra.console.toolkit.util.S3Util;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

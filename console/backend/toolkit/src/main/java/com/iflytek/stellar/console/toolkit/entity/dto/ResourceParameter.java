@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.entity.dto;
+package com.iflytek.astra.console.toolkit.entity.dto;
 
 
-import com.iflytek.stellar.console.toolkit.common.constant.CommonConst;
+import com.iflytek.astra.console.toolkit.common.constant.CommonConst;
 import lombok.*;
 
 /**

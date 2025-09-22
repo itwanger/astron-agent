@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.core.workflow;
+package com.iflytek.astra.console.toolkit.entity.core.workflow;
 
 import com.alibaba.fastjson2.JSONObject;
 import lombok.Data;

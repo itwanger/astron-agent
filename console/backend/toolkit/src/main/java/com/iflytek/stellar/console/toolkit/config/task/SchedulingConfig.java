@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.config.task;
+package com.iflytek.astra.console.toolkit.config.task;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;

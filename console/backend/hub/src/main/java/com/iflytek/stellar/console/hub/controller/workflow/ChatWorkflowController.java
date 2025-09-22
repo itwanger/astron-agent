@@ -1,17 +1,17 @@
-package com.iflytek.stellar.console.hub.controller.workflow;
+package com.iflytek.astra.console.hub.controller.workflow;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
-import com.iflytek.stellar.console.commons.constant.ResponseEnum;
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.commons.util.space.SpaceInfoUtil;
-import com.iflytek.stellar.console.commons.service.bot.ChatBotDataService;
-import com.iflytek.stellar.console.commons.service.data.UserLangChainDataService;
-import com.iflytek.stellar.console.commons.entity.workflow.WorkflowInfoDto;
-import com.iflytek.stellar.console.commons.entity.bot.ChatBotBase;
-import com.iflytek.stellar.console.commons.entity.bot.UserLangChainInfo;
-import com.iflytek.stellar.console.toolkit.service.workflow.WorkflowService;
+import com.iflytek.astra.console.commons.constant.ResponseEnum;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.commons.util.space.SpaceInfoUtil;
+import com.iflytek.astra.console.commons.service.bot.ChatBotDataService;
+import com.iflytek.astra.console.commons.service.data.UserLangChainDataService;
+import com.iflytek.astra.console.commons.entity.workflow.WorkflowInfoDto;
+import com.iflytek.astra.console.commons.entity.bot.ChatBotBase;
+import com.iflytek.astra.console.commons.entity.bot.UserLangChainInfo;
+import com.iflytek.astra.console.toolkit.service.workflow.WorkflowService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

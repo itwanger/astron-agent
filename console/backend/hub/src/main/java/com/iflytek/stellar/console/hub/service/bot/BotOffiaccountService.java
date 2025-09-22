@@ -1,6 +1,6 @@
-package com.iflytek.stellar.console.hub.service.bot;
+package com.iflytek.astra.console.hub.service.bot;
 
-import com.iflytek.stellar.console.hub.entity.BotOffiaccount;
+import com.iflytek.astra.console.hub.entity.BotOffiaccount;
 
 import java.util.List;
 

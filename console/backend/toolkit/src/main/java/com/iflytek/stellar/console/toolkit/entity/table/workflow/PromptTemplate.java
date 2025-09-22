@@ -1,8 +1,8 @@
-package com.iflytek.stellar.console.toolkit.entity.table.workflow;
+package com.iflytek.astra.console.toolkit.entity.table.workflow;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.iflytek.stellar.console.toolkit.service.workflow.WorkflowService;
+import com.iflytek.astra.console.toolkit.service.workflow.WorkflowService;
 import lombok.Data;
 import java.util.Date;
 import java.util.List;

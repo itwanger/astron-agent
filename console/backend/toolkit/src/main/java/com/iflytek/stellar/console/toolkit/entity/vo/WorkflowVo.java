@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.toolkit.entity.vo;
+package com.iflytek.astra.console.toolkit.entity.vo;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.iflytek.stellar.console.commons.entity.workflow.Workflow;
+import com.iflytek.astra.console.commons.entity.workflow.Workflow;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

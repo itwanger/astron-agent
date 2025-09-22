@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.vo;
+package com.iflytek.astra.console.toolkit.entity.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

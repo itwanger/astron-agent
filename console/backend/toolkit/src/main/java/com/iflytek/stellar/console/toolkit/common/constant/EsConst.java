@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.common.constant;
+package com.iflytek.astra.console.toolkit.common.constant;
 
 public class EsConst {
     public static final String CHAT_HISTORY_INDEX = "sparkbot_chat_history";

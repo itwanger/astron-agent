@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.hub.service;
+package com.iflytek.astra.console.hub.service;
 
 import cn.xfyun.api.AgentClient;
 import cn.xfyun.model.agent.AgentChatParam;
@@ -6,12 +6,12 @@ import cn.xfyun.model.agent.AgentResumeParam;
 import cn.xfyun.model.sparkmodel.RoleContent;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.iflytek.stellar.console.commons.service.data.ChatDataService;
-import com.iflytek.stellar.console.commons.entity.workflow.WorkflowChatRequest;
-import com.iflytek.stellar.console.commons.entity.workflow.WorkflowEventData;
-import com.iflytek.stellar.console.commons.entity.workflow.WorkflowResumeReq;
-import com.iflytek.stellar.console.commons.entity.chat.ChatReqRecords;
-import com.iflytek.stellar.console.commons.util.SseEmitterUtil;
+import com.iflytek.astra.console.commons.service.data.ChatDataService;
+import com.iflytek.astra.console.commons.entity.workflow.WorkflowChatRequest;
+import com.iflytek.astra.console.commons.entity.workflow.WorkflowEventData;
+import com.iflytek.astra.console.commons.entity.workflow.WorkflowResumeReq;
+import com.iflytek.astra.console.commons.entity.chat.ChatReqRecords;
+import com.iflytek.astra.console.commons.util.SseEmitterUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Call;

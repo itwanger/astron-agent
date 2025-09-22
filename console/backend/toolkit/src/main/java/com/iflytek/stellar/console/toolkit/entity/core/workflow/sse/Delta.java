@@ -1,4 +1,4 @@
-package com.iflytek.stellar.console.toolkit.entity.core.workflow.sse;
+package com.iflytek.astra.console.toolkit.entity.core.workflow.sse;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

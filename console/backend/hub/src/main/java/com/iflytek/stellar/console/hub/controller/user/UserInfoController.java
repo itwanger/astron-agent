@@ -1,9 +1,9 @@
-package com.iflytek.stellar.console.hub.controller.user;
+package com.iflytek.astra.console.hub.controller.user;
 
-import com.iflytek.stellar.console.commons.data.UserInfoDataService;
-import com.iflytek.stellar.console.commons.entity.user.UserInfo;
-import com.iflytek.stellar.console.commons.response.ApiResult;
-import com.iflytek.stellar.console.hub.dto.user.UpdateUserBasicInfoRequest;
+import com.iflytek.astra.console.commons.data.UserInfoDataService;
+import com.iflytek.astra.console.commons.entity.user.UserInfo;
+import com.iflytek.astra.console.commons.response.ApiResult;
+import com.iflytek.astra.console.hub.dto.user.UpdateUserBasicInfoRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

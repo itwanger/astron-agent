@@ -1,7 +1,7 @@
-package com.iflytek.stellar.console.hub.service.homepage;
+package com.iflytek.astra.console.hub.service.homepage;
 
-import com.iflytek.stellar.console.hub.dto.homepage.BotListPageDto;
-import com.iflytek.stellar.console.hub.dto.homepage.BotTypeDto;
+import com.iflytek.astra.console.hub.dto.homepage.BotListPageDto;
+import com.iflytek.astra.console.hub.dto.homepage.BotTypeDto;
 
 import java.util.List;
 
