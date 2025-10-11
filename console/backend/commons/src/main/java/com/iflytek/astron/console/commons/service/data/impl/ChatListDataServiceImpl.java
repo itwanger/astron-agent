@@ -4,15 +4,15 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.iflytek.astron.console.commons.entity.bot.ChatBotBase;
-import com.iflytek.astron.console.commons.entity.bot.ChatBotList;
-import com.iflytek.astron.console.commons.dto.chat.ChatBotListDto;
+import com.iflytek.astron.console.commons.entity.chat.ChatBotListDto;
 import com.iflytek.astron.console.commons.entity.chat.ChatList;
 import com.iflytek.astron.console.commons.entity.chat.ChatTreeIndex;
-import com.iflytek.astron.console.commons.mapper.bot.ChatBotListMapper;
 import com.iflytek.astron.console.commons.mapper.chat.ChatListMapper;
 import com.iflytek.astron.console.commons.mapper.chat.ChatTreeIndexMapper;
 import com.iflytek.astron.console.commons.service.data.ChatListDataService;
+import com.iflytek.astron.console.commons.entity.bot.ChatBotBase;
+import com.iflytek.astron.console.commons.entity.bot.ChatBotList;
+import com.iflytek.astron.console.commons.mapper.bot.ChatBotListMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +35,6 @@ public class ChatListDataServiceImpl implements ChatListDataService {
     @Autowired
     private ChatBotListMapper chatBotListMapper;
 
-    /**
-     * Query chat list by user ID and chat ID
-     *
-     * @param uid User ID
-     * @param chatId Chat ID (corresponding to the primary key id of ChatList)
-     * @return Chat list information
-     */
     @Override
     public ChatList findByUidAndChatId(String uid, Long chatId) {
         if (uid == null || chatId == null) {
@@ -60,12 +53,6 @@ public class ChatListDataServiceImpl implements ChatListDataService {
         return result;
     }
 
-    /**
-     * Query chat tree index by chat ID and sort by ID in descending order
-     *
-     * @param rootChatId Root chat ID
-     * @return Chat tree index list
-     */
     @Override
     public List<ChatTreeIndex> findChatTreeIndexByChatIdOrderById(Long rootChatId) {
         LambdaQueryWrapper<ChatTreeIndex> chatTreeQuery = new LambdaQueryWrapper<ChatTreeIndex>()

@@ -28,9 +28,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author mingsuiyongheng
- */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -45,12 +42,6 @@ public class SparkChatService {
     @Autowired
     private ChatRecordModelService chatRecordModelService;
 
-    /**
-     * Create and return an SseEmitter object for handling chat room streaming requests
-     *
-     * @param request SparkChatRequest object containing chat room request
-     * @return SseEmitter object for handling chat room streaming requests
-     */
     public SseEmitter chatStream(SparkChatRequest request) {
         SseEmitter emitter = SseEmitterUtil.createSseEmitter();
         String streamId = request.getChatId() + "_" + request.getUserId() + "_" + System.currentTimeMillis();
@@ -73,6 +64,7 @@ public class SparkChatService {
         }
         try {
             SparkModel sparkModel = getSparkModel(request.getModel());
+            // todo: Connection pool configuration
             SparkChatClient client = new SparkChatClient.Builder().signatureHttp(apiPassword, sparkModel).build();
 
             SparkChatParam sendParam = buildSparkChatParam(request);
@@ -249,19 +241,7 @@ public class SparkChatService {
                 Integer code = dataObj.getInteger("code");
                 log.error("SSE data contains error code, streamId: {}, code: {}, message: {}", streamId, code, dataObj.getString("message"));
                 String fallbackMessage = getFallbackMessage(code);
-
-                // For specific error codes, replace all content with fallback message
-                if (shouldReplaceContent(code)) {
-                    finalResult.setLength(0); // Clear existing content
-                    thinkingResult.setLength(0); // Clear thinking content
-                    finalResult.append(fallbackMessage);
-                    dataObj.put("message", fallbackMessage);
-
-                    // Modify the response data to send fallback message to client
-                    modifyResponseDataForFallback(dataObj, fallbackMessage);
-                } else {
-                    finalResult.append(fallbackMessage);
-                }
+                finalResult.append(fallbackMessage);
             }
 
             // Add deskToolName field for Web search tool calls
@@ -270,11 +250,9 @@ public class SparkChatService {
             // Try to send data, continue processing data even if client disconnects
             boolean clientConnected = tryServeSSEData(emitter, dataObj, streamId);
 
-            // Process and save data regardless of client connection status (skip if content replaced)
+            // Process and save data regardless of client connection status
             processSidValue(dataObj, sid, streamId);
-            if (!shouldReplaceContent(dataObj.getInteger("code"))) {
-                processChoicesData(dataObj, finalResult, thinkingResult, traceResult, streamId);
-            }
+            processChoicesData(dataObj, finalResult, thinkingResult, traceResult, streamId);
 
             if (!clientConnected) {
                 log.info("Client disconnected, but continue processing data to ensure completeness, streamId: {}", streamId);
@@ -499,7 +477,9 @@ public class SparkChatService {
 
         return switch (code) {
             case 10007 -> "User traffic limited: Service is processing user's current request, please wait for completion before sending new requests.";
-            case 10013, 10014, 10019 -> "抱歉,您这个问题我暂时无法回答,我抓紧学习一下,争取下次给您满意的答复。";
+            case 10013 -> "Input content audit failed, suspected violation, please readjust input content";
+            case 10014 -> "Output content involves sensitive information, audit failed";
+            case 10019 -> "This conversation content has a tendency to involve violation information";
             case 10907 -> "Token count exceeds limit";
             case 11200 -> "Authorization error: This appId does not have authorization for related functions or business volume exceeds limit";
             case 11201 -> "Authorization error: Daily flow control exceeded. Exceeded daily maximum access limit";
@@ -507,44 +487,6 @@ public class SparkChatService {
             case 11203 -> "Authorization error: Concurrent flow control exceeded. Concurrent paths exceed authorized path limit";
             default -> "Service exception, please try again later";
         };
-    }
-
-    /**
-     * Check if error code requires content replacement
-     *
-     * @param code Error code
-     * @return true if content should be replaced with fallback message
-     */
-    private boolean shouldReplaceContent(Integer code) {
-        return code != null && (code == 10013 || code == 10014 || code == 10019);
-    }
-
-    /**
-     * Modify response data to send fallback message to client
-     *
-     * @param dataObj Response data JSON object
-     * @param fallbackMessage Fallback message to replace content
-     */
-    private void modifyResponseDataForFallback(JSONObject dataObj, String fallbackMessage) {
-        // Modify choices data to contain fallback message
-        if (dataObj.containsKey("choices")) {
-            JSONArray choices = dataObj.getJSONArray("choices");
-            if (!choices.isEmpty()) {
-                JSONObject firstChoice = choices.getJSONObject(0);
-                if (firstChoice.containsKey("delta")) {
-                    JSONObject delta = firstChoice.getJSONObject("delta");
-                    // Replace content with fallback message
-                    delta.put("content", fallbackMessage);
-                    // Remove reasoning content for violation cases
-                    delta.remove("reasoning_content");
-                } else {
-                    // Create delta object with fallback content
-                    JSONObject delta = new JSONObject();
-                    delta.put("content", fallbackMessage);
-                    firstChoice.put("delta", delta);
-                }
-            }
-        }
     }
 
     /**
@@ -675,7 +617,7 @@ public class SparkChatService {
 
         if (chatReqRecords != null) {
             completeData.put("chatId", chatReqRecords.getChatId());
-            completeData.put("reqId", chatReqRecords.getId());
+            completeData.put("requestId", chatReqRecords.getId());
         }
 
         return completeData;

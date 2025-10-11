@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iflytek.astron.console.commons.mapper.bot.ChatBotBaseMapper">
 
-    <select id="botDetail" resultType="com.iflytek.astron.console.commons.dto.bot.BotDetail">
+    <select id="botDetail" resultType="com.iflytek.astron.console.commons.entity.bot.BotDetail">
         SELECT a.id AS botId,
         a.prompt,
         case when a.support_context then 1 else 0 end as supportContext,

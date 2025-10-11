@@ -58,7 +58,7 @@ public class MassDatasetInfoService {
         return infoList;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, transactionManager = "commonTransactionManager")
     public void botAssociateDataset(String uid, Integer botId, List<Long> datasetList, Integer supportDocument) {
         if (CollUtil.isEmpty(datasetList)) {
             return;
@@ -90,7 +90,7 @@ public class MassDatasetInfoService {
     /**
      * First invalidate old MAAS dataset associations, then associate new dataset list
      */
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, transactionManager = "commonTransactionManager")
     public void updateDatasetByBot(String uid, Integer botId, List<Long> datasetList, Integer supportDocument) {
         // 1) Invalidate old associations
         UpdateWrapper<BotDatasetMaas> wrapper = new UpdateWrapper<>();

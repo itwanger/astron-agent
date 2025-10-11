@@ -7,11 +7,11 @@ import com.iflytek.astron.console.commons.response.ApiResult;
 import com.iflytek.astron.console.commons.util.RequestContextUtil;
 import com.iflytek.astron.console.commons.util.space.SpaceInfoUtil;
 import com.iflytek.astron.console.commons.service.bot.ChatBotDataService;
-import com.iflytek.astron.console.commons.dto.bot.BotInfoDto;
-import com.iflytek.astron.console.commons.dto.chat.ChatListCreateRequest;
-import com.iflytek.astron.console.commons.dto.chat.ChatListCreateResponse;
-import com.iflytek.astron.console.commons.dto.chat.ChatListDelRequest;
-import com.iflytek.astron.console.commons.dto.chat.ChatListResponseDto;
+import com.iflytek.astron.console.commons.entity.bot.BotInfoDto;
+import com.iflytek.astron.console.commons.entity.chat.ChatListCreateRequest;
+import com.iflytek.astron.console.commons.entity.chat.ChatListCreateResponse;
+import com.iflytek.astron.console.commons.entity.chat.ChatListDelRequest;
+import com.iflytek.astron.console.commons.entity.chat.ChatListResponseDto;
 import com.iflytek.astron.console.commons.entity.bot.ChatBotBase;
 import com.iflytek.astron.console.commons.enums.ShelfStatusEnum;
 import com.iflytek.astron.console.hub.service.chat.ChatListService;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @author mingsuiyongheng
+ * @author yingpeng
  */
 @RestController
 @Tag(name = "Chat List")
@@ -49,12 +49,6 @@ public class ChatListController {
         return ApiResult.success(allChatList);
     }
 
-    /**
-     * Controller method for creating chat list
-     *
-     * @param payload Request body containing chat list creation request data
-     * @return Returns an ApiResult object containing chat list creation response data
-     */
     @PostMapping("/v1/create-chat-list")
     @Operation(summary = "Create Chat List")
     public ApiResult<ChatListCreateResponse> createChatList(
@@ -66,12 +60,6 @@ public class ChatListController {
         return ApiResult.success(chatListService.createChatList(uid, payload.getChatListName(), botId));
     }
 
-    /**
-     * Delete chat list
-     *
-     * @param payload Request body containing chat list ID
-     * @return Result of the delete operation
-     */
     @PostMapping("/v1/del-chat-list")
     @Operation(summary = "Delete Chat List")
     public ApiResult<Boolean> deleteChatList(

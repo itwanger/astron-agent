@@ -2,7 +2,7 @@ package com.iflytek.astron.console.hub.converter;
 
 import com.iflytek.astron.console.hub.dto.publish.BotPublishInfoDto;
 import com.iflytek.astron.console.hub.dto.publish.BotDetailResponseDto;
-import com.iflytek.astron.console.commons.dto.bot.BotPublishQueryResult;
+import com.iflytek.astron.console.commons.entity.bot.BotPublishQueryResult;
 import org.mapstruct.*;
 
 import java.util.ArrayList;

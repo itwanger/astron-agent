@@ -2,9 +2,7 @@ package com.iflytek.astron.console.commons.util;
 
 import com.iflytek.astron.console.commons.constant.ResponseEnum;
 import com.iflytek.astron.console.commons.exception.BusinessException;
-import io.minio.BucketExistsArgs;
 import io.minio.GetPresignedObjectUrlArgs;
-import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.minio.errors.ErrorResponseException;
@@ -52,20 +50,6 @@ public class S3ClientUtil {
     @PostConstruct
     public void init() {
         this.minioClient = MinioClient.builder().endpoint(endpoint).credentials(accessKey, secretKey).build();
-
-        // Check if default bucket exists, create if not
-        try {
-            boolean found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(defaultBucket).build());
-            if (!found) {
-                minioClient.makeBucket(MakeBucketArgs.builder().bucket(defaultBucket).build());
-                log.info("Created S3 bucket: {}", defaultBucket);
-            } else {
-                log.info("S3 bucket already exists: {}", defaultBucket);
-            }
-        } catch (ErrorResponseException | InsufficientDataException | InternalException | InvalidKeyException | InvalidResponseException | IOException | NoSuchAlgorithmException | ServerException | XmlParserException e) {
-            log.error("Failed to check/create S3 bucket '{}': {}", defaultBucket, e.getMessage(), e);
-            throw new BusinessException(ResponseEnum.INTERNAL_SERVER_ERROR);
-        }
     }
 
     /**

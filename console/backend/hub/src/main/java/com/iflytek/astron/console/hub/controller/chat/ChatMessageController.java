@@ -4,7 +4,7 @@ import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson2.JSON;
 import com.iflytek.astron.console.commons.constant.ResponseEnum;
 import com.iflytek.astron.console.commons.entity.bot.ChatBotBase;
-import com.iflytek.astron.console.commons.dto.chat.ChatListCreateResponse;
+import com.iflytek.astron.console.commons.entity.chat.ChatListCreateResponse;
 import com.iflytek.astron.console.commons.exception.BusinessException;
 import com.iflytek.astron.console.commons.response.ApiResult;
 import com.iflytek.astron.console.commons.util.RequestContextUtil;
@@ -13,7 +13,7 @@ import com.iflytek.astron.console.commons.service.data.ChatDataService;
 import com.iflytek.astron.console.commons.service.data.ChatListDataService;
 import com.iflytek.astron.console.commons.util.SseEmitterUtil;
 import com.iflytek.astron.console.hub.dto.chat.BotDebugRequest;
-import com.iflytek.astron.console.commons.dto.bot.ChatBotReqDto;
+import com.iflytek.astron.console.commons.entity.bot.ChatBotReqDto;
 import com.iflytek.astron.console.hub.dto.chat.StopStreamResponse;
 import com.iflytek.astron.console.commons.entity.chat.ChatList;
 import com.iflytek.astron.console.commons.entity.chat.ChatReqRecords;
@@ -35,7 +35,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import java.util.*;
 
 /**
- * @author mingsuiyongheng
+ * @author yingpeng
  */
 @RestController
 @Slf4j
@@ -237,16 +237,7 @@ public class ChatMessageController {
     }
 
     private record ValidationResult(boolean isValid) {
-        /**
-         * Gets a static method that represents validation passed.
-         *
-         * @return ValidationResult A static result object representing validation passed
-         */
         static ValidationResult valid() { return new ValidationResult(true); }
-        /**
-         * Returns a static method that represents an invalid validation result.
-         * @return ValidationResult Represents an invalid validation result
-         */
         static ValidationResult invalid() { return new ValidationResult(false); }
     }
 
@@ -278,7 +269,7 @@ public class ChatMessageController {
     /**
      * Regenerate conversation result
      */
-    @PostMapping(path = "/re-answer", produces = "text/event-stream;charset=UTF-8")
+    @PostMapping(path = "/reAnswer", produces = "text/event-stream;charset=UTF-8")
     @Operation(summary = "Regenerate conversation result")
     public SseEmitter reAnswer(@RequestParam Long chatId, @RequestParam Long requestId) {
         String sseId = RandomUtil.randomString(8);

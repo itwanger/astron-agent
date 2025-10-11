@@ -15,12 +15,8 @@ public class UserInfoResultExcelDTO {
     @ColumnWidth(15)
     private String mobile;
 
-    @ExcelProperty(value = {"Please ensure the username is registered on the Astron platform, the parsing result only displays registered users. Duplicate accounts will be automatically deduplicated.", "Username"}, index = 1)
-    @ColumnWidth(15)
-    private String username;
-
     /**
-     * @see com.iflytek.astron.console.hub.enums.UserInfoResultEnum
+     * @see UserInfoResultEnum
      */
     @ExcelProperty(value = {"Please ensure the mobile number is registered on the Astron platform, the parsing result only displays registered users. Duplicate accounts will be automatically deduplicated.", "Parsing Result"}, index = 2)
     @ColumnWidth(13)

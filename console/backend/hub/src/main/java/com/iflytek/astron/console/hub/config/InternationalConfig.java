@@ -7,8 +7,8 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
 public class InternationalConfig implements WebMvcConfigurer {
@@ -16,7 +16,7 @@ public class InternationalConfig implements WebMvcConfigurer {
     /** Configure default locale resolver, use Session to store locale information */
     @Bean
     public LocaleResolver localeResolver() {
-        AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
+        SessionLocaleResolver localeResolver = new SessionLocaleResolver();
         // Set default language to Chinese
         localeResolver.setDefaultLocale(Locale.CHINA);
         return localeResolver;

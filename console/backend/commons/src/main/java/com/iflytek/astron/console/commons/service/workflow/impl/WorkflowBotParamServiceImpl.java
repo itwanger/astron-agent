@@ -4,10 +4,10 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.iflytek.astron.console.commons.entity.bot.BotChatFileParam;
-import com.iflytek.astron.console.commons.dto.chat.ChatFileReq;
+import com.iflytek.astron.console.commons.entity.chat.ChatFileReq;
 import com.iflytek.astron.console.commons.entity.chat.ChatFileUser;
 import com.iflytek.astron.console.commons.entity.chat.ChatReqModel;
-import com.iflytek.astron.console.commons.dto.chat.ChatReqModelDto;
+import com.iflytek.astron.console.commons.entity.chat.ChatReqModelDto;
 import com.iflytek.astron.console.commons.service.data.ChatDataService;
 import com.iflytek.astron.console.commons.service.workflow.WorkflowBotParamService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,9 +22,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/**
- * @author mingsuiyongheng
- */
 @Service
 @Slf4j
 public class WorkflowBotParamServiceImpl implements WorkflowBotParamService {
@@ -32,19 +29,6 @@ public class WorkflowBotParamServiceImpl implements WorkflowBotParamService {
     @Autowired
     private ChatDataService chatDataService;
 
-    /**
-     * Function to handle single parameter
-     *
-     * @param uid User ID
-     * @param chatId Chat room ID
-     * @param sseId Server-sent event ID
-     * @param leftId Left side ID
-     * @param fileUrl File URL
-     * @param extraInputs Additional input parameters
-     * @param reqId Request ID
-     * @param inputs Input parameters
-     * @param botId Bot ID
-     */
     @Override
     public void handleSingleParam(String uid, Long chatId, String sseId, Long leftId, String fileUrl,
             JSONObject extraInputs, Long reqId, JSONObject inputs, Integer botId) {
@@ -101,17 +85,6 @@ public class WorkflowBotParamServiceImpl implements WorkflowBotParamService {
     }
 
 
-    /**
-     * Function to handle multi-file parameters
-     *
-     * @param uid User ID
-     * @param chatId Chat room ID
-     * @param leftId Left side ID
-     * @param extraInputsConfig Additional input configuration
-     * @param inputs Input parameters
-     * @param reqId Request ID
-     * @return Whether any file has been set
-     */
     @Override
     public boolean handleMultiFileParam(String uid, Long chatId, Long leftId, List<JSONObject> extraInputsConfig, JSONObject inputs, Long reqId) {
         List<BotChatFileParam> botChatFileParamList = chatDataService.findBotChatFileParamsByChatIdAndIsDelete(chatId, 0);
@@ -146,15 +119,7 @@ public class WorkflowBotParamServiceImpl implements WorkflowBotParamService {
         return hasSet;
     }
 
-    /**
-     * Handle multi-file request input
-     *
-     * @param chatFileReqList List containing chat file requests
-     * @param uid User ID
-     * @param chatId Chat ID
-     * @param reqId Request ID
-     * @param leftId Left ID
-     */
+    // Bind all unbound files with reqId
     private void handleMultiFileReqInput(List<ChatFileReq> chatFileReqList, String uid, Long chatId, Long reqId, Long leftId) {
         if (chatFileReqList != null) {
             List<String> collect = chatFileReqList.stream()
@@ -166,17 +131,7 @@ public class WorkflowBotParamServiceImpl implements WorkflowBotParamService {
         }
     }
 
-    /**
-     * Handle file request input
-     *
-     * @param fileReq Chat file request object
-     * @param uid User ID
-     * @param chatId Chat ID
-     * @param reqId Request ID
-     * @param leftId Left ID
-     * @param inputs Input JSON object
-     * @param key Key
-     */
+    // Common method for handling file request input
     private void handleFileReqInput(ChatFileReq fileReq, String uid, Long chatId, Long reqId, Long leftId, JSONObject inputs, String key) {
 
         String fileId = fileReq.getFileId();
@@ -194,10 +149,17 @@ public class WorkflowBotParamServiceImpl implements WorkflowBotParamService {
 
     /**
      * Determine if parameter is array type
+     *
+     * @param param
+     * @return
      */
     public static boolean isFileArray(JSONObject param) {
         try {
-            return "array-string".equalsIgnoreCase(param.getJSONObject("schema").getString("type"));
+            if ("array-string".equalsIgnoreCase(param.getJSONObject("schema").getString("type"))) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             log.error("Exception when determining if parameter is array type: {}", e.getMessage());
             return false;

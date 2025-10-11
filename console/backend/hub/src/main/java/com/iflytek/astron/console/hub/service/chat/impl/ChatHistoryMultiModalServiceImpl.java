@@ -1,9 +1,9 @@
 package com.iflytek.astron.console.hub.service.chat.impl;
 
 import com.alibaba.fastjson2.JSON;
-import com.iflytek.astron.console.commons.dto.chat.ChatReqModelDto;
-import com.iflytek.astron.console.commons.dto.chat.ChatRespModelDto;
-import com.iflytek.astron.console.commons.dto.workflow.WorkflowEventData;
+import com.iflytek.astron.console.commons.entity.chat.ChatReqModelDto;
+import com.iflytek.astron.console.commons.entity.chat.ChatRespModelDto;
+import com.iflytek.astron.console.commons.entity.workflow.WorkflowEventData;
 import com.iflytek.astron.console.hub.service.chat.ChatHistoryMultiModalService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,9 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author mingsuiyongheng
- */
 @Service
 @Slf4j
 public class ChatHistoryMultiModalServiceImpl implements ChatHistoryMultiModalService {
@@ -24,6 +21,10 @@ public class ChatHistoryMultiModalServiceImpl implements ChatHistoryMultiModalSe
     /**
      * Merge document history records
      *
+     * @param reqList
+     * @param respList
+     * @param botId
+     * @return
      */
     @Override
     public List<Object> mergeChatHistory(List<ChatReqModelDto> reqList, List<ChatRespModelDto> respList, Integer botId) {
@@ -54,12 +55,6 @@ public class ChatHistoryMultiModalServiceImpl implements ChatHistoryMultiModalSe
         return list;
     }
 
-    /**
-     * Set bot last session context
-     *
-     * @param records List of chat request model data transfer objects
-     * @param botId Bot ID
-     */
     public void setBotLastContext(List<ChatReqModelDto> records, Integer botId) {
         if (botId == null || 0 == botId) {
             return;

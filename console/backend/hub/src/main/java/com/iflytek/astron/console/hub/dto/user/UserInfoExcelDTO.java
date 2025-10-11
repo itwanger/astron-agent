@@ -9,9 +9,6 @@ import lombok.Data;
 @Data
 public class UserInfoExcelDTO {
 
-    @ExcelProperty("Mobile")
+    @ExcelProperty("Mobile Number")
     private String mobile;
-
-    @ExcelProperty("Username")
-    private String username;
 }

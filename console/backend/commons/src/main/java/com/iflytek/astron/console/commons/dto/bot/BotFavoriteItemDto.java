@@ -1,5 +1,6 @@
 package com.iflytek.astron.console.commons.dto.bot;
 
+import com.iflytek.astron.console.commons.entity.bot.ChatBotMarketPage;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

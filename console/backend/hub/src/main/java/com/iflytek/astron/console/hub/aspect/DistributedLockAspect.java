@@ -17,8 +17,6 @@ import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
-import org.springframework.expression.ParserContext;
-import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.stereotype.Component;
 
@@ -137,19 +135,19 @@ public class DistributedLockAspect {
      */
     private String parseLockKey(String keyExpression, ProceedingJoinPoint point) {
         try {
-            // 这个检查可以保留，作为对不含任何动态内容字符串的快速路径
             if (!keyExpression.contains("#{")) {
+                // Simple string, return directly
                 return keyExpression;
             }
 
+            // SpEL expression parsing
             MethodSignature signature = (MethodSignature) point.getSignature();
             Method method = signature.getMethod();
             Object[] args = point.getArgs();
 
             EvaluationContext context = new MethodBasedEvaluationContext(point.getTarget(), method, args, nameDiscoverer);
 
-            ParserContext parserContext = new TemplateParserContext();
-            Expression expression = parser.parseExpression(keyExpression, parserContext);
+            Expression expression = parser.parseExpression(keyExpression);
             Object result = expression.getValue(context);
 
             return result != null ? result.toString() : keyExpression;

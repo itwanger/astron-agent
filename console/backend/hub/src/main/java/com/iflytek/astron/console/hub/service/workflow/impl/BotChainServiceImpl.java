@@ -17,9 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.*;
 
-/**
- * @author mingsuiyongheng
- */
 @Service
 @Slf4j
 public class BotChainServiceImpl implements BotChainService {
@@ -32,6 +29,11 @@ public class BotChainServiceImpl implements BotChainService {
 
     /**
      * Copy assistant 2.0
+     *
+     * @param uid
+     * @param sourceId
+     * @param targetId
+     * @param spaceId
      */
     @Override
     public void copyBot(String uid, Long sourceId, Long targetId, Long spaceId) {
@@ -45,7 +47,7 @@ public class BotChainServiceImpl implements BotChainService {
         UserLangChainInfo chainInfo = botList.getFirst();
         // Replace node id to prevent data backflow confusion
         replaceNodeId(chainInfo);
-        // Configure botId, flowId, uid, updateTime
+        // Configure _id, id, botId, flowId, uid, updateTime
         chainInfo.setId(null);
         chainInfo.setBotId(Math.toIntExact(targetId));
         chainInfo.setFlowId(null);
@@ -62,6 +64,12 @@ public class BotChainServiceImpl implements BotChainService {
 
     /**
      * Copy workflow
+     *
+     * @param uid uid
+     * @param sourceId
+     * @param targetId
+     * @param request
+     * @param spaceId
      */
     @Override
     @Transactional
@@ -97,11 +105,6 @@ public class BotChainServiceImpl implements BotChainService {
         log.info("----- Source assistant: {}, target assistant: {} got new canvas id: {}, flowId: {}", sourceId, targetId, currentMass, flowId);
     }
 
-    /**
-     * Replace node ID
-     *
-     * @param botMap UserLangChainInfo object containing open and GCY strings
-     */
     public static void replaceNodeId(UserLangChainInfo botMap) {
         JSONObject open = JSONObject.parseObject(botMap.getOpen());
         String openStr = botMap.getOpen();
@@ -120,13 +123,6 @@ public class BotChainServiceImpl implements BotChainService {
         botMap.setGcy(gcyStr);
     }
 
-    /**
-     * Get new node ID
-     *
-     * @param original Original node ID string
-     * @return New node ID string, if the original string contains a colon, add a random UUID after the
-     *         colon, otherwise throw an exception
-     */
     public static String getNewNodeId(String original) {
         int colonIndex = original.indexOf(':');
         if (colonIndex != -1) {

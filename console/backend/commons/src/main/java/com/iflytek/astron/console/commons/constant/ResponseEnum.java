@@ -1,7 +1,5 @@
 package com.iflytek.astron.console.commons.constant;
 
-import lombok.Getter;
-
 /**
  * Response code enumeration class
  */
@@ -74,17 +72,6 @@ public enum ResponseEnum {
     ACTIVITY_NOT_FOUND_ERROR(60030, "error.activity.not.found"),
     BOT_CHAIN_UPDATE_ERROR(60031, "error.bot.chain.update.error"),
 
-    USER_APP_ID_CREATE_ERROR(60032, "error.app.create.failed"),
-    USER_APP_NAME_REPEAT(60033, "error.app.create.name.repeat"),
-    BOT_API_CREATE_LIMIT_ERROR(60034, "error.bot.api.create.limited"),
-
-    BOT_API_CREATE_REPEAT(60035, "error.bot.api.create.repeat"),
-
-    USER_APP_ID_NOT_EXISTE(60036, "error.app.not.exists"),
-
-    BOT_API_CREATE_ERROR(60037, "error.bot.api.create.failed"),
-
-    BOT_TYPE_NOT_EXISTS(60038, "error.bot.type.not.exists"),
 
     // Space application related errors
     SPACE_APPLICATION_PLEASE_JOIN_ENTERPRISE_FIRST(61001, "space.application.please.join.enterprise.first"),
@@ -96,6 +83,8 @@ public enum ResponseEnum {
     SPACE_APPLICATION_CURRENT_SPACE_INCONSISTENT(61007, "space.application.current.space.inconsistent"),
     SPACE_APPLICATION_STATUS_INCORRECT(61008, "space.application.status.incorrect"),
     SPACE_APPLICATION_APPROVAL_FAILED(61009, "space.application.approval.failed"),
+    SPACE_APPLICATION_JOIN_SUCCESS(61010, "space.application.join.success"),
+    SPACE_APPLICATION_SUCCESS(61011, "space.application.success"),
 
     // Enterprise team related errors
     ENTERPRISE_NOT_EXISTS(62001, "enterprise.not.exists"),
@@ -105,15 +94,19 @@ public enum ResponseEnum {
     ENTERPRISE_USER_ALREADY_CREATED_ENTERPRISE(62005, "enterprise.user.already.created"),
     ENTERPRISE_CREATE_FAILED(62006, "enterprise.create.failed"),
     ENTERPRISE_UPDATE_FAILED(62007, "enterprise.update.failed"),
+    ENTERPRISE_UPDATE_SUCCESS(62008, "enterprise.update.success"),
 
     // Enterprise team user related errors
     ENTERPRISE_TEAM_USER_NOT_IN_TEAM(63001, "enterprise.user.not.in.team"),
     ENTERPRISE_TEAM_SUPER_ADMIN_CANNOT_BE_REMOVED(63002, "enterprise.user.super.admin.cannot.be.removed"),
     ENTERPRISE_TEAM_REMOVE_USER_FAILED(63003, "enterprise.user.remove.failed"),
+    ENTERPRISE_TEAM_REMOVE_USER_SUCCESS(63004, "enterprise.user.remove.success"),
     ENTERPRISE_TEAM_ROLE_TYPE_INCORRECT(63005, "enterprise.user.role.type.incorrect"),
     ENTERPRISE_TEAM_UPDATE_ROLE_FAILED(63006, "enterprise.user.update.role.failed"),
+    ENTERPRISE_TEAM_UPDATE_ROLE_SUCCESS(63007, "enterprise.user.update.role.success"),
     ENTERPRISE_TEAM_SUPER_ADMIN_CANNOT_LEAVE_TEAM(63008, "enterprise.user.super.admin.cannot.leave.team"),
     ENTERPRISE_TEAM_LEAVE_FAILED(63009, "enterprise.user.leave.failed"),
+    ENTERPRISE_TEAM_LEAVE_SUCCESS(63010, "enterprise.user.leave.success"),
 
     // Invitation management related errors
     INVITE_SPACE_USER_FULL(64001, "invite.space.user.full"),
@@ -140,7 +133,6 @@ public enum ResponseEnum {
     INVITE_UNSUPPORTED_TYPE(64023, "invite.unsupported.type"),
     INVITE_PARAMETER_EXCEPTION(64024, "invite.parameter.exception"),
     INVITE_SPACE_ALREADY_DELETED(64025, "invite.space.already.deleted"),
-    INVITE_PLEASE_UPLOAD_USERNAMES(64026, "invite.please.upload.usernames"),
 
     // Space management related errors
     SPACE_NAME_EXISTS(65001, "space.name.exists"),
@@ -148,6 +140,7 @@ public enum ResponseEnum {
     SPACE_PERSONAL_PRO_MAX_EXCEEDED(65003, "space.personal.pro.max.exceeded"),
     SPACE_FREE_USER_MAX_EXCEEDED(65004, "space.free.user.max.exceeded"),
     SPACE_NOT_EXISTS(65005, "space.not.exists"),
+    SPACE_DELETE_SUCCESS(65006, "space.delete.success"),
     SPACE_DELETE_FAILED(65007, "space.delete.failed"),
     SPACE_NAME_DUPLICATE(65008, "space.name.duplicate"),
     SPACE_USER_NOT_IN_SPACE(65009, "space.user.not.in.space"),
@@ -369,14 +362,20 @@ public enum ResponseEnum {
     // System errors 9xxxx
     SYSTEM_ERROR(99999, "system.error");
 
-    @Getter
     private final int code;
 
-    @Getter
     private final String messageKey;
 
     ResponseEnum(int code, String messageKey) {
         this.code = code;
         this.messageKey = messageKey;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public String getMessageKey() {
+        return messageKey;
     }
 }

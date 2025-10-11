@@ -4,7 +4,7 @@ import cn.hutool.core.convert.Convert;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.iflytek.astron.console.commons.dto.bot.BotMarketForm;
+import com.iflytek.astron.console.commons.entity.bot.BotMarketForm;
 import com.iflytek.astron.console.commons.entity.bot.ChatBotMarket;
 import com.iflytek.astron.console.commons.entity.bot.UserLangChainInfo;
 import com.iflytek.astron.console.commons.enums.bot.BotStatusEnum;

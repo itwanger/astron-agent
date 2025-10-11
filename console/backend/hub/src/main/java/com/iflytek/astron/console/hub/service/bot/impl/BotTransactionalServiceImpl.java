@@ -15,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Duration;
 
 /**
- * @author mingsuiyongheng
+ * @author cczhu10
+ * @date 2025-06-30
+ * @description
  */
 @Service
 @Slf4j
@@ -30,14 +32,6 @@ public class BotTransactionalServiceImpl implements BotTransactionalService {
     @Autowired
     private RedissonClient redissonClient;
 
-    /**
-     * Copy bot
-     *
-     * @param uid User ID
-     * @param botId Bot ID
-     * @param request HTTP request object
-     * @param spaceId Space ID
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void copyBot(String uid, Integer botId, HttpServletRequest request, Long spaceId) {
@@ -51,7 +45,7 @@ public class BotTransactionalServiceImpl implements BotTransactionalService {
             // Create an event to be consumed at /massCopySynchronize
             redissonClient.getBucket(MaasUtil.generatePrefix(uid, botId)).set(String.valueOf(botId));
             redissonClient.getBucket(MaasUtil.generatePrefix(uid, botId)).expire(Duration.ofSeconds(60));
-            // Synchronize Xingchen MAAS
+            // Synchronize Xingchen MASS
             botChainService.cloneWorkFlow(uid, Long.valueOf(botId), targetId, request, spaceId);
         }
     }

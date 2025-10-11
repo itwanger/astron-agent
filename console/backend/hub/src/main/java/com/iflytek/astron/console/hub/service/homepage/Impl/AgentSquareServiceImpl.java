@@ -61,30 +61,17 @@ public class AgentSquareServiceImpl implements AgentSquareService {
         // Get paginated assistant list
         Page<ChatBotMarket> marketPage = chatBotMarketService.getBotPage(type, search, pageSize, page);
         // Get current user's UID
-        String uid;
-        Set<Integer> favoriteIds = new HashSet<>();
-        try {
-            uid = RequestContextUtil.getUID();
-            if (uid != null && !uid.isEmpty()) {
-                favoriteIds = new HashSet<>(botFavoriteService.list(uid));
-            }
-        } catch (Exception e) {
-            uid = null;
-        }
+        String uid = RequestContextUtil.getUID();
+        // Get user's favorite assistant ID set
+        Set<Integer> favoriteIds = new HashSet<>(botFavoriteService.list(uid));
 
         // Use Stream to process each assistant, convert to DTO
-        String finalUid = uid;
-        Set<Integer> finalFavoriteIds = favoriteIds;
         List<BotInfoDto> botInfoList = marketPage.getRecords()
                 .stream()
                 .map(market -> {
                     String creatorName = userInfoDataService.findNickNameByUid(market.getUid()).orElse(null);
-                    ChatList latestChat;
-                    Long chatId = null;
-                    if (finalUid != null && !finalUid.isEmpty()) {
-                        latestChat = chatListDataService.findLatestEnabledChatByUserAndBot(finalUid, market.getBotId());
-                        chatId = latestChat != null ? latestChat.getId() : null;
-                    }
+                    ChatList latestChat = chatListDataService.findLatestEnabledChatByUserAndBot(uid, market.getBotId());
+                    Long chatId = latestChat != null ? latestChat.getId() : null;
                     return new BotInfoDto(
                             market.getBotId(),
                             chatId,
@@ -93,11 +80,11 @@ public class AgentSquareServiceImpl implements AgentSquareService {
                             market.getAvatar(),
                             market.getPrompt(),
                             market.getBotDesc(),
-                            finalFavoriteIds.contains(market.getBotId()),
-                            creatorName,
-                            market.getVersion());
+                            favoriteIds.contains(market.getBotId()),
+                            creatorName);
                 })
                 .collect(Collectors.toList());
+
         return new BotListPageDto(
                 botInfoList,
                 Math.toIntExact(marketPage.getTotal()),
@@ -105,4 +92,5 @@ public class AgentSquareServiceImpl implements AgentSquareService {
                 Math.toIntExact(marketPage.getCurrent()),
                 Math.toIntExact(marketPage.getPages()));
     }
+
 }

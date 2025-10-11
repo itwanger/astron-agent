@@ -108,7 +108,4 @@ public class ChatBotMarket {
 
     @Schema(description = "Publish channels: MARKET,API,WECHAT,MCP (comma separated)")
     private String publishChannels;
-
-    @Schema(description = "Does it support the knowledge base? 0 - Not supported, 1 - Supported")
-    private Integer supportDocument;
 }

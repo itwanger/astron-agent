@@ -85,25 +85,11 @@ public class InviteRecordController {
         return ApiResult.success(inviteRecordBizService.searchUser(mobile, InviteRecordTypeEnum.ENTERPRISE));
     }
 
-    @GetMapping("/enterprise-search-username")
-    @EnterprisePreAuth(module = "Invitation Management", description = "Enterprise invitation search username", key = "InviteRecordController_enterpriseSearchUsername_GET")
-    @Operation(summary = "Enterprise invitation search username")
-    public ApiResult<List<ChatUserVO>> enterpriseSearchUsername(@RequestParam("username") @NotEmpty String username) {
-        return ApiResult.success(inviteRecordBizService.searchUsername(username, InviteRecordTypeEnum.ENTERPRISE));
-    }
-
     @PostMapping("/enterprise-batch-search-user")
     @EnterprisePreAuth(module = "Invitation Management", description = "Enterprise invitation batch search user", key = "InviteRecordController_enterpriseBatchSearchUser_POST")
     @Operation(summary = "Enterprise invitation batch search user")
     public ApiResult<BatchChatUserVO> enterpriseBatchSearchUser(@RequestParam MultipartFile file) {
         return inviteRecordBizService.searchUserBatch(file);
-    }
-
-    @PostMapping("/enterprise-batch-search-username")
-    @EnterprisePreAuth(module = "Invitation Management", description = "Enterprise invitation batch search username", key = "InviteRecordController_enterpriseBatchSearchUsername_POST")
-    @Operation(summary = "Enterprise invitation batch search username")
-    public ApiResult<BatchChatUserVO> enterpriseBatchSearchUsername(@RequestParam MultipartFile file) {
-        return inviteRecordBizService.searchUsernameBatch(file);
     }
 
     @PostMapping("/enterprise-invite")

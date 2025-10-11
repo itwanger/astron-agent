@@ -1,6 +1,6 @@
 package com.iflytek.astron.console.commons.service.bot;
 
-import com.iflytek.astron.console.commons.dto.bot.BotMarketForm;
+import com.iflytek.astron.console.commons.entity.bot.BotMarketForm;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;

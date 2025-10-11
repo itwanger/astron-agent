@@ -1,7 +1,7 @@
 package com.iflytek.astron.console.hub.controller;
 
-import com.iflytek.astron.console.commons.dto.workflow.WorkflowChatRequest;
-import com.iflytek.astron.console.commons.dto.workflow.WorkflowResumeReq;
+import com.iflytek.astron.console.commons.entity.workflow.WorkflowChatRequest;
+import com.iflytek.astron.console.commons.entity.workflow.WorkflowResumeReq;
 import com.iflytek.astron.console.commons.util.SseEmitterUtil;
 import com.iflytek.astron.console.hub.service.WorkflowChatService;
 import io.swagger.v3.oas.annotations.Operation;

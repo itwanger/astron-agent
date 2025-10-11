@@ -8,7 +8,7 @@ import com.iflytek.astron.console.commons.response.ApiResult;
 import com.iflytek.astron.console.commons.util.RequestContextUtil;
 import com.iflytek.astron.console.commons.service.bot.ChatBotDataService;
 import com.iflytek.astron.console.commons.service.data.ChatListDataService;
-import com.iflytek.astron.console.commons.dto.chat.ChatListCreateResponse;
+import com.iflytek.astron.console.commons.entity.chat.ChatListCreateResponse;
 import com.iflytek.astron.console.commons.entity.bot.ChatBotBase;
 import com.iflytek.astron.console.commons.entity.chat.ChatList;
 import com.iflytek.astron.console.commons.enums.ShelfStatusEnum;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author mingsuiyongheng
+ * @author yingpeng
  */
 @RestController
 @Tag(name = "New Chat")
@@ -44,12 +44,6 @@ public class ChatRestartController {
     @Autowired
     private ChatRestartService chatRestartService;
 
-    /**
-     * Restart chat functionality
-     *
-     * @param chatId Chat ID
-     * @return Returns an ApiResult object containing chat list creation response
-     */
     @PostMapping(value = "/restart")
     @Operation(summary = "Start New Chat")
     public ApiResult<ChatListCreateResponse> restart(@RequestParam("chatId") Long chatId) {

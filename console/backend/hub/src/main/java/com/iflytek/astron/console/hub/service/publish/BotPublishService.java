@@ -4,6 +4,7 @@ import com.iflytek.astron.console.hub.dto.PageResponse;
 import com.iflytek.astron.console.commons.dto.bot.BotListRequestDto;
 import com.iflytek.astron.console.hub.dto.publish.BotPublishInfoDto;
 import com.iflytek.astron.console.hub.dto.publish.BotDetailResponseDto;
+import com.iflytek.astron.console.hub.dto.publish.PublishStatusUpdateDto;
 import com.iflytek.astron.console.hub.dto.publish.BotVersionVO;
 import com.iflytek.astron.console.hub.dto.publish.BotSummaryStatsVO;
 import com.iflytek.astron.console.hub.dto.publish.BotTimeSeriesResponseDto;
@@ -11,7 +12,6 @@ import com.iflytek.astron.console.hub.dto.publish.WechatAuthUrlResponseDto;
 import com.iflytek.astron.console.hub.dto.publish.BotTraceRequestDto;
 import com.iflytek.astron.console.commons.dto.workflow.WorkflowInputsResponseDto;
 import com.iflytek.astron.console.commons.enums.PublishChannelEnum;
-import com.iflytek.astron.console.hub.dto.publish.UnifiedPrepareDto;
 
 /**
  * Bot Publishing Management Service Interface
@@ -48,6 +48,16 @@ public interface BotPublishService {
      */
     BotDetailResponseDto getBotDetail(Integer botId, String currentUid, Long spaceId);
 
+    /**
+     * Update bot publish status - unified handling of publish and offline logic, using ShelfStatusEnum
+     * (0=offline, 1=published)
+     *
+     * @param botId Bot ID
+     * @param updateDto Status update request
+     * @param currentUid Current user ID
+     * @param spaceId Space ID (optional)
+     */
+    void updatePublishStatus(Integer botId, PublishStatusUpdateDto updateDto, String currentUid, Long spaceId);
 
     // ==================== Version Management ====================
 
@@ -153,17 +163,4 @@ public interface BotPublishService {
      * @return Workflow input parameter definitions
      */
     WorkflowInputsResponseDto getInputsType(Integer botId, String uid, Long spaceId);
-
-    // ==================== Publish Prepare Data Management ====================
-
-    /**
-     * Get publish prepare data for different publish types
-     *
-     * @param botId Bot ID
-     * @param type Publish type (market, mcp, feishu, api)
-     * @param currentUid Current user ID
-     * @param spaceId Space ID
-     * @return Unified prepare data
-     */
-    UnifiedPrepareDto getPrepareData(Integer botId, String type, String currentUid, Long spaceId);
 }

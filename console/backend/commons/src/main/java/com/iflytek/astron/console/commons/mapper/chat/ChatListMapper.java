@@ -1,7 +1,7 @@
 package com.iflytek.astron.console.commons.mapper.chat;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.iflytek.astron.console.commons.dto.chat.ChatBotListDto;
+import com.iflytek.astron.console.commons.entity.chat.ChatBotListDto;
 import com.iflytek.astron.console.commons.entity.chat.ChatList;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

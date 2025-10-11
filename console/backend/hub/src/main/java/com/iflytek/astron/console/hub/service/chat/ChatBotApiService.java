@@ -8,11 +8,4 @@ public interface ChatBotApiService {
 
     List<ChatBotApi> getBotApiList(String uid);
 
-    boolean exists(Long botId);
-
-    Long selectCount(Integer botId);
-
-    void insertOrUpdate(ChatBotApi chatBotApi);
-
-    ChatBotApi getOneByUidAndBotId(String uid, Long botId);
 }

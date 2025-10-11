@@ -13,9 +13,9 @@
         </foreach>
     </select>
 
-    <!-- ==================== Bot Query Related SQL ==================== -->
+    <!-- ==================== 智能体查询相关 SQL ==================== -->
     
-    <!-- Base query conditions for bot queries -->
+    <!-- 智能体查询基础条件 -->
     <sql id="base_query_conditions">
         FROM
         `chat_bot_base` a
@@ -25,7 +25,7 @@
         AND (b.is_delete IS NULL OR b.is_delete = 0)
         AND a.virtual_agent_id IS NULL
         
-        <!-- Space permission control -->
+        <!-- 空间权限控制 -->
         <choose>
             <when test="condition.spaceId != null">
                 AND a.space_id = #{condition.spaceId}
@@ -36,7 +36,7 @@
             </otherwise>
         </choose>
         
-        <!-- Publish status filtering -->
+        <!-- 发布状态筛选 -->
         <if test="condition.publishStatus != null and condition.publishStatus.size() > 0">
             AND COALESCE(b.bot_status, 0) IN
             <foreach collection="condition.publishStatus" item="status" open="(" separator="," close=")">
@@ -44,19 +44,19 @@
             </foreach>
         </if>
         
-        <!-- Version filtering -->
+        <!-- 版本筛选 -->
         <if test="condition.version != null">
             AND a.version = #{condition.version}
         </if>
         
-        <!-- Keyword search -->
+        <!-- 关键词搜索 -->
         <if test="condition.keyword != null and condition.keyword != ''">
             AND a.bot_name LIKE CONCAT('%', #{condition.keyword}, '%')
         </if>
     </sql>
 
-    <!-- Paginated query for bot list -->
-    <select id="selectBotListByConditions" resultType="com.iflytek.astron.console.commons.dto.bot.BotPublishQueryResult">
+    <!-- 分页查询智能体列表 -->
+    <select id="selectBotListByConditions" resultType="com.iflytek.astron.console.commons.entity.bot.BotPublishQueryResult">
         SELECT
         a.uid,
         a.space_id AS spaceId,
@@ -64,14 +64,14 @@
         a.bot_name AS botName,
         a.bot_desc AS botDesc,
         a.version,
-        -- Bot status mapping: 0=offline, 1=online, NULL=unpublished
-        b.bot_status AS botStatus,
+        -- 智能体状态映射：0=下架，1=上架，NULL=未发布
+        COALESCE(b.bot_status, 0) AS botStatus,
         a.create_time AS createTime,
         a.update_time AS updateTime,
         b.publish_channels AS publishChannels
         <include refid="base_query_conditions"/>
         
-        <!-- Sorting -->
+        <!-- 排序 -->
         <choose>
             <when test="condition.sortField != null">
                 <choose>
@@ -92,8 +92,8 @@
         </choose>
     </select>
 
-    <!-- Query bot details -->
-    <select id="selectBotDetail" resultType="com.iflytek.astron.console.commons.dto.bot.BotPublishQueryResult">
+    <!-- 查询智能体详情 -->
+    <select id="selectBotDetail" resultType="com.iflytek.astron.console.commons.entity.bot.BotPublishQueryResult">
         SELECT
             a.uid,
             a.space_id AS spaceId,
@@ -101,7 +101,7 @@
             a.bot_name AS botName,
             a.bot_desc AS botDesc,
             a.version,
-            b.bot_status AS botStatus,
+            COALESCE(b.bot_status, 0) AS botStatus,
             a.create_time AS createTime,
             a.update_time AS updateTime,
             b.publish_channels AS publishChannels
@@ -119,7 +119,7 @@
           </choose>
     </select>
 
-    <!-- Update bot publish status and publish channels -->
+    <!-- 更新智能体发布状态和发布渠道 -->
     <update id="updatePublishStatus">
         UPDATE chat_bot_market 
         SET 

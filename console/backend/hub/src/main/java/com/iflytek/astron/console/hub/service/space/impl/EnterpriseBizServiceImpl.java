@@ -106,7 +106,7 @@ public class EnterpriseBizServiceImpl implements EnterpriseBizService {
         }
         enterprise.setName(name);
         if (enterpriseService.updateById(enterprise)) {
-            return ApiResult.success();
+            return ApiResult.of(ResponseEnum.ENTERPRISE_UPDATE_SUCCESS, null);
         } else {
             return ApiResult.error(ResponseEnum.ENTERPRISE_UPDATE_FAILED);
         }
@@ -128,7 +128,7 @@ public class EnterpriseBizServiceImpl implements EnterpriseBizService {
         }
         enterprise.setLogoUrl(logoUrl);
         if (enterpriseService.updateById(enterprise)) {
-            return ApiResult.success();
+            return ApiResult.of(ResponseEnum.ENTERPRISE_UPDATE_SUCCESS, null);
         } else {
             return ApiResult.error(ResponseEnum.ENTERPRISE_UPDATE_FAILED);
         }
@@ -150,7 +150,7 @@ public class EnterpriseBizServiceImpl implements EnterpriseBizService {
         }
         enterprise.setAvatarUrl(avatarUrl);
         if (enterpriseService.updateById(enterprise)) {
-            return ApiResult.success();
+            return ApiResult.of(ResponseEnum.ENTERPRISE_UPDATE_SUCCESS, null);
         } else {
             return ApiResult.error(ResponseEnum.ENTERPRISE_UPDATE_FAILED);
         }

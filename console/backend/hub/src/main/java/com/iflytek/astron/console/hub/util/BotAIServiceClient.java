@@ -57,15 +57,6 @@ public class BotAIServiceClient {
     @Value("${spark.api-secret}")
     private String apiSecret;
 
-    @Value("${spark.image-appId}")
-    private String imageAppId;
-
-    @Value("${spark.image-apiKey}")
-    private String imageApiKey;
-
-    @Value("${spark.image-apiSecret}")
-    private String imageApiSecret;
-
     /**
      * Image generation request
      *
@@ -80,10 +71,10 @@ public class BotAIServiceClient {
         }
 
         int imageSize = validateImageSize(size);
-        JSONObject requestData = buildImageGenerationRequest(imageAppId, uid, prompt, imageSize);
+        JSONObject requestData = buildImageGenerationRequest(appId, uid, prompt, imageSize);
 
         try {
-            String requestUrl = buildAuthenticatedUrl(imageHost, imageApiKey, imageApiSecret, "POST");
+            String requestUrl = buildAuthenticatedUrl(imageHost, apiKey, apiSecret, "POST");
 
             MediaType jsonMediaType = MediaType.get("application/json; charset=utf-8");
             RequestBody requestBody = RequestBody.create(requestData.toString(), jsonMediaType);
@@ -300,12 +291,12 @@ public class BotAIServiceClient {
     /**
      * Build image generation request data
      */
-    private JSONObject buildImageGenerationRequest(String imageAppId, String uid, String prompt, int size) {
+    private JSONObject buildImageGenerationRequest(String appId, String uid, String prompt, int size) {
         JSONObject request = new JSONObject();
 
         // Build header
         JSONObject header = new JSONObject();
-        header.put("app_id", imageAppId);
+        header.put("app_id", appId);
         header.put("uid", uid);
         request.put("header", header);
 

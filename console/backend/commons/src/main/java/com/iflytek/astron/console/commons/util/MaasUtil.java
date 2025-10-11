@@ -8,13 +8,8 @@ import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.iflytek.astron.console.commons.constant.ResponseEnum;
-import com.iflytek.astron.console.commons.dto.bot.AdvancedConfig;
-import com.iflytek.astron.console.commons.dto.bot.BotCreateForm;
-import com.iflytek.astron.console.commons.dto.bot.BotTag;
-import com.iflytek.astron.console.commons.dto.workflow.MaasApi;
-import com.iflytek.astron.console.commons.entity.bot.ChatBotBase;
-import com.iflytek.astron.console.commons.entity.bot.ChatBotTag;
-import com.iflytek.astron.console.commons.entity.bot.UserLangChainInfo;
+import com.iflytek.astron.console.commons.entity.bot.*;
+import com.iflytek.astron.console.commons.entity.workflow.MaasApi;
 import com.iflytek.astron.console.commons.enums.bot.BotUploadEnum;
 import com.iflytek.astron.console.commons.exception.BusinessException;
 import com.iflytek.astron.console.commons.mapper.bot.ChatBotBaseMapper;
@@ -359,113 +354,81 @@ public class MaasUtil {
                 log.error("Assistant tag mapping table is null in Redis");
             }
         } catch (Exception e) {
-            log.error("Failed to parse assistant tags, request parameters: {}, error: {}", JSONObject.toJSONString(botInfo), e.getMessage());
+            log.error("Failed to parse assistant tags, request parameters: {}, error: {}", botInfo.toJSONString(0), e.getMessage());
             throw e;
         }
     }
 
-    /**
-     * Create API (without version)
-     *
-     * @param flowId Workflow ID
-     * @param appid Application ID
-     * @return JSONObject response result
-     */
     public JSONObject createApi(String flowId, String appid) {
-        return createApiInternal(flowId, appid, null, null);
-    }
-
-    public void createApi(String flowId, String appid, String version) {
-        createApiInternal(flowId, appid, version, null);
-    }
-
-    /**
-     * Create API (with version)
-     *
-     * @param flowId Workflow ID
-     * @param appid Application ID
-     * @param version Version number
-     * @return JSONObject response result
-     */
-    public JSONObject createApi(String flowId, String appid, String version, JSONObject data) {
-        return createApiInternal(flowId, appid, version, data);
-    }
-
-    /**
-     * Internal generic method for creating API
-     *
-     * @param flowId Workflow ID
-     * @param appid Application ID
-     * @param version Version number (can be null)
-     * @return JSONObject response result
-     */
-    private JSONObject createApiInternal(String flowId, String appid, String version, JSONObject data) {
         log.info("----- Publishing mass workflow flowId: {}", flowId);
-        MaasApi maasApi = new MaasApi(flowId, appid, version, data);
-
-        // Execute publish request
-        String publishResponse = executeRequest(publishApi, maasApi);
-        validateResponse(publishResponse, "publish", flowId, appid);
-
-        // Execute authentication request
-        String authResponse = executeRequest(authApi, maasApi);
-        validateResponse(authResponse, "bind", flowId, appid);
-
-        return new JSONObject();
-    }
-
-    /**
-     * Execute HTTP POST request and return response string
-     *
-     * @param url Request URL
-     * @param bodyData Request body data object
-     * @return String representation of response content
-     */
-    private String executeRequest(String url, MaasApi bodyData) {
-        Map<String, String> authMap = AuthStringUtil.authMap(url, "POST", consumerKey, consumerSecret, JSONObject.toJSONString(bodyData));
+        MaasApi maasApi = new MaasApi(flowId, appid);
+        Map<String, String> pubAuth = AuthStringUtil.authMap(publishApi, "POST", consumerKey, consumerSecret, JSONObject.toJSONString(maasApi));
+        // Build request body
         RequestBody requestBody = RequestBody.create(
-                JSONObject.toJSONString(bodyData),
+                JSONObject.toJSONString(pubAuth),
                 MediaType.parse("application/json; charset=utf-8"));
-
-        Request request = new Request.Builder()
-                .url(url)
+        Request pubRequest = new Request.Builder()
+                .url(publishApi)
                 .post(requestBody)
                 .addHeader("X-Consumer-Username", consumerId)
                 .addHeader("Lang-Code", I18nUtil.getLanguage())
-                .addHeader("Authorization", "Bearer %s:%s".formatted(consumerKey, consumerSecret))
+                .headers(Headers.of(pubAuth))
                 .addHeader(X_AUTH_SOURCE_HEADER, X_AUTH_SOURCE_VALUE)
                 .build();
-        log.info("MaasUtil executeRequest url: {} request: {}, header: {}", request.url(), JSONObject.toJSONString(authMap), request.headers());
-        try (Response httpResponse = HTTP_CLIENT.newCall(request).execute()) {
+
+        String response;
+        try (Response httpResponse = HTTP_CLIENT.newCall(pubRequest).execute()) {
             ResponseBody responseBody = httpResponse.body();
             if (responseBody != null) {
-                return responseBody.string();
+                response = responseBody.string();
             } else {
-                log.error("Request to {} returned empty response", url);
-                return "{}"; // Return empty JSON object string to avoid parsing errors
+                log.error("Delete mass workflow request response is empty");
+                return new JSONObject();
             }
         } catch (IOException e) {
-            throw new BusinessException(ResponseEnum.BOT_API_CREATE_ERROR, e);
+            throw new BusinessException(ResponseEnum.CREATE_BOT_FAILED);
         }
-    }
-
-    /**
-     * Validate whether the response is successful
-     *
-     * @param responseStr Response content string representation
-     * @param action Description of current operation being performed (e.g., "publish", "bind")
-     * @param flowId Workflow ID
-     * @param appid Application ID
-     */
-    private void validateResponse(String responseStr, String action, String flowId, String appid) {
-        log.info("----- {} maas api response: {}", action, responseStr);
-        JSONObject res = JSONObject.parseObject(responseStr);
+        log.info("----- Publish maas api response: {}", response);
+        JSONObject res = JSONObject.parseObject(response);
         if (res.getInteger("code") != 0) {
-            log.error("------ Failed to {} maas api, massId: {}, appid: {}, reason: {}", action, flowId, appid, responseStr);
-            throw new BusinessException(ResponseEnum.BOT_API_CREATE_ERROR);
+            log.info("------ Failed to publish maas api, massId: {},appid: {}, reason: {}", flowId, appid, response);
+            throw new BusinessException(ResponseEnum.CREATE_BOT_FAILED);
         }
-    }
 
+        Map<String, String> authMap = AuthStringUtil.authMap(authApi, "POST", consumerKey, consumerSecret, JSONObject.toJSONString(maasApi));
+        // Build request body
+        requestBody = RequestBody.create(
+                JSONObject.toJSONString(authMap),
+                MediaType.parse("application/json; charset=utf-8"));
+        Request authRequest = new Request.Builder()
+                .url(authApi)
+                .post(requestBody)
+                .addHeader("X-Consumer-Username", consumerId)
+                .addHeader("Lang-Code", I18nUtil.getLanguage())
+                .headers(Headers.of(pubAuth))
+                .addHeader(X_AUTH_SOURCE_HEADER, X_AUTH_SOURCE_VALUE)
+                .build();
+
+        String authResponse = "";
+        try (Response httpResponse = HTTP_CLIENT.newCall(authRequest).execute()) {
+            ResponseBody responseBody = httpResponse.body();
+            if (responseBody != null) {
+                authResponse = responseBody.string();
+            } else {
+                log.error("Delete mass workflow request response is empty");
+                return new JSONObject();
+            }
+        } catch (IOException e) {
+            throw new BusinessException(ResponseEnum.CREATE_BOT_FAILED);
+        }
+        log.info("----- Bind maas api response: {}", authResponse);
+        JSONObject authResJson = JSONObject.parseObject(authResponse);
+        if (authResJson.getInteger("code") != 0) {
+            log.info("------ Failed to bind maas api, massId: {},appid: {}, reason: {}", flowId, appid, authResJson);
+            throw new BusinessException(ResponseEnum.CREATE_BOT_FAILED);
+        }
+        return new JSONObject();
+    }
 
     public JSONObject copyWorkFlow(Long maasId, String uid) {
         log.info("----- Copying maas workflow id: {}", maasId);
@@ -474,20 +437,16 @@ public class MaasUtil {
             log.error("Failed to parse clone workflow URL: {}", cloneWorkFlowUrl);
             throw new BusinessException(ResponseEnum.CLONE_BOT_FAILED);
         }
-        Map<String, String> pubAuth = AuthStringUtil.authMap(baseUrl.toString(), "POST", consumerKey, consumerSecret, null);
+
         HttpUrl httpUrl = baseUrl.newBuilder()
                 .addQueryParameter("id", String.valueOf(maasId))
                 .addQueryParameter("password", "xfyun")
                 .build();
         Request httpRequest = new Request.Builder()
                 .url(httpUrl)
-                .addHeader("X-Consumer-Username", consumerId)
-                .addHeader("Lang-Code", I18nUtil.getLanguage())
-                .headers(Headers.of(pubAuth))
-                .addHeader(X_AUTH_SOURCE_HEADER, X_AUTH_SOURCE_VALUE)
                 .get()
                 .build();
-        String responseBody;
+        String responseBody = "";
         try (Response response = client.newCall(httpRequest).execute()) {
             if (!response.isSuccessful()) {
                 // Handle request failure
@@ -639,94 +598,5 @@ public class MaasUtil {
             log.error("Exception determining if parameter is array type: {}", e.getMessage());
             return false;
         }
-    }
-
-    /**
-     * Register MCP server (mock implementation) Corresponds to massUtil.registerMcp in original project
-     *
-     * @param cookie HTTP cookies from request
-     * @param chainInfo workflow chain information
-     * @param mcpRequest MCP publish request data
-     * @param versionName workflow version name
-     * @return JSONObject containing MCP registration result
-     */
-    public static JSONObject registerMcp(String cookie, Object chainInfo, Object mcpRequest, String versionName) {
-        log.info("Registering MCP server: versionName={}", versionName);
-
-        // Mock implementation - return structured data similar to original project
-        JSONObject result = new JSONObject();
-
-        try {
-            // Extract data from mcpRequest (using reflection to avoid direct dependency)
-            if (mcpRequest != null) {
-                // Use reflection to get data from mcpRequest to avoid circular dependency
-                try {
-                    java.lang.reflect.Method getServerName = mcpRequest.getClass().getMethod("getServerName");
-                    java.lang.reflect.Method getDescription = mcpRequest.getClass().getMethod("getDescription");
-                    java.lang.reflect.Method getContent = mcpRequest.getClass().getMethod("getContent");
-                    java.lang.reflect.Method getIcon = mcpRequest.getClass().getMethod("getIcon");
-                    java.lang.reflect.Method getArgs = mcpRequest.getClass().getMethod("getArgs");
-                    java.lang.reflect.Method getBotId = mcpRequest.getClass().getMethod("getBotId");
-
-                    result.put("serverName", getServerName.invoke(mcpRequest));
-                    result.put("description", getDescription.invoke(mcpRequest));
-                    result.put("content", getContent.invoke(mcpRequest));
-                    result.put("icon", getIcon.invoke(mcpRequest));
-                    result.put("args", getArgs.invoke(mcpRequest));
-                    result.put("botId", getBotId.invoke(mcpRequest));
-                } catch (Exception reflectionException) {
-                    log.warn("Failed to extract data from mcpRequest using reflection: {}", reflectionException.getMessage());
-                }
-            }
-
-            // Extract flowId from chainInfo (using reflection to avoid direct dependency)
-            String flowId = null;
-            if (chainInfo != null) {
-                try {
-                    java.lang.reflect.Method getFlowId = chainInfo.getClass().getMethod("getFlowId");
-                    flowId = (String) getFlowId.invoke(chainInfo);
-                } catch (Exception reflectionException) {
-                    log.warn("Failed to extract flowId from chainInfo using reflection: {}", reflectionException.getMessage());
-                }
-            }
-
-            // Generate server URL (similar to original project)
-            if (flowId != null && !flowId.trim().isEmpty()) {
-                result.put("serverUrl", String.format("https://xingchen-api.xf-yun.com/mcp/xingchen/flow/%s/sse", flowId));
-            } else {
-                result.put("serverUrl", "https://xingchen-api.xf-yun.com/mcp/xingchen/flow/default/sse");
-            }
-
-            // Add version information
-            result.put("versionName", versionName);
-            result.put("flowId", flowId);
-
-            // Add mock success indicators
-            result.put("code", 0);
-            result.put("message", "MCP server registered successfully");
-            result.put("success", true);
-
-            log.info("MCP server registration completed: serverUrl={}", result.getString("serverUrl"));
-
-        } catch (Exception e) {
-            log.error("Failed to register MCP server: versionName={}", versionName, e);
-            result.put("code", -1);
-            result.put("message", "Failed to register MCP server: " + e.getMessage());
-            result.put("success", false);
-        }
-
-        return result;
-    }
-
-    public static Headers buildHeaders(Map<String, String> headerMap) {
-        Headers.Builder headerBuilder = new Headers.Builder();
-        if (headerMap != null) {
-            for (Map.Entry<String, String> entry : headerMap.entrySet()) {
-                if (entry.getKey() != null && entry.getValue() != null) {
-                    headerBuilder.add(entry.getKey(), entry.getValue());
-                }
-            }
-        }
-        return headerBuilder.build();
     }
 }

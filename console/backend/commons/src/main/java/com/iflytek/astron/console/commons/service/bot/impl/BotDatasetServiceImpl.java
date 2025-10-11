@@ -75,11 +75,11 @@ public class BotDatasetServiceImpl implements BotDatasetService {
             }
         }
 
-        return true;
+        return false;
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, transactionManager = "commonTransactionManager")
     public void botAssociateDataset(String uid, Integer botId, List<Long> datasetList, Integer supportDocument) {
         if (CollUtil.isEmpty(datasetList)) {
             return;
@@ -112,7 +112,7 @@ public class BotDatasetServiceImpl implements BotDatasetService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, transactionManager = "commonTransactionManager")
     public void updateDatasetByBot(String uid, Integer botId, List<Long> datasetList, Integer supportDocument) {
         // 1) First invalidate existing associations
         UpdateWrapper<BotDataset> updateWrapper = new UpdateWrapper<>();

@@ -6,19 +6,14 @@ import cn.hutool.core.util.PhoneUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSONObject;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.iflytek.astron.console.commons.constant.ResponseEnum;
 import com.iflytek.astron.console.commons.data.UserInfoDataService;
-import com.iflytek.astron.console.commons.dto.bot.BotCreateForm;
-import com.iflytek.astron.console.commons.dto.bot.BotDetail;
-import com.iflytek.astron.console.commons.dto.bot.BotInfoDto;
 import com.iflytek.astron.console.commons.entity.bot.*;
 import com.iflytek.astron.console.commons.entity.user.UserInfo;
 import com.iflytek.astron.console.commons.enums.ShelfStatusEnum;
 import com.iflytek.astron.console.commons.enums.bot.BotTypeEnum;
 import com.iflytek.astron.console.commons.exception.BusinessException;
 import com.iflytek.astron.console.commons.mapper.bot.ChatBotBaseMapper;
-import com.iflytek.astron.console.commons.mapper.bot.ChatBotPromptStructMapper;
 import com.iflytek.astron.console.commons.service.bot.*;
 import com.iflytek.astron.console.commons.service.data.ChatListDataService;
 import com.iflytek.astron.console.commons.service.data.DatasetDataService;
@@ -95,9 +90,6 @@ public class BotServiceImpl implements BotService {
 
     @Autowired
     private ChatBotBaseMapper chatBotBaseMapper;
-
-    @Autowired
-    private ChatBotPromptStructMapper chatBotPromptStructMapper;
 
     @Value("${bot.default.avatar}")
     private String DEFAULT_AVATAR;
@@ -177,7 +169,6 @@ public class BotServiceImpl implements BotService {
             validateBotCreation(uid, bot.getName(), spaceId);
             ChatBotBase botBase = createBasicBotBase(uid, bot, spaceId);
             saveBotAndAddToList(botBase);
-            processPromptStruct(botBase.getId(), bot);
             return createBotInfoDto(botBase.getId());
         });
     }
@@ -188,6 +179,7 @@ public class BotServiceImpl implements BotService {
         BotDetail detail = chatBotBaseMapper.botDetail(Math.toIntExact(botId));
         ChatBotBase botBase = new ChatBotBase();
         BeanUtils.copyProperties(detail, botBase);
+        log.info("copy old bot : {} , new bot : {}", detail, botBase);
         botBase.setId(null);
         // Set a new assistant name as differentiation
         botBase.setVersion(Integer.valueOf(detail.getVersion()));
@@ -220,7 +212,6 @@ public class BotServiceImpl implements BotService {
         return executeWithLock("user:update:basic:bot:uid:" + uid, () -> {
             validateBotNameForUpdate(uid, bot.getName(), bot.getBotId(), spaceId);
             updateBasicBotInternal(uid, bot);
-            processPromptStruct(bot.getBotId(), bot);
             return Boolean.TRUE;
         });
     }
@@ -335,7 +326,7 @@ public class BotServiceImpl implements BotService {
         botBase.setSupportDocument(bot.getSupportDocument());
         botBase.setPromptType(bot.getPromptType() != null ? bot.getPromptType() : 0);
         botBase.setPrompt(bot.getPrompt());
-        botBase.setPromptSystem(1);
+        botBase.setPromptSystem(bot.getPromptSystem());
         botBase.setSupportUpload(bot.getSupportUpload());
         botBase.setModel(bot.getModel());
         botBase.setVcnCn(bot.getVcnCn());
@@ -354,7 +345,7 @@ public class BotServiceImpl implements BotService {
         botBase.setBackground(bot.getBackground());
         botBase.setVirtualCharacter(bot.getVirtualCharacter());
         botBase.setMassBotId(bot.getMassBotId());
-        botBase.setVersion(1);
+        botBase.setVersion(bot.getIsSentence());
         botBase.setSpaceId(spaceId);
         setInputExamples(botBase, bot.getInputExample(), bot.getInputExampleEn());
         botBase.setBotwebStatus(0);
@@ -434,7 +425,6 @@ public class BotServiceImpl implements BotService {
 
             chatBotDataService.updateBot(botBase);
             chatListDataService.updateChatBotList(botBase);
-            chatBotDataService.updateChatBotMarket(botBase);
         } catch (Exception e) {
             log.error("uid update bot basic info error, uid: {}", uid, e);
             throw new BusinessException(ResponseEnum.UPDATE_BOT_FAILED);
@@ -454,8 +444,6 @@ public class BotServiceImpl implements BotService {
                 .prologue(bot.getPrologue())
                 .botDesc(bot.getBotDesc())
                 .botTemplate(bot.getBotTemplate())
-                .version(BotTypeEnum.SYSTEM_BOT.getType())
-                .supportContext(bot.getSupportContext())
                 .supportSystem(bot.getSupportSystem())
                 .supportDocument(bot.getSupportDocument())
                 .promptType(bot.getPromptType())
@@ -756,35 +744,6 @@ public class BotServiceImpl implements BotService {
         } catch (Exception e) {
             log.error("Workflow API call exception, URL: {}, error: {}", url, e.getMessage(), e);
             return new JSONObject();
-        }
-    }
-
-    public void processPromptStruct(Integer botId, BotCreateForm bot) {
-        if (botId == null || bot == null || bot.getPromptType() != 1) {
-            return;
-        }
-
-        List<BotCreateForm.PromptStruct> promptStructList = bot.getPromptStructList();
-        if (promptStructList == null || promptStructList.isEmpty()) {
-            return;
-        }
-
-        chatBotPromptStructMapper.delete(Wrappers.lambdaQuery(ChatBotPromptStruct.class).eq(ChatBotPromptStruct::getBotId, botId));
-        LocalDateTime now = LocalDateTime.now();
-
-        for (BotCreateForm.PromptStruct promptStruct : promptStructList) {
-            if (StringUtils.isBlank(promptStruct.getPromptKey()) || StringUtils.isBlank(promptStruct.getPromptValue())) {
-                continue;
-            }
-
-            ChatBotPromptStruct entity = new ChatBotPromptStruct();
-            entity.setBotId(botId);
-            entity.setPromptKey(promptStruct.getPromptKey());
-            entity.setPromptValue(promptStruct.getPromptValue());
-            entity.setCreateTime(now);
-            entity.setUpdateTime(now);
-
-            chatBotPromptStructMapper.insert(entity);
         }
     }
 }

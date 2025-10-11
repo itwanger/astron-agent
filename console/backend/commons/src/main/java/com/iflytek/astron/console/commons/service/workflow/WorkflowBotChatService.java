@@ -1,6 +1,6 @@
 package com.iflytek.astron.console.commons.service.workflow;
 
-import com.iflytek.astron.console.commons.dto.bot.ChatBotReqDto;
+import com.iflytek.astron.console.commons.entity.bot.ChatBotReqDto;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 public interface WorkflowBotChatService {
