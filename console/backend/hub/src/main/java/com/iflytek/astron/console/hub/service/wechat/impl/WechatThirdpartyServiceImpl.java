@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.time.Duration;
+import java.util.Map;
 
 /**
  * WeChat third-party platform service implementation
@@ -50,10 +51,11 @@ public class WechatThirdpartyServiceImpl implements WechatThirdpartyService {
     private static final String AUTHORIZATION_REFRESH_TOKEN_KEY = REDIS_KEY_PREFIX + "authorization_refresh_token:";
 
     // Cache expiration time
-    private static final Duration PRE_AUTH_CODE_EXPIRE = Duration.ofSeconds(1800);
+    private static final Duration PRE_AUTH_CODE_EXPIRE = Duration.ofSeconds(5); // Short cache to prevent duplicate requests
     private static final Duration PRE_BIND_EXPIRE = Duration.ofSeconds(1800);
-    private static final Duration ACCESS_TOKEN_EXPIRE = Duration.ofSeconds(7200);
+    private static final Duration ACCESS_TOKEN_EXPIRE = Duration.ofSeconds(6900); // WeChat access token expires in 2 hours, set to 6900s for safety
     private static final Duration VERIFY_TICKET_EXPIRE = Duration.ofSeconds(43200);
+    private static final Duration REFRESH_TOKEN_EXPIRE = Duration.ofDays(365); // Refresh token should be long-term, set to 1 year
 
     @Override
     public String getPreAuthCode(Integer botId, String appid, String uid) {
@@ -74,7 +76,7 @@ public class WechatThirdpartyServiceImpl implements WechatThirdpartyService {
             preAuthCode = requestPreAuthCodeFromWechat(componentAccessToken);
 
             // 缓存预authorization码（短时间缓存，防止重复request）
-            bucket.set(preAuthCode, Duration.ofSeconds(5));
+            bucket.set(preAuthCode, PRE_AUTH_CODE_EXPIRE);
             log.info("获取新的预授权码: botId={}, appid={}", botId, appid);
         }
 
@@ -160,16 +162,29 @@ public class WechatThirdpartyServiceImpl implements WechatThirdpartyService {
     }
 
     @Override
-    public void refreshVerifyTicket(String componentVerifyTicket) {
-        if (!StringUtils.hasText(componentVerifyTicket)) {
-            log.error("刷新验证票据失败：票据为空");
+    public void refreshVerifyTicket(String decryptedXml) {
+        if (!StringUtils.hasText(decryptedXml)) {
+            log.error("Refresh verify ticket failed: decrypted XML is empty");
             return;
         }
 
-        RBucket<String> bucket = redissonClient.getBucket(COMPONENT_VERIFY_TICKET_KEY);
-        bucket.set(componentVerifyTicket, VERIFY_TICKET_EXPIRE);
+        try {
+            // Parse the decrypted XML to extract ComponentVerifyTicket
+            Map<String, String> ticketMsg = com.iflytek.astron.console.hub.util.wechat.WXBizMsgParse.parseTicketMsg(decryptedXml);
+            String ticket = ticketMsg.get("ComponentVerifyTicket");
 
-        log.info("验证票据刷新成功");
+            if (!StringUtils.hasText(ticket)) {
+                log.error("Refresh WeChat component_verify_ticket failed: ticket is empty!");
+                return;
+            }
+
+            RBucket<String> bucket = redissonClient.getBucket(COMPONENT_VERIFY_TICKET_KEY);
+            bucket.set(ticket, VERIFY_TICKET_EXPIRE);
+
+            log.info("WeChat component_verify_ticket refreshed successfully: ticket={}", ticket);
+        } catch (Exception e) {
+            log.error("Failed to parse verify ticket from decrypted XML: {}", decryptedXml, e);
+        }
     }
 
     @Override
@@ -370,7 +385,7 @@ public class WechatThirdpartyServiceImpl implements WechatThirdpartyService {
                 String refreshTokenKey = AUTHORIZATION_REFRESH_TOKEN_KEY + authorizerAppid;
 
                 redissonClient.getBucket(accessTokenKey).set(authorizationAccessToken, ACCESS_TOKEN_EXPIRE);
-                redissonClient.getBucket(refreshTokenKey).set(authorizationRefreshToken);
+                redissonClient.getBucket(refreshTokenKey).set(authorizationRefreshToken, REFRESH_TOKEN_EXPIRE);
 
                 log.info("授权令牌初始化成功: authorizerAppid={}", authorizerAppid);
             } else {

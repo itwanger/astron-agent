@@ -1,5 +1,6 @@
 package com.iflytek.astron.console.commons.entity.bot;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@TableName(value = "user_lang_chain_log")
 public class UserLangChainLog {
 
     private Long id;

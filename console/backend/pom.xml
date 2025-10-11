@@ -13,7 +13,7 @@
     <modules>
         <module>commons</module>
         <module>hub</module>
-         <module>toolkit</module>
+        <module>toolkit</module>
     </modules>
 
     <licenses>
@@ -52,6 +52,8 @@
         <xfyun-websdk.version>2.1.5</xfyun-websdk.version>
         <easy-excel.version>4.0.3</easy-excel.version>
         <minio.version>8.5.10</minio.version>
+        <retrofit>2.5.0</retrofit>
+        <converter-jackson>2.5.0</converter-jackson>
 
         <!-- maven plugins -->
         <spotless.version>2.46.1</spotless.version>
@@ -230,6 +232,17 @@
                 <version>${mapstruct.version}</version>
                 <scope>provided</scope>
             </dependency>
+            <dependency>
+                <groupId>com.squareup.retrofit2</groupId>
+                <artifactId>retrofit</artifactId>
+                <version>${retrofit}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.squareup.retrofit2</groupId>
+                <artifactId>converter-jackson</artifactId>
+                <version>${converter-jackson}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -283,7 +296,8 @@
                     <effort>Max</effort>
                     <threshold>Low</threshold>
                     <xmlOutput>true</xmlOutput>
-                    <excludeFilterFile>${maven.multiModuleProjectDirectory}/config/spotbugs-exclude.xml</excludeFilterFile>
+                    <excludeFilterFile>${maven.multiModuleProjectDirectory}/config/spotbugs-exclude.xml
+                    </excludeFilterFile>
                     <failOnError>true</failOnError>
                 </configuration>
             </plugin>

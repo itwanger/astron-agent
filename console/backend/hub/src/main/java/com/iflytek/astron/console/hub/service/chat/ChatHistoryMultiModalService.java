@@ -1,7 +1,7 @@
 package com.iflytek.astron.console.hub.service.chat;
 
-import com.iflytek.astron.console.commons.entity.chat.ChatReqModelDto;
-import com.iflytek.astron.console.commons.entity.chat.ChatRespModelDto;
+import com.iflytek.astron.console.commons.dto.chat.ChatReqModelDto;
+import com.iflytek.astron.console.commons.dto.chat.ChatRespModelDto;
 
 import java.util.List;
 

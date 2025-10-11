@@ -1,7 +1,7 @@
 package com.iflytek.astron.console.hub.controller.bot;
 
 import com.iflytek.astron.console.commons.dto.bot.BotFavoritePageDto;
-import com.iflytek.astron.console.commons.entity.bot.BotMarketForm;
+import com.iflytek.astron.console.commons.dto.bot.BotMarketForm;
 import com.iflytek.astron.console.commons.response.ApiResult;
 import com.iflytek.astron.console.commons.service.bot.BotFavoriteService;
 import com.iflytek.astron.console.commons.util.RequestContextUtil;

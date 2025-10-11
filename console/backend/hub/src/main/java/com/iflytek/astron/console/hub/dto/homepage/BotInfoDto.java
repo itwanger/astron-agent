@@ -41,4 +41,7 @@ public class BotInfoDto {
     @Schema(description = "Bot creator")
     private String creator;
 
+    @Schema(description = "Bot version")
+    private Integer version;
+
 }

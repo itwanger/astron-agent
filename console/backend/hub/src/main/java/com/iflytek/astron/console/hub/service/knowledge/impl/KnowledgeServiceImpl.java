@@ -31,6 +31,14 @@ public class KnowledgeServiceImpl implements KnowledgeService {
     @Autowired
     private ChatListDataService chatListDataService;
 
+    /**
+     * Get knowledge chunks by botId
+     *
+     * @param botId Bot ID
+     * @param ask Question statement
+     * @param topN Number of knowledge chunks to return
+     * @return List of strings containing knowledge chunks
+     */
     @Override
     public List<String> getChuncksByBotId(Integer botId, String ask, Integer topN) {
         List<String> knowledgeContent = new ArrayList<>();
@@ -43,6 +51,15 @@ public class KnowledgeServiceImpl implements KnowledgeService {
         return getChuncks(dataUidList, ask, topN, false);
     }
 
+    /**
+     * Override method: Get text chunks from MAAS datasets
+     *
+     * @param maasDatasetList MAAS dataset list
+     * @param text Text to be processed
+     * @param topN Number of most relevant text chunks to return
+     * @param isBelongLoginUser Indicates whether the user belongs to the logged-in user
+     * @return List of relevant text chunks
+     */
     @Override
     public List<String> getChuncks(List<String> maasDatasetList, String text, Integer topN, boolean isBelongLoginUser) {
         List<String> relationChunk = new ArrayList<>();

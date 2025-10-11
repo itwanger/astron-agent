@@ -1,5 +1,8 @@
 package com.iflytek.astron.console.commons.service.data;
 
+import com.iflytek.astron.console.commons.dto.chat.ChatFileReq;
+import com.iflytek.astron.console.commons.dto.chat.ChatReqModelDto;
+import com.iflytek.astron.console.commons.dto.chat.ChatRespModelDto;
 import com.iflytek.astron.console.commons.entity.bot.BotChatFileParam;
 import com.iflytek.astron.console.commons.entity.chat.*;
 

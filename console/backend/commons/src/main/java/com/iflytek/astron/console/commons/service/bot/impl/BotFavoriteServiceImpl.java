@@ -2,21 +2,17 @@ package com.iflytek.astron.console.commons.service.bot.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.iflytek.astron.console.commons.constant.ResponseEnum;
 import com.iflytek.astron.console.commons.data.UserInfoDataService;
-import com.iflytek.astron.console.commons.dto.bot.BotFavoriteItemDto;
-import com.iflytek.astron.console.commons.dto.bot.BotFavoritePageDto;
-import com.iflytek.astron.console.commons.dto.bot.BotFavoriteQueryDto;
+import com.iflytek.astron.console.commons.dto.bot.*;
 import com.iflytek.astron.console.commons.entity.bot.*;
-import com.iflytek.astron.console.commons.entity.user.ChatUser;
+import com.iflytek.astron.console.commons.entity.user.UserInfo;
 import com.iflytek.astron.console.commons.exception.BusinessException;
 import com.iflytek.astron.console.commons.mapper.bot.BotFavoriteMapper;
 import com.iflytek.astron.console.commons.mapper.bot.ChatBotBaseMapper;
 import com.iflytek.astron.console.commons.mapper.bot.ChatBotMarketMapper;
-import com.iflytek.astron.console.commons.mapper.user.ChatUserMapper;
 import com.iflytek.astron.console.commons.service.bot.BotFavoriteService;
 import com.iflytek.astron.console.commons.util.BotUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -39,9 +35,6 @@ public class BotFavoriteServiceImpl implements BotFavoriteService {
     private BotFavoriteMapper botFavoriteMapper;
 
     @Autowired
-    private ChatUserMapper chatUserMapper;
-
-    @Autowired
     private ChatBotBaseMapper chatBotBaseMapper;
 
     @Autowired
@@ -60,7 +53,7 @@ public class BotFavoriteServiceImpl implements BotFavoriteService {
         }
 
         LinkedList<ChatBotMarketPage> botList = queryBotPages(queryDto, botMarketForm);
-        Map<String, ChatUser> userMap = buildUserMap(botList, botMarketForm);
+        Map<String, UserInfo> userMap = buildUserMap(botList, botMarketForm);
         List<BotFavoriteItemDto> resultList = buildResultList(botList, userMap, uid, langCode);
 
         return new BotFavoritePageDto(count, resultList);
@@ -89,17 +82,15 @@ public class BotFavoriteServiceImpl implements BotFavoriteService {
         return result;
     }
 
-    private Map<String, ChatUser> buildUserMap(LinkedList<ChatBotMarketPage> botList, BotMarketForm botMarketForm) {
+    private Map<String, UserInfo> buildUserMap(LinkedList<ChatBotMarketPage> botList, BotMarketForm botMarketForm) {
         Set<String> uidSet = extractUidSet(botList);
         if (uidSet.isEmpty()) {
             log.info("------Creator not found, bot_type: {}, searchValue: {}", botMarketForm.getBotType(), botMarketForm.getSearchValue());
             uidSet.add("1");
         }
 
-        LambdaQueryWrapper<ChatUser> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.in(ChatUser::getUid, uidSet);
-        List<ChatUser> userList = chatUserMapper.selectList(queryWrapper);
-        return userList.stream().collect(Collectors.toMap(ChatUser::getUid, user -> user));
+        List<UserInfo> userList = userInfoDataService.findByUids(uidSet);
+        return userList.stream().collect(Collectors.toMap(UserInfo::getUid, user -> user));
     }
 
     private Set<String> extractUidSet(LinkedList<ChatBotMarketPage> botList) {
@@ -111,7 +102,7 @@ public class BotFavoriteServiceImpl implements BotFavoriteService {
     }
 
     private List<BotFavoriteItemDto> buildResultList(LinkedList<ChatBotMarketPage> botList,
-            Map<String, ChatUser> userMap,
+            Map<String, UserInfo> userMap,
             String uid,
             String langCode) {
         List<BotFavoriteItemDto> resultList = new ArrayList<>();
@@ -127,7 +118,7 @@ public class BotFavoriteServiceImpl implements BotFavoriteService {
     }
 
     private BotFavoriteItemDto buildBotFavoriteItem(ChatBotMarketPage market,
-            Map<String, ChatUser> userMap,
+            Map<String, UserInfo> userMap,
             String uid,
             String langCode) {
         // Handle popularity value display
@@ -155,14 +146,14 @@ public class BotFavoriteServiceImpl implements BotFavoriteService {
         market.setHotNum(numStr);
     }
 
-    private void setCreatorInfo(BotFavoriteItemDto item, ChatBotMarketPage market, Map<String, ChatUser> userMap) {
+    private void setCreatorInfo(BotFavoriteItemDto item, ChatBotMarketPage market, Map<String, UserInfo> userMap) {
         String creatorUid = market.getUid();
         if (Objects.equals(creatorUid, "1")) {
             item.setCreator("");
             return;
         }
 
-        ChatUser creator = userMap.get(creatorUid);
+        UserInfo creator = userMap.get(creatorUid);
         if (creator == null) {
             item.setCreator("");
             return;
@@ -172,7 +163,7 @@ public class BotFavoriteServiceImpl implements BotFavoriteService {
         item.setCreator(creatorName);
     }
 
-    private String getCreatorDisplayName(ChatUser creator) {
+    private String getCreatorDisplayName(UserInfo creator) {
         if (StringUtils.isNotBlank(creator.getNickname())) {
             return creator.getNickname();
         }

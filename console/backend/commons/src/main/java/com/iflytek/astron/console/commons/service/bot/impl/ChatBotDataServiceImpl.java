@@ -10,7 +10,9 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.iflytek.astron.console.commons.dto.bot.BotDetail;
 import com.iflytek.astron.console.commons.dto.bot.ChatBotApi;
+import com.iflytek.astron.console.commons.dto.bot.PromptBotDetail;
 import com.iflytek.astron.console.commons.dto.vcn.CustomV2VCNDTO;
 import com.iflytek.astron.console.commons.entity.bot.*;
 import com.iflytek.astron.console.commons.entity.chat.ChatList;
@@ -25,6 +27,7 @@ import com.iflytek.astron.console.commons.service.bot.ChatBotDataService;
 import com.iflytek.astron.console.commons.service.data.IDatasetInfoService;
 import com.iflytek.astron.console.commons.service.mcp.McpDataService;
 import com.iflytek.astron.console.commons.util.MaasUtil;
+import com.iflytek.astron.console.commons.util.space.SpaceInfoUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -612,5 +615,44 @@ public class ChatBotDataServiceImpl implements ChatBotDataService {
             releaseList.add(ReleaseTypeEnum.MCP.getCode());
         }
         return releaseList;
+    }
+
+    @Override
+    public ChatBotBase findOne(String uid, Long botId) {
+        LambdaQueryWrapper<ChatBotBase> botSearch = Wrappers.lambdaQuery(ChatBotBase.class).eq(ChatBotBase::getId, botId);
+        Long spaceId = SpaceInfoUtil.getSpaceId();
+        if (spaceId == null) {
+            botSearch.eq(ChatBotBase::getUid, uid)
+                    .isNull(ChatBotBase::getSpaceId);
+        } else {
+            botSearch.eq(ChatBotBase::getSpaceId, spaceId);
+        }
+        return chatBotBaseMapper.selectOne(botSearch);
+    }
+
+    @Override
+    public void updateChatBotMarket(ChatBotBase chatBotBase) {
+        UpdateWrapper<ChatBotMarket> wrapper = new UpdateWrapper<>();
+        wrapper.eq("uid", chatBotBase.getUid());
+        wrapper.eq("bot_id", chatBotBase.getId());
+        wrapper.set("bot_name", chatBotBase.getBotName());
+        wrapper.set("avatar", chatBotBase.getAvatar());
+        wrapper.set("bot_type", chatBotBase.getBotType());
+        wrapper.set("bot_desc", chatBotBase.getBotDesc());
+        wrapper.set("pc_background", chatBotBase.getPcBackground());
+        wrapper.set("app_background", chatBotBase.getAppBackground());
+        wrapper.set("background_color", chatBotBase.getBackgroundColor());
+        wrapper.set("prompt", chatBotBase.getPrompt());
+        wrapper.set("prologue", chatBotBase.getPrologue());
+        wrapper.set("support_context", chatBotBase.getSupportContext());
+        wrapper.set("version", chatBotBase.getVersion());
+        wrapper.set("model", chatBotBase.getModel());
+        wrapper.set("opened_tool", chatBotBase.getOpenedTool());
+        wrapper.set("client_hide", chatBotBase.getClientHide());
+        wrapper.set("model_id", chatBotBase.getModelId());
+        wrapper.set("support_document", chatBotBase.getSupportDocument());
+        wrapper.set("update_time", LocalDateTime.now());
+        chatBotMarketMapper.update(null, wrapper);
+        log.debug("Updated chat bot market uid={}, botId={}", chatBotBase.getUid(), chatBotBase.getId());
     }
 }

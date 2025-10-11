@@ -31,4 +31,6 @@ public interface InviteRecordBizService {
     List<ChatUserVO> searchUsername(String username, InviteRecordTypeEnum type);
 
     ApiResult<BatchChatUserVO> searchUserBatch(MultipartFile file);
+
+    ApiResult<BatchChatUserVO> searchUsernameBatch(MultipartFile file);
 }

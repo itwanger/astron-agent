@@ -5,12 +5,16 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.iflytek.astron.console.commons.constant.RedisKeyConstant;
 import com.iflytek.astron.console.commons.constant.ResponseEnum;
+import com.iflytek.astron.console.commons.dto.chat.ChatModelMeta;
+import com.iflytek.astron.console.commons.dto.chat.ChatReqModelDto;
+import com.iflytek.astron.console.commons.dto.chat.ChatRequestDto;
+import com.iflytek.astron.console.commons.dto.chat.ChatRequestDtoList;
 import com.iflytek.astron.console.commons.entity.bot.ChatBotMarket;
-import com.iflytek.astron.console.commons.entity.bot.ChatBotReqDto;
+import com.iflytek.astron.console.commons.dto.bot.ChatBotReqDto;
 import com.iflytek.astron.console.commons.entity.chat.*;
-import com.iflytek.astron.console.commons.entity.workflow.WorkflowApiRequest;
-import com.iflytek.astron.console.commons.entity.workflow.WorkflowEventData;
-import com.iflytek.astron.console.commons.entity.workflow.WorkflowResumeRequest;
+import com.iflytek.astron.console.commons.dto.workflow.WorkflowApiRequest;
+import com.iflytek.astron.console.commons.dto.workflow.WorkflowEventData;
+import com.iflytek.astron.console.commons.dto.workflow.WorkflowResumeRequest;
 import com.iflytek.astron.console.commons.exception.BusinessException;
 import com.iflytek.astron.console.commons.service.WssListenerService;
 import com.iflytek.astron.console.commons.service.bot.ChatBotDataService;
@@ -36,6 +40,9 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author mingsuiyongheng
+ */
 @Service
 @Slf4j
 public class WorkflowBotChatServiceImpl implements WorkflowBotChatService {
@@ -79,6 +86,15 @@ public class WorkflowBotChatServiceImpl implements WorkflowBotChatService {
     @Value("${common.apiSecret}")
     private String appSecret;
 
+    /**
+     * Handle chatbot workflow requests
+     *
+     * @param chatBotReqDto Chat bot request data transfer object
+     * @param sseEmitter Server-Sent Events emitter
+     * @param sseId Server-sent event identifier
+     * @param workflowOperation Workflow operation type
+     * @param workflowVersion Workflow version
+     */
     @Override
     public void chatWorkflowBot(ChatBotReqDto chatBotReqDto, SseEmitter sseEmitter, String sseId, String workflowOperation, String workflowVersion) {
         String uid = chatBotReqDto.getUid();
@@ -122,6 +138,7 @@ public class WorkflowBotChatServiceImpl implements WorkflowBotChatService {
         ChatRequestDtoList requestDtoList = chatHistoryService.getHistory(uid, chatId, reqList);
         filterContent(requestDtoList);
         WorkflowApiRequest workflowApiRequest = new WorkflowApiRequest(flowId, uid, inputs, requestDtoList.getMessages(), workflowVersion);
+        log.info("workflowApiRequest:{}", workflowApiRequest);
         RequestBody body = RequestBody.create(JSON.toJSONString(workflowApiRequest), MediaType.parse("application/json; charset=utf-8"));
 
         // Check if already published
@@ -164,6 +181,11 @@ public class WorkflowBotChatServiceImpl implements WorkflowBotChatService {
         client.createWebSocketConnect(listener);
     }
 
+    /**
+     * Filter chat request content
+     *
+     * @param requestDtoList Chat request list
+     */
     private void filterContent(ChatRequestDtoList requestDtoList) {
         LinkedList<ChatRequestDto> filteredMessages = new LinkedList<>();
         boolean removeNext = false;
@@ -199,6 +221,12 @@ public class WorkflowBotChatServiceImpl implements WorkflowBotChatService {
         requestDtoList.setMessages(filteredMessages);
     }
 
+    /**
+     * Determine whether the given content should be removed
+     *
+     * @param content Content object to be evaluated
+     * @return Returns true if should be removed, otherwise false
+     */
     private boolean shouldRemove(Object content) {
         try {
             WorkflowEventData.EventValue eventValue = JSON.parseObject(String.valueOf(content), WorkflowEventData.EventValue.class);

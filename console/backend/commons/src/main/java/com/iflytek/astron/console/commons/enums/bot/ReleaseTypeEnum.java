@@ -9,6 +9,8 @@ public enum ReleaseTypeEnum {
     WECHAT(3, "WeChat Official Account"),
 
     MCP(4, "MCP"),
+
+    FEISHU(5, "Feishu"),
     ;
 
     private Integer code;
@@ -17,6 +19,25 @@ public enum ReleaseTypeEnum {
 
     public Integer getCode() {
         return code;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    /**
+     * Get enum by string name (case insensitive)
+     */
+    public static ReleaseTypeEnum getByName(String name) {
+        if (name == null) {
+            return null;
+        }
+
+        try {
+            return valueOf(name.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 
     ReleaseTypeEnum(Integer code, String desc) {

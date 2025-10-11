@@ -7,9 +7,9 @@ import cn.xfyun.model.sparkmodel.RoleContent;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.iflytek.astron.console.commons.service.data.ChatDataService;
-import com.iflytek.astron.console.commons.entity.workflow.WorkflowChatRequest;
-import com.iflytek.astron.console.commons.entity.workflow.WorkflowEventData;
-import com.iflytek.astron.console.commons.entity.workflow.WorkflowResumeReq;
+import com.iflytek.astron.console.commons.dto.workflow.WorkflowChatRequest;
+import com.iflytek.astron.console.commons.dto.workflow.WorkflowEventData;
+import com.iflytek.astron.console.commons.dto.workflow.WorkflowResumeReq;
 import com.iflytek.astron.console.commons.entity.chat.ChatReqRecords;
 import com.iflytek.astron.console.commons.util.SseEmitterUtil;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Workflow conversation service
+ * @author mingsuiyongheng Workflow conversation service
  */
 @Slf4j
 @Service
@@ -68,11 +68,10 @@ public class WorkflowChatService {
      */
     public void workflowChatStream(WorkflowChatRequest request, SseEmitter emitter, String streamId,
             ChatReqRecords chatReqRecords, boolean edit) {
-        // if (chatReqRecords == null || chatReqRecords.getUid() == null || chatReqRecords.getChatId() ==
-        // null) {
-        // SseEmitterUtil.completeWithError(emitter, "Chat records are empty");
-        // return;
-        // }
+        if (chatReqRecords == null || chatReqRecords.getUid() == null || chatReqRecords.getChatId() == null) {
+            SseEmitterUtil.completeWithError(emitter, "Chat records are empty");
+            return;
+        }
 
         try {
             // Create AgentClient

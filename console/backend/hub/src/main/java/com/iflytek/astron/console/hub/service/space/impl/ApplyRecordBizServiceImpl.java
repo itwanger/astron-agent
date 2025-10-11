@@ -65,7 +65,7 @@ public class ApplyRecordBizServiceImpl implements ApplyRecordBizService {
         // Super admin directly joins
         if (Objects.equals(enterpriseUser.getRole(), EnterpriseRoleEnum.OFFICER.getCode())) {
             if (spaceUserService.addSpaceUser(spaceId, uid, SpaceRoleEnum.ADMIN)) {
-                return ApiResult.of(ResponseEnum.SPACE_APPLICATION_JOIN_SUCCESS, null);
+                return ApiResult.success();
             } else {
                 return ApiResult.error(ResponseEnum.SPACE_APPLICATION_JOIN_FAILED);
             }
@@ -80,7 +80,7 @@ public class ApplyRecordBizServiceImpl implements ApplyRecordBizService {
             applyRecord.setApplyTime(LocalDateTime.now());
             applyRecord.setStatus(ApplyRecord.Status.APPLYING.getCode());
             if (applyRecordService.save(applyRecord)) {
-                return ApiResult.of(ResponseEnum.SPACE_APPLICATION_SUCCESS, null);
+                return ApiResult.success();
             } else {
                 return ApiResult.error(ResponseEnum.SPACE_APPLICATION_FAILED);
             }

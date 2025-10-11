@@ -2,7 +2,7 @@ package com.iflytek.astron.console.hub.service.chat.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson2.JSONObject;
-import com.iflytek.astron.console.commons.entity.chat.ChatRespModelDto;
+import com.iflytek.astron.console.commons.dto.chat.ChatRespModelDto;
 import com.iflytek.astron.console.commons.entity.chat.ChatReasonRecords;
 import com.iflytek.astron.console.commons.entity.chat.ChatTraceSource;
 import com.iflytek.astron.console.hub.service.chat.ChatReasonRecordsService;
@@ -15,11 +15,20 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * @author mingsuiyongheng
+ */
 @Service
 @Slf4j
 public class ChatReasonRecordsServiceImpl implements ChatReasonRecordsService {
 
-
+    /**
+     * Function to assemble response reasons
+     *
+     * @param respList Chat response model list
+     * @param reasonRecordsList Chat reason records list
+     * @param traceList Chat trace source list
+     */
     @Override
     public void assembleRespReasoning(List<ChatRespModelDto> respList, List<ChatReasonRecords> reasonRecordsList, List<ChatTraceSource> traceList) {
         if (CollUtil.isEmpty(respList) || CollUtil.isEmpty(reasonRecordsList)) {

@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author yingpeng
+ * @author mingsuiyongheng
  */
 @RestController
 @Slf4j
@@ -43,9 +43,16 @@ public class ChatEnhanceController {
 
     @Autowired
     private ChatEnhanceService chatEnhanceService;
+
     @Autowired
     private ChatDataService chatDataService;
 
+    /**
+     * Handles the request mapping for saving files
+     *
+     * @param vo Request body containing file information
+     * @return Result of saving the file, including file ID or error information
+     */
     @PostMapping(path = "/save-file")
     @Operation(summary = "Save File")
     public ApiResult<String> saveFile(@RequestBody ChatEnhanceSaveFileVo vo) {
@@ -77,6 +84,13 @@ public class ChatEnhanceController {
         return ApiResult.error(-1, errorMsg);
     }
 
+    /**
+     * Unbind file from ChatId
+     *
+     * @param longFileDto Object containing file ID and optional link ID as well as parameter name
+     * @return Operation result object
+     * @throws BusinessException Thrown when file information is missing or invalid
+     */
     @Operation(summary = "Unbind file's FileId and ChatId")
     @PostMapping(path = "unbind-file")
     public ApiResult<Object> unbindFile(@RequestBody LongFileDto longFileDto) {

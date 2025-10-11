@@ -25,6 +25,9 @@ public interface UserInfoDataService {
     /** Query users by a collection of mobile numbers */
     List<UserInfo> findUsersByMobiles(Collection<String> mobile);
 
+    /** Query users by a collection of usernames */
+    List<UserInfo> findUsersByUsernames(Collection<String> usernames);
+
     /** Fuzzy query users by nickname */
     List<UserInfo> findByNicknameLike(String nickname);
 
@@ -53,7 +56,7 @@ public interface UserInfoDataService {
     boolean updateUserAgreement(String uid, int userAgreement);
 
     /** Batch query users by UID */
-    List<UserInfo> findByUids(List<String> uids);
+    List<UserInfo> findByUids(Collection<String> uids);
 
     /** Check whether username exists */
     boolean existsByUsername(String username);

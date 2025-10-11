@@ -13,7 +13,7 @@
         AND (b.is_delete is null or b.is_delete = 0)
     </sql>
 
-    <select id="selectBotPage" resultType="com.iflytek.astron.console.commons.entity.bot.ChatBotMarketPage">
+    <select id="selectBotPage" resultType="com.iflytek.astron.console.commons.dto.bot.ChatBotMarketPage">
         SELECT
         bf.id,
         a.uid,

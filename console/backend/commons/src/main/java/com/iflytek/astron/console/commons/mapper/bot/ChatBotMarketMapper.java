@@ -3,7 +3,7 @@ package com.iflytek.astron.console.commons.mapper.bot;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.iflytek.astron.console.commons.dto.bot.BotQueryCondition;
-import com.iflytek.astron.console.commons.entity.bot.BotPublishQueryResult;
+import com.iflytek.astron.console.commons.dto.bot.BotPublishQueryResult;
 import com.iflytek.astron.console.commons.entity.bot.ChatBotMarket;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

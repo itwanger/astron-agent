@@ -17,13 +17,17 @@ import com.iflytek.astron.console.hub.mapper.AiPromptTemplateMapper;
 import com.iflytek.astron.console.hub.service.bot.BotAIService;
 import com.iflytek.astron.console.hub.util.BotAIServiceClient;
 import com.iflytek.astron.console.hub.util.ImageUtil;
+import com.iflytek.astron.console.toolkit.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
+import java.text.MessageFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.iflytek.astron.console.commons.constant.ResponseEnum.PARAMETER_ERROR;
 
@@ -46,11 +50,20 @@ public class BotAIServiceImpl implements BotAIService {
     @Autowired
     private AiPromptTemplateMapper promptTemplateMapper;
 
+    @Autowired
+    private RedisUtil redisUtil;
+
     /**
-     * Get prompt template from database
+     * Get prompt template from database with Redis cache
      */
     private String getPromptTemplate(String promptKey) {
         String languageCode = I18nUtil.getLanguage();
+        String cacheKey = "prompt_template:" + promptKey + ":" + languageCode;
+
+        String cached = redisUtil.getStr(cacheKey);
+        if (cached != null) {
+            return cached;
+        }
 
         AiPromptTemplate template = promptTemplateMapper.selectOne(
                 new LambdaQueryWrapper<AiPromptTemplate>()
@@ -58,24 +71,31 @@ public class BotAIServiceImpl implements BotAIService {
                         .eq(AiPromptTemplate::getLanguageCode, languageCode)
                         .eq(AiPromptTemplate::getIsActive, 1));
 
+        String result = null;
         if (template != null) {
-            return template.getPromptContent();
+            result = template.getPromptContent();
         }
 
         // Fallback to English if not found
-        if (!"en".equals(languageCode)) {
+        if (result == null && !"en".equals(languageCode)) {
             template = promptTemplateMapper.selectOne(
                     new LambdaQueryWrapper<AiPromptTemplate>()
                             .eq(AiPromptTemplate::getPromptKey, promptKey)
                             .eq(AiPromptTemplate::getLanguageCode, "en")
                             .eq(AiPromptTemplate::getIsActive, 1));
             if (template != null) {
-                return template.getPromptContent();
+                result = template.getPromptContent();
             }
         }
 
         // Fallback to default template
-        return getDefaultPromptTemplate(promptKey);
+        if (result == null) {
+            result = getDefaultPromptTemplate(promptKey);
+        }
+
+        redisUtil.put(cacheKey, result, 86400);
+
+        return result;
     }
 
     /**
@@ -85,13 +105,44 @@ public class BotAIServiceImpl implements BotAIService {
         try {
             String template = getPromptTemplate(promptKey);
 
-            // Clean and normalize the template
-            template = template.trim()
-                    .replace("%n", System.lineSeparator())
-                    .replaceAll("\\s+", " ");
+            // Always trim and expand %n to newline
+            template = template.trim().replace("%n", System.lineSeparator());
 
-            // Use MessageFormat for parameter substitution
-            return java.text.MessageFormat.format(template.replace("%s", "{0}"), params);
+            // Special adaptation for generate input example: keep structure/newlines, support %s or {i}
+            boolean isGenInputExample =
+                    "input_example_generation".equals(promptKey)
+                            || "generate-input-example".equals(promptKey)
+                            || "generate_input_example".equals(promptKey);
+
+            if (isGenInputExample) {
+                if (template.contains("%s")) {
+                    // Use classic formatter to support templates like {{%s}}
+                    return String.format(template, params);
+                }
+                return MessageFormat.format(template, params);
+            }
+
+            // Default behavior (backward compatible): normalize spaces to one line
+            template = template.replaceAll("\\s+", " ");
+
+            // Keep compatibility with legacy %s templates by converting to MessageFormat
+            if (template.contains("%s")) {
+                StringBuilder buf = new StringBuilder();
+                int from = 0;
+                int idx = 0;
+                while (true) {
+                    int pos = template.indexOf("%s", from);
+                    if (pos < 0) {
+                        buf.append(template, from, template.length());
+                        break;
+                    }
+                    buf.append(template, from, pos).append('{').append(idx++).append('}');
+                    from = pos + 2;
+                }
+                template = buf.toString();
+            }
+
+            return MessageFormat.format(template, params);
         } catch (Exception e) {
             log.error("Failed to format prompt template: {}, error: {}", promptKey, e.getMessage());
             throw new BusinessException(ResponseEnum.SYSTEM_ERROR);
@@ -523,31 +574,60 @@ public class BotAIServiceImpl implements BotAIService {
      * Get default prompt template
      */
     private String getDefaultPromptTemplate(String promptKey) {
-        switch (promptKey) {
-            case "avatar_generation":
-                return """
-                        Please generate a professional avatar for an AI assistant named "{0}". Description: {1}. \
-                        Requirements: 1.Modern and clean style 2.Harmonious color scheme 3.Professional AI assistant image \
-                        4.Suitable for application interface display""";
-            case "sentence_bot_generation":
-                return """
-                        Based on the user description: "{0}", please generate a complete AI assistant configuration. \
-                        Please output strictly in the following format: Assistant Name: [Concise and clear assistant name] \
-                        Assistant Category: [Choose from: Workplace/Learning/Writing/Programming/Lifestyle/Health] \
-                        Assistant Description: [One sentence describing the main function] \
-                        Role Setting: [Detailed description of role identity and professional background] \
-                        Target Task: [Clearly state the main tasks to be completed] \
-                        Requirement Description: [Detailed functional requirements and usage scenarios] \
-                        Input Examples: [Provide 2-3 possible user input examples, separated by |] \
-                        Note: Please ensure each field has specific content, do not use placeholders.""";
-            case "prologue_generation":
-                return """
-                        Please generate a friendly and professional opening message for an AI assistant named "{0}". \
-                        Requirements: 1.Friendly and natural tone 2.Highlight professional capabilities \
-                        3.Guide users to start conversation 4.Keep within 50 words""";
-            default:
-                throw new BusinessException(ResponseEnum.SYSTEM_ERROR);
-        }
+        return switch (promptKey) {
+            case "avatar_generation" -> """
+                    Please generate a professional avatar for an AI assistant named "{0}". Description: {1}. \
+                    Requirements: 1.Modern and clean style 2.Harmonious color scheme 3.Professional AI assistant image \
+                    4.Suitable for application interface display""";
+            case "sentence_bot_generation" -> """
+                    Based on the user description: "{0}", please generate a complete AI assistant configuration. \
+                    Please output strictly in the following format: Assistant Name: [Concise and clear assistant name] \
+                    Assistant Category: [Choose from: Workplace/Learning/Writing/Programming/Lifestyle/Health] \
+                    Assistant Description: [One sentence describing the main function] \
+                    Role Setting: [Detailed description of role identity and professional background] \
+                    Target Task: [Clearly state the main tasks to be completed] \
+                    Requirement Description: [Detailed functional requirements and usage scenarios] \
+                    Input Examples: [Provide 2-3 possible user input examples, separated by |] \
+                    Note: Please ensure each field has specific content, do not use placeholders.""";
+            case "prologue_generation" -> """
+                    Please generate a friendly and professional opening message for an AI assistant named "{0}". \
+                    Requirements: 1.Friendly and natural tone 2.Highlight professional capabilities \
+                    3.Guide users to start conversation 4.Keep within 50 words""";
+            case "input_example_generation" ->
+                """
+                        Assistant name as follows:
+                        ```
+                        {0}
+                        ```
+                        Assistant description as follows:
+                        ```
+                        {1}
+                        ```
+                        Assistant instructions as follows:
+                        ```
+                        {2}
+                        ```
+                        Note:
+                        An assistant sends an instruction template together with the user's detailed input to a large language model to complete a specific task.
+                        The assistant description states what the assistant should accomplish and what the user needs to provide.
+                        The assistant instructions are the template sent to the model; the template plus the user's detailed input enable the model to complete the task.
+
+                        Please follow these steps:
+                        1. Carefully read the assistant name, description, and instructions to understand the intended task.
+                        2. Based on the above, generate three short task descriptions that a user would input when using this assistant.
+                        3. Ensure each output matches the assistant task and does not repeat.
+                        4. Be specific; avoid vague dimensions only.
+                        5. Return results line by line, one description per line.
+                        6. Each description must be no more than 20 words. [VERY IMPORTANT!!]
+                        7. Be concise and avoid verbosity; use short phrases.
+
+                        Ensure the three user input task descriptions are appropriate for this assistant.
+                        Return results in the following format:
+                        1.context1
+                        2.context2
+                        3.context3""";
+            default -> throw new BusinessException(ResponseEnum.SYSTEM_ERROR);
+        };
     }
 
     /**
@@ -588,5 +668,71 @@ public class BotAIServiceImpl implements BotAIService {
         mappings.put("target_task", "Target Task");
         mappings.put("requirement_description", "Requirement Description");
         return mappings;
+    }
+
+    @Override
+    public List<String> generateInputExample(String botName, String botDesc, String prompt) {
+        if (StringUtils.isBlank(botName) || StringUtils.length(botName) > 128) {
+            throw new BusinessException(PARAMETER_ERROR);
+        }
+        botDesc = StringUtils.defaultString(StringUtils.left(botDesc, 1000));
+        prompt = StringUtils.defaultString(StringUtils.left(prompt, 2000));
+
+        try {
+            String question = formatPrompt("input_example_generation", botName, botDesc, prompt);
+            String answer = aiServiceClient.generateText(question, "gpt4", 60);
+            List<String> examples = parseNumberedExamples(answer);
+            return examples.size() > 3 ? examples.subList(0, 3) : examples;
+        } catch (BusinessException e) {
+            throw e;
+        } catch (Exception e) {
+            log.error("Failed to generate input examples, botName=[{}]", botName, e);
+            return Collections.emptyList();
+        }
+    }
+
+    /**
+     * Parse text content and extract up to 3 numbered examples. Supports patterns like: 1. xxx\n2.
+     * yyy\n3. zzz (optional 4. ... will be ignored) Fallback: take first 3 non-empty lines.
+     */
+    private List<String> parseNumberedExamples(String text) {
+        List<String> result = new ArrayList<>();
+        if (StringUtils.isBlank(text)) {
+            return result;
+        }
+
+        // Non-greedy capture between markers; DOTALL for multi-line
+        Pattern p = Pattern.compile("(?s)1\\.\\s*(.*?)(?:\\n|\r|$)\\s*2\\.\\s*(.*?)(?:\\n|\r|$)\\s*3\\.\\s*(.*?)(?:(?:\\n|\r)\\s*4\\.|$)");
+        Matcher m = p.matcher(text);
+        if (m.find()) {
+            for (int i = 1; i <= 3; i++) {
+                String seg = StringUtils.trimToEmpty(m.group(i));
+                // Cut potential trailing numbering accidentally captured
+                seg = seg.replaceAll("(?s)\\n\\s*[1-9]\\.\\s*.*$", "").trim();
+                if (StringUtils.isNotBlank(seg)) {
+                    result.add(seg);
+                }
+            }
+        }
+
+        if (result.size() >= 1) {
+            return result;
+        }
+
+        // Fallback: try simple line-based extraction
+        String[] lines = text.split("\r?\n");
+        for (String line : lines) {
+            String s = StringUtils.trimToEmpty(line);
+            if (s.isEmpty())
+                continue;
+            // leading numbering or dash
+            s = s.replaceFirst("^\\s*(?:[0-9]+[\\.)]|[-•])\\s*", "").trim();
+            if (!s.isEmpty()) {
+                result.add(s);
+            }
+            if (result.size() == 3)
+                break;
+        }
+        return result;
     }
 }

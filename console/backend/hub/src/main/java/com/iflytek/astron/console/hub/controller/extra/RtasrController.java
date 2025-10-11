@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Real-time Speech Recognition Controller
  *
- * @author yingpeng
+ * @author mingsuiyongheng
  */
 @Slf4j
 @Tag(name = "Real-time Speech Recognition Capability")
@@ -52,10 +53,18 @@ public class RtasrController {
         return ApiResult.success(resultMap);
     }
 
+    /**
+     * Get signature
+     *
+     * @param ts Timestamp
+     * @param lfasrApikey API key
+     * @param appId Application ID
+     * @return Signature string
+     */
     public String getSign(String ts, String lfasrApikey, String appId) {
         try {
             String sign = CryptTools.hmacEncrypt(CryptTools.HMAC_SHA1, CryptTools.md5Encrypt(appId + ts), lfasrApikey);
-            return URLEncoder.encode(sign, "UTF-8");
+            return URLEncoder.encode(sign, StandardCharsets.UTF_8);
         } catch (Exception e) {
             log.error("Exception occurred while getting authorization token for real-time speech recognition", e);
         }

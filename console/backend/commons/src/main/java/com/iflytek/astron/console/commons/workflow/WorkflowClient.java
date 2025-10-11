@@ -11,6 +11,9 @@ import okhttp3.sse.EventSources;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author mingsuiyongheng
+ */
 @Slf4j
 public class WorkflowClient {
 
@@ -44,6 +47,11 @@ public class WorkflowClient {
         this.requestBody = requestBody;
     }
 
+    /**
+     * Create WebSocket connection
+     *
+     * @param sseListener Listener for handling SSE events
+     */
     public void createWebSocketConnect(EventSourceListener sseListener) {
         // Platform chain large model interface wsURL
         String wsURL = chatUrl;
@@ -56,17 +64,31 @@ public class WorkflowClient {
         this.newSSE(sseListener);
     }
 
+    /**
+     * Create a new EventSource object and handle events using the given listener.
+     *
+     * @param listener EventSourceListener object for handling events
+     */
     private void newSSE(EventSourceListener listener) {
         EventSource.Factory factory = EventSources.createFactory(okHttpClient);
         eventSource = factory.newEventSource(request, listener);
     }
 
+    /**
+     * Method to close SSE event source. Cancels the event source if eventSource is not null.
+     */
     public void closeSse() {
         if (this.eventSource != null) {
             this.eventSource.cancel();
         }
     }
 
+    /**
+     * Generate authorization information
+     *
+     * @return Returns authorization string with appKey and appSecret, format: Bearer
+     *         <appKey>:<appSecret>
+     */
     public String genAuthorization() {
         return "Bearer " + appKey + ":" + appSecret;
     }

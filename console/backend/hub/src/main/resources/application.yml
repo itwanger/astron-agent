@@ -82,6 +82,9 @@ spark:
     password: ${SPARK_API_PASSWORD:xxx}
   lfasr-key: ${SPARK_LFASR_KEY:xxx}
   lfasr-appId: ${SPARK_LFASR_APPID:xxx}
+  image-appId: ${SPARK_IMAGE_APP_ID:xxx}
+  image-apiKey: ${SPARK_IMAGE_API_KEY:xxx}
+  image-apiSecret: ${SPARK_IMAGE_API_SECRET:xxx}
 
 # DeepSeek configuration example
 deepseek:
@@ -119,10 +122,12 @@ workflow:
     storage-path: ${WORKFLOW_STORAGE_PATH:/tmp/workflow/uploads}
 
 
+
 maas:
   appId: ${MAAS_APP_ID:your-maas-app-id}
   apiKey: ${MAAS_API_KEY:your-maas-api-key}
   apiSecret: ${MAAS_API_SECRET:your-maas-api-secret}
+  workflowVersion: ${MAAS_WORKFLOW_VERSION:http://127.0.0.1:8080/workflow/version}
   synchronizeWorkFlow: http://127.0.0.1:8080/workflow
   publish: http://127.0.0.1:8080/workflow/publish
   cloneWorkFlow: http://127.0.0.1:8080/workflow/internal-clone
@@ -131,8 +136,8 @@ maas:
   consumerId: ${MAAS_CONSUMER_ID:your-maas-consumer-id}
   consumerSecret: ${MAAS_CONSUMER_SECRET:your-maas-consumer-secret}
   consumerKey: ${MAAS_CONSUMER_KEY:your-maas-consumer-key}
-  publishApi: http://10.1.87.65:7880/v1/publish
-  authApi: http://10.1.87.65:7880/v1/auth
+  publishApi: http://10.1.87.65:7880/workflow/v1/publish
+  authApi: http://10.1.87.65:7880/workflow/v1/auth
   mcpHost: https://xingchen-api.xf-yun.com/mcp/xingchen/flow/%s/sse
   mcpRegister: http://127.0.0.1:8080/workflow/release
   workflowConfig: http://127.0.0.1:8080/workflow/get-flow-advanced-config
@@ -156,15 +161,7 @@ space:
       space-count: 10000
       user-count: 500
   invite-message-template:
-    url: https://${CONSOLE_DOMAIN:localhost:3000}/sharepage?param=
-    space-title: Space Invitation Reminder
-    space-content: >
-      <h3>Space Invitation Reminder</h3>[%s] invited you to join space "%s",
-      <a href="%s" target="_blank" style="color: blue;">Click to view</a>
-    enterprise-title: Team Invitation Reminder
-    enterprise-content: >
-      <h3>Team Invitation Reminder</h3>[%s] invited you to join team "%s",
-      <a href="%s" target="_blank" style="color: blue;">Click to view</a>
+    url: ${CONSOLE_DOMAIN:localhost:3000}/sharepage?param=
 
 # WeChat third-party platform configuration
 wechat:
@@ -177,3 +174,7 @@ wechat:
     token: ${WECHAT_TOKEN:your_token}
     # Message encryption/decryption key
     encoding-aes-key: ${WECHAT_ENCODING_AES_KEY:your_encoding_aes_key}
+
+tenant:
+  create-app: http://10.1.87.65:5052/v2/app
+  get-app-detail: http://10.1.87.65:5052/v2/app/details

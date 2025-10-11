@@ -23,6 +23,9 @@ public class EnterpriseUserVO {
     // User ID
     @Schema(description = "User ID")
     private String uid;
+    // Username
+    @Schema(description = "Username")
+    private String username;
     // User nickname
     @Schema(description = "User nickname")
     private String nickname;

@@ -1,7 +1,7 @@
 package com.iflytek.astron.console.commons.service.data;
 
 import com.iflytek.astron.console.commons.entity.bot.ChatBotBase;
-import com.iflytek.astron.console.commons.entity.chat.ChatBotListDto;
+import com.iflytek.astron.console.commons.dto.chat.ChatBotListDto;
 import com.iflytek.astron.console.commons.entity.chat.ChatList;
 import com.iflytek.astron.console.commons.entity.chat.ChatTreeIndex;
 

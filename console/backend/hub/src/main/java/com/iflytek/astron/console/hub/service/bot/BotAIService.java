@@ -33,4 +33,14 @@ public interface BotAIService {
      * @return Generated prologue
      */
     String generatePrologue(String botName);
+
+    /**
+     * Generate 3 input examples for a bot
+     *
+     * @param botName bot name
+     * @param botDesc bot description
+     * @param prompt bot prompt/instruction
+     * @return up to 3 input examples (may be empty on failure)
+     */
+    java.util.List<String> generateInputExample(String botName, String botDesc, String prompt);
 }

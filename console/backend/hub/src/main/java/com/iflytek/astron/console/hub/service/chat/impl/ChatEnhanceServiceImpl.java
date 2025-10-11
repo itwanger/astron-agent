@@ -12,9 +12,9 @@ import com.iflytek.astron.console.commons.exception.BusinessException;
 import com.iflytek.astron.console.commons.service.data.ChatDataService;
 import com.iflytek.astron.console.hub.dto.chat.ChatEnhanceChatHistoryListFileVo;
 import com.iflytek.astron.console.hub.dto.chat.ChatEnhanceSaveFileVo;
-import com.iflytek.astron.console.commons.entity.chat.ChatReqModelDto;
+import com.iflytek.astron.console.commons.dto.chat.ChatReqModelDto;
 import com.iflytek.astron.console.commons.entity.bot.BotChatFileParam;
-import com.iflytek.astron.console.commons.entity.chat.ChatFileReq;
+import com.iflytek.astron.console.commons.dto.chat.ChatFileReq;
 import com.iflytek.astron.console.commons.entity.chat.ChatFileUser;
 import com.iflytek.astron.console.hub.enums.ChatFileLimitEnum;
 import com.iflytek.astron.console.hub.enums.LongContextStatusEnum;
@@ -34,6 +34,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author mingsuiyongheng
+ */
 @Service
 @Slf4j
 public class ChatEnhanceServiceImpl implements ChatEnhanceService {
@@ -44,6 +47,14 @@ public class ChatEnhanceServiceImpl implements ChatEnhanceService {
     @Autowired
     private RedissonClient redissonClient;
 
+    /**
+     * Add chat history records to the history list.
+     *
+     * @param assembledHistoryList Already assembled history record list
+     * @param uid User ID
+     * @param chatId Chat ID
+     * @return Map containing complete chat file list and history records
+     */
     @Override
     public Map<String, Object> addHistoryChatFile(List<Object> assembledHistoryList, String uid, Long chatId) {
         // Get all bound file information under this ChatId
@@ -130,6 +141,13 @@ public class ChatEnhanceServiceImpl implements ChatEnhanceService {
         return map;
     }
 
+    /**
+     * Save file and return file ID mapping
+     *
+     * @param uid User ID
+     * @param vo Chat enhance file save object
+     * @return Map containing file ID and error information
+     */
     @Override
     public Map<String, String> saveFile(String uid, ChatEnhanceSaveFileVo vo) {
         String fileName = vo.getFileName();
@@ -160,6 +178,13 @@ public class ChatEnhanceServiceImpl implements ChatEnhanceService {
         return fileIdMap;
     }
 
+    /**
+     * Find chat file user by link ID and user ID
+     *
+     * @param linkId Link ID
+     * @param uid User ID
+     * @return Returns the matching chat file user object
+     */
     @Override
     public ChatFileUser findById(Long linkId, String uid) {
         return chatDataService.findChatFileUserByIdAndUid(linkId, uid);
@@ -177,6 +202,18 @@ public class ChatEnhanceServiceImpl implements ChatEnhanceService {
         chatDataService.deleteChatFileReq(fileId, chatId, uid);
     }
 
+    /**
+     * Method to check files, validate if file name, URL and size are valid, and check if the number of
+     * uploaded files exceeds daily limit.
+     *
+     * @param uid User ID
+     * @param fileName File name
+     * @param fileUrl File URL
+     * @param fileSize File size
+     * @param limitEnum File limit enum, including maximum file size and daily upload count limit
+     * @throws BusinessException Business exception thrown when file name or URL is empty, business type
+     *         is wrong, file size exceeds limit or daily upload count exceeds limit
+     */
     private void checkFile(String uid, String fileName, String fileUrl, Long fileSize, ChatFileLimitEnum limitEnum) {
         if (StringUtils.isBlank(fileName) || StringUtils.isBlank(fileUrl)) {
             throw new BusinessException(ResponseEnum.LONG_CONTENT_MISS_FILE_INFO);
@@ -195,6 +232,21 @@ public class ChatEnhanceServiceImpl implements ChatEnhanceService {
         }
     }
 
+    /**
+     * Handle document upload functionality
+     *
+     * @param chatFileUserId Chat file user ID
+     * @param uid User ID
+     * @param chatId Chat ID
+     * @param fileUrl File URL
+     * @param fileName File name
+     * @param fileSize File size
+     * @param limitEnum File limit enum
+     * @param fileBusinessKey File business key
+     * @param documentType Document type
+     * @param paramName Parameter name
+     * @return Returns a Map containing processing results
+     */
     public Map<String, String> documentHandler(Long chatFileUserId, String uid, Long chatId, String fileUrl, String fileName, Long fileSize,
             ChatFileLimitEnum limitEnum, String fileBusinessKey,
             Integer documentType, String paramName) {
@@ -233,6 +285,18 @@ public class ChatEnhanceServiceImpl implements ChatEnhanceService {
         return agentMaasHandle(uid, chatId, fileUrl, fileName, chatFileUserId, limitEnum, paramName);
     }
 
+    /**
+     * Agent method for handling document parsing
+     *
+     * @param uid User ID
+     * @param chatId Chat ID
+     * @param fileUrl File URL
+     * @param fileName File name
+     * @param chatFileUserId Chat file user ID
+     * @param limitEnum Chat file limit enum
+     * @param paramName Parameter name
+     * @return Map containing file ID
+     */
     private Map<String, String> agentMaasHandle(String uid,
             Long chatId,
             String fileUrl,

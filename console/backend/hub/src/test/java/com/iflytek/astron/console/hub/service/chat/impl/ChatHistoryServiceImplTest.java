@@ -1,7 +1,10 @@
 package com.iflytek.astron.console.hub.service.chat.impl;
 
+import com.iflytek.astron.console.commons.dto.chat.ChatModelMeta;
+import com.iflytek.astron.console.commons.dto.chat.ChatReqModelDto;
+import com.iflytek.astron.console.commons.dto.chat.ChatRequestDtoList;
+import com.iflytek.astron.console.commons.dto.chat.ChatRespModelDto;
 import com.iflytek.astron.console.commons.dto.llm.SparkChatRequest;
-import com.iflytek.astron.console.commons.entity.chat.*;
 import com.iflytek.astron.console.commons.service.data.ChatDataService;
 import com.iflytek.astron.console.hub.data.ReqKnowledgeRecordsDataService;
 import com.iflytek.astron.console.hub.entity.ReqKnowledgeRecords;
@@ -35,6 +38,7 @@ class ChatHistoryServiceImplTest {
 
     private String uid;
     private Long chatId;
+    private Boolean supportDocument;
     private List<ChatReqModelDto> reqModelDtos;
     private List<ChatRespModelDto> respModelDtos;
     private Map<Long, ReqKnowledgeRecords> knowledgeRecordsMap;
@@ -43,6 +47,7 @@ class ChatHistoryServiceImplTest {
     void setUp() {
         uid = "user123";
         chatId = 100L;
+        supportDocument = true;
 
         // Setup request DTOs
         ChatReqModelDto req1 = new ChatReqModelDto();
@@ -56,7 +61,8 @@ class ChatHistoryServiceImplTest {
         req2.setUrl("http://example.com/image.jpg");
         req2.setCreateTime(LocalDateTime.now().minusMinutes(5));
 
-        reqModelDtos = Arrays.asList(req1, req2);
+        // getReqModelBotHistoryByChatId returns in DESC order (newest first)
+        reqModelDtos = Arrays.asList(req2, req1);
 
         // Setup response DTOs
         ChatRespModelDto resp1 = new ChatRespModelDto();
@@ -91,14 +97,14 @@ class ChatHistoryServiceImplTest {
     @Test
     void testGetSystemBotHistory_WithValidData_ShouldReturnMessageList() {
         // Given
-        List<Long> reqIds = Arrays.asList(1L, 2L);
+        List<Long> reqIds = Arrays.asList(2L, 1L); // DESC order (newest first)
 
         when(chatDataService.getReqModelBotHistoryByChatId(uid, chatId)).thenReturn(reqModelDtos);
         when(chatDataService.getChatRespModelBotHistoryByChatId(uid, chatId, reqIds)).thenReturn(respModelDtos);
         when(reqKnowledgeRecordsDataService.findByReqIds(reqIds)).thenReturn(knowledgeRecordsMap);
 
         // When
-        List<SparkChatRequest.MessageDto> result = chatHistoryService.getSystemBotHistory(uid, chatId);
+        List<SparkChatRequest.MessageDto> result = chatHistoryService.getSystemBotHistory(uid, chatId, supportDocument);
 
         // Then
         assertNotNull(result);
@@ -136,7 +142,7 @@ class ChatHistoryServiceImplTest {
         when(chatDataService.getReqModelBotHistoryByChatId(uid, chatId)).thenReturn(new ArrayList<>());
 
         // When
-        List<SparkChatRequest.MessageDto> result = chatHistoryService.getSystemBotHistory(uid, chatId);
+        List<SparkChatRequest.MessageDto> result = chatHistoryService.getSystemBotHistory(uid, chatId, supportDocument);
 
         // Then
         assertNotNull(result);
@@ -152,7 +158,7 @@ class ChatHistoryServiceImplTest {
         when(chatDataService.getReqModelBotHistoryByChatId(uid, chatId)).thenReturn(null);
 
         // When
-        List<SparkChatRequest.MessageDto> result = chatHistoryService.getSystemBotHistory(uid, chatId);
+        List<SparkChatRequest.MessageDto> result = chatHistoryService.getSystemBotHistory(uid, chatId, supportDocument);
 
         // Then
         assertNotNull(result);
@@ -162,7 +168,7 @@ class ChatHistoryServiceImplTest {
     @Test
     void testGetSystemBotHistory_WithMissingResponse_ShouldSkipAssistantMessage() {
         // Given
-        List<Long> reqIds = Arrays.asList(1L, 2L);
+        List<Long> reqIds = Arrays.asList(2L, 1L); // DESC order (newest first)
         List<ChatRespModelDto> partialResponses = Arrays.asList(respModelDtos.get(0)); // Only first response
 
         when(chatDataService.getReqModelBotHistoryByChatId(uid, chatId)).thenReturn(reqModelDtos);
@@ -170,7 +176,7 @@ class ChatHistoryServiceImplTest {
         when(reqKnowledgeRecordsDataService.findByReqIds(reqIds)).thenReturn(knowledgeRecordsMap);
 
         // When
-        List<SparkChatRequest.MessageDto> result = chatHistoryService.getSystemBotHistory(uid, chatId);
+        List<SparkChatRequest.MessageDto> result = chatHistoryService.getSystemBotHistory(uid, chatId, supportDocument);
 
         // Then
         assertNotNull(result);
@@ -184,11 +190,11 @@ class ChatHistoryServiceImplTest {
     @Test
     void testGetSystemBotHistory_WithEmptyResponseMessage_ShouldSkipAssistantMessage() {
         // Given
-        List<Long> reqIds = Arrays.asList(1L);
-        List<ChatReqModelDto> singleRequest = Arrays.asList(reqModelDtos.get(0));
+        List<Long> reqIds = Arrays.asList(2L); // First element from reqModelDtos
+        List<ChatReqModelDto> singleRequest = Arrays.asList(reqModelDtos.get(0)); // req2
 
         ChatRespModelDto emptyResponse = new ChatRespModelDto();
-        emptyResponse.setReqId(1L);
+        emptyResponse.setReqId(2L); // Match req2
         emptyResponse.setMessage(""); // Empty message
 
         when(chatDataService.getReqModelBotHistoryByChatId(uid, chatId)).thenReturn(singleRequest);
@@ -196,7 +202,7 @@ class ChatHistoryServiceImplTest {
         when(reqKnowledgeRecordsDataService.findByReqIds(reqIds)).thenReturn(knowledgeRecordsMap);
 
         // When
-        List<SparkChatRequest.MessageDto> result = chatHistoryService.getSystemBotHistory(uid, chatId);
+        List<SparkChatRequest.MessageDto> result = chatHistoryService.getSystemBotHistory(uid, chatId, supportDocument);
 
         // Then
         assertNotNull(result);
@@ -207,7 +213,7 @@ class ChatHistoryServiceImplTest {
     @Test
     void testGetHistory_WithValidData_ShouldReturnChatRequestDtoList() {
         // Given
-        List<Long> reqIds = Arrays.asList(1L, 2L);
+        List<Long> reqIds = Arrays.asList(2L, 1L); // DESC order (newest first)
 
         when(chatDataService.getChatRespModelBotHistoryByChatId(uid, chatId, reqIds)).thenReturn(respModelDtos);
 
@@ -247,9 +253,9 @@ class ChatHistoryServiceImplTest {
     @Test
     void testGetHistory_WithMultimodalContent_ShouldHandleCorrectly() {
         // Given
-        List<Long> reqIds = Arrays.asList(2L);
-        List<ChatReqModelDto> multimodalReq = Arrays.asList(reqModelDtos.get(1)); // Has URL
-        List<ChatRespModelDto> multimodalResp = Arrays.asList(respModelDtos.get(1)); // Has content
+        List<Long> reqIds = Arrays.asList(2L); // First element from reqModelDtos (req2)
+        List<ChatReqModelDto> multimodalReq = Arrays.asList(reqModelDtos.get(0)); // req2 has URL and matches resp2
+        List<ChatRespModelDto> multimodalResp = Arrays.asList(respModelDtos.get(1)); // resp2 has content and reqId=2L
 
         when(chatDataService.getChatRespModelBotHistoryByChatId(uid, chatId, reqIds)).thenReturn(multimodalResp);
 
@@ -443,13 +449,13 @@ class ChatHistoryServiceImplTest {
     void testGetHistory_WithNeedHisFlag2_ShouldAddTextualResponse() {
         // Given
         ChatRespModelDto respWithNeedHis2 = new ChatRespModelDto();
-        respWithNeedHis2.setReqId(1L);
+        respWithNeedHis2.setReqId(2L); // Match req2 (first element in reqModelDtos)
         respWithNeedHis2.setMessage("Text response");
         respWithNeedHis2.setContent("multimodal content");
         respWithNeedHis2.setNeedHis(2); // Should add textual response
 
-        List<ChatReqModelDto> singleReq = Arrays.asList(reqModelDtos.get(0));
-        when(chatDataService.getChatRespModelBotHistoryByChatId(uid, chatId, Arrays.asList(1L)))
+        List<ChatReqModelDto> singleReq = Arrays.asList(reqModelDtos.get(0)); // req2
+        when(chatDataService.getChatRespModelBotHistoryByChatId(uid, chatId, Arrays.asList(2L)))
                 .thenReturn(Arrays.asList(respWithNeedHis2));
 
         // When

@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 智能体与微信公众号bind服务实现
+ * Bot WeChat Official Account binding service implementation
  *
  * @author Omuigix
  */
@@ -38,9 +38,9 @@ public class BotOffiaccountServiceImpl implements BotOffiaccountService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void bind(Integer botId, String appid, String uid) {
-        log.info("开始绑定智能体与微信公众号: botId={}, appid={}, uid={}", botId, appid, uid);
+        log.info("Starting to bind bot with WeChat official account: botId={}, appid={}, uid={}", botId, appid, uid);
 
-        // 1. validationbotpermission
+        // 1. Validate bot permission
         ChatBotBase botBase = chatBotBaseMapper.selectById(botId);
         if (botBase == null) {
             throw new BusinessException(ResponseEnum.BOT_NOT_EXISTS);
@@ -51,28 +51,28 @@ public class BotOffiaccountServiceImpl implements BotOffiaccountService {
             throw new BusinessException(ResponseEnum.BOT_NOT_EXISTS);
         }
 
-        // 2. 检查AppID是否已被其他botbind
+        // 2. Check if AppID is already bound by other bot
         BotOffiaccount existingAppidBind = botOffiaccountMapper.selectOne(
                 new LambdaQueryWrapper<BotOffiaccount>()
                         .eq(BotOffiaccount::getAppid, appid)
                         .eq(BotOffiaccount::getStatus, BotOffiaccountStatusEnum.BOUND.getStatus()));
         if (existingAppidBind != null && !Objects.equals(existingAppidBind.getBotId(), botId)) {
-            // unbind旧的bot
+            // Unbind the old bot
             existingAppidBind.setStatus(BotOffiaccountStatusEnum.UNBOUND.getStatus());
             existingAppidBind.setUpdateTime(LocalDateTime.now());
             botOffiaccountMapper.updateById(existingAppidBind);
-            log.info("微信公众号AppID已被其他智能体绑定，解绑旧智能体: appid={}, oldBotId={}",
+            log.info("WeChat AppID already bound by another bot, unbinding old bot: appid={}, oldBotId={}",
                     appid, existingAppidBind.getBotId());
         }
 
-        // 3. 处理当前bot的bind记录
+        // 3. Handle current bot's binding record
         BotOffiaccount currentBotBind = botOffiaccountMapper.selectOne(
                 new LambdaQueryWrapper<BotOffiaccount>()
                         .eq(BotOffiaccount::getBotId, botId)
                         .orderByDesc(BotOffiaccount::getUpdateTime)
                         .last("LIMIT 1"));
         if (currentBotBind == null) {
-            // create新的bind记录
+            // Create new binding record
             BotOffiaccount newBind = BotOffiaccount.builder()
                     .uid(uid)
                     .botId(botId)
@@ -82,28 +82,28 @@ public class BotOffiaccountServiceImpl implements BotOffiaccountService {
                     .updateTime(LocalDateTime.now())
                     .build();
             botOffiaccountMapper.insert(newBind);
-            log.info("创建新的微信绑定记录: botId={}, appid={}", botId, appid);
+            log.info("Created new WeChat binding record: botId={}, appid={}", botId, appid);
         } else {
-            // update现有记录
+            // Update existing record
             currentBotBind.setUid(uid);
             currentBotBind.setAppid(appid);
             currentBotBind.setStatus(BotOffiaccountStatusEnum.BOUND.getStatus());
             currentBotBind.setUpdateTime(LocalDateTime.now());
             botOffiaccountMapper.updateById(currentBotBind);
-            log.info("更新现有微信绑定记录: botId={}, appid={}", botId, appid);
+            log.info("Updated existing WeChat binding record: botId={}, appid={}", botId, appid);
         }
 
-        // 4. publishchannelupdate事件
+        // 4. Publish channel update event
         eventPublisher.publishEvent(new PublishChannelUpdateEvent(
                 this, botId, uid, botBase.getSpaceId(), PublishChannelEnum.WECHAT, true));
 
-        log.info("智能体与微信公众号绑定成功: botId={}, appid={}", botId, appid);
+        log.info("Bot WeChat official account binding successful: botId={}, appid={}", botId, appid);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void unbind(String appid) {
-        log.info("开始解绑微信公众号: appid={}", appid);
+        log.info("Starting to unbind WeChat official account: appid={}", appid);
 
         BotOffiaccount botOffiaccount = botOffiaccountMapper.selectOne(
                 new LambdaQueryWrapper<BotOffiaccount>()
@@ -120,9 +120,9 @@ public class BotOffiaccountServiceImpl implements BotOffiaccountService {
                     this, botOffiaccount.getBotId(), botOffiaccount.getUid(),
                     botBase != null ? botBase.getSpaceId() : null, PublishChannelEnum.WECHAT, false));
 
-            log.info("微信公众号解绑成功: botId={}, appid={}", botOffiaccount.getBotId(), appid);
+            log.info("WeChat official account unbinding successful: botId={}, appid={}", botOffiaccount.getBotId(), appid);
         } else {
-            log.warn("未找到需要解绑的微信公众号记录: appid={}", appid);
+            log.warn("WeChat official account record not found for unbinding: appid={}", appid);
         }
     }
 

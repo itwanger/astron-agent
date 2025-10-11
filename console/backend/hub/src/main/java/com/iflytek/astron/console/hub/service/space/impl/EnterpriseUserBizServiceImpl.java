@@ -64,7 +64,7 @@ public class EnterpriseUserBizServiceImpl implements EnterpriseUserBizService {
             return ApiResult.error(ResponseEnum.ENTERPRISE_TEAM_REMOVE_USER_FAILED);
         }
         enterpriseSpaceService.clearEnterpriseUserCache(enterpriseId, uid);
-        return ApiResult.of(ResponseEnum.ENTERPRISE_TEAM_REMOVE_USER_SUCCESS, null);
+        return ApiResult.success();
     }
 
     /**
@@ -95,7 +95,7 @@ public class EnterpriseUserBizServiceImpl implements EnterpriseUserBizService {
             enterpriseSpaceService.clearEnterpriseUserCache(enterpriseId, uid);
             return ApiResult.error(ResponseEnum.ENTERPRISE_TEAM_UPDATE_ROLE_FAILED);
         }
-        return ApiResult.of(ResponseEnum.ENTERPRISE_TEAM_UPDATE_ROLE_SUCCESS, null);
+        return ApiResult.success();
     }
 
     /**
@@ -118,7 +118,7 @@ public class EnterpriseUserBizServiceImpl implements EnterpriseUserBizService {
             enterpriseSpaceService.clearEnterpriseUserCache(enterpriseId, uid);
             return ApiResult.error(ResponseEnum.ENTERPRISE_TEAM_LEAVE_FAILED);
         }
-        return ApiResult.of(ResponseEnum.ENTERPRISE_TEAM_LEAVE_SUCCESS, null);
+        return ApiResult.success();
     }
 
     /**

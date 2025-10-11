@@ -1,9 +1,9 @@
 package com.iflytek.astron.console.hub.service.chat.impl;
 
 import com.alibaba.fastjson2.JSON;
-import com.iflytek.astron.console.commons.entity.chat.ChatReqModelDto;
-import com.iflytek.astron.console.commons.entity.chat.ChatRespModelDto;
-import com.iflytek.astron.console.commons.entity.workflow.WorkflowEventData;
+import com.iflytek.astron.console.commons.dto.chat.ChatReqModelDto;
+import com.iflytek.astron.console.commons.dto.chat.ChatRespModelDto;
+import com.iflytek.astron.console.commons.dto.workflow.WorkflowEventData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

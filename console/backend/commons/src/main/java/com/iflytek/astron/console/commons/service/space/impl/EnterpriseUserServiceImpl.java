@@ -82,7 +82,13 @@ public class EnterpriseUserServiceImpl extends ServiceImpl<EnterpriseUserMapper,
         if (enterpriseId == null) {
             return Page.of(param.getPageNum(), param.getPageSize());
         }
-        return this.baseMapper.selectVOPageByParam(page, enterpriseId, param.getNickname(), param.getRole());
+        Page<EnterpriseUserVO> result = this.baseMapper.selectVOPageByParam(page, enterpriseId, param.getNickname(), param.getRole());
+        for (EnterpriseUserVO vo : result.getRecords()) {
+            UserInfo userInfo = userInfoDataService.findByUid(vo.getUid()).orElseThrow();
+            vo.setUsername(userInfo.getUsername());
+            vo.setNickname(userInfo.getNickname());
+        }
+        return result;
     }
 
     @Override

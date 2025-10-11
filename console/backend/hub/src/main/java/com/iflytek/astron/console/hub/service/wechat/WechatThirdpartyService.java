@@ -53,9 +53,9 @@ public interface WechatThirdpartyService {
     /**
      * Refresh verification ticket
      *
-     * @param componentVerifyTicket Verification ticket
+     * @param decryptedXml Decrypted XML containing ComponentVerifyTicket
      */
-    void refreshVerifyTicket(String componentVerifyTicket);
+    void refreshVerifyTicket(String decryptedXml);
 
     /**
      * Get third-party platform access token

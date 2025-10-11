@@ -1,6 +1,5 @@
 package com.iflytek.astron.console.hub.service.publish;
 
-import com.iflytek.astron.console.hub.dto.publish.mcp.McpContentResponseDto;
 import com.iflytek.astron.console.hub.dto.publish.mcp.McpPublishRequestDto;
 
 /**
@@ -10,15 +9,6 @@ import com.iflytek.astron.console.hub.dto.publish.mcp.McpPublishRequestDto;
  */
 public interface McpService {
 
-    /**
-     * Get bot MCP content (corresponds to original interface: getMcpContent)
-     *
-     * @param botId Bot ID
-     * @param currentUid Current user ID
-     * @param spaceId Space ID
-     * @return MCP content
-     */
-    McpContentResponseDto getMcpContent(Integer botId, String currentUid, Long spaceId);
 
     /**
      * Publish bot to MCP (corresponds to original interface: publishMCP)

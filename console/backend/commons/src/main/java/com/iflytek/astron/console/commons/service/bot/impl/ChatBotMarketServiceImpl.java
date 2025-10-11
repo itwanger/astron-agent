@@ -30,9 +30,11 @@ public class ChatBotMarketServiceImpl implements ChatBotMarketService {
     public Page<ChatBotMarket> getBotPage(Integer type, String search, Integer pageSize, Integer page) {
         Page<ChatBotMarket> marketPage = new Page<>(page, pageSize);
         LambdaQueryWrapper<ChatBotMarket> queryWrapper = Wrappers.lambdaQuery(ChatBotMarket.class)
-                .eq(ChatBotMarket::getBotType, type)
                 .eq(ChatBotMarket::getIsDelete, NOT_DELETED)
                 .orderByDesc(ChatBotMarket::getCreateTime);
+        if (type != null) {
+            queryWrapper.eq(ChatBotMarket::getBotType, type);
+        }
         if (StringUtils.isNotBlank(search)) {
             queryWrapper.like(ChatBotMarket::getBotName, "%" + search + "%");
         }

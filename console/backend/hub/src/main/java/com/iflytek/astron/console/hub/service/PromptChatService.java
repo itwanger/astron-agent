@@ -17,6 +17,9 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
 
+/**
+ * @author mingsuiyongheng
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -52,6 +55,17 @@ public class PromptChatService {
         }
     }
 
+    /**
+     * Function to execute chat request
+     *
+     * @param request JSON object containing chat request
+     * @param emitter SseEmitter object for sending events
+     * @param streamId Unique identifier of the stream
+     * @param chatReqRecords Chat request records
+     * @param edit Whether in edit mode
+     * @param isDebug Whether in debug mode
+     * @throws IOException If HTTP request fails
+     */
     private void performChatRequest(JSONObject request, SseEmitter emitter, String streamId, ChatReqRecords chatReqRecords, boolean edit, boolean isDebug) throws IOException {
         request.put("stream", true);
         String requestBody = JSON.toJSONString(request);

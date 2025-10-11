@@ -16,6 +16,30 @@ import java.util.List;
 public class BotFileParamUtil {
 
     /**
+     * Determine if it's a multi-file parameter bot
+     *
+     * @param botId Bot ID for logging
+     * @param extraInputsConfig Extra inputs configuration
+     * @return true if it's a multi-file parameter bot, false otherwise
+     */
+    public static boolean isMultiFileParam(Integer botId, List<JSONObject> extraInputsConfig) {
+        if (extraInputsConfig == null || extraInputsConfig.isEmpty()) {
+            log.info("botId: {} is eligible for publishing, extraInputsConfig is empty", botId);
+            return false;
+        }
+
+        long noSupportTypeCount = extraInputsConfig.stream()
+                .filter(obj -> MaasUtil.NO_SUPPORT_TYPE.contains(obj.getString("type")))
+                .count();
+        if (noSupportTypeCount > 0) {
+            log.info("schema.type contains basic data type fields, botId: {}", botId);
+            return true;
+        }
+        log.info("botId: {} is eligible for publishing", botId);
+        return false;
+    }
+
+    /**
      * Get old extraInputsConfig configuration
      *
      * @param userLangChainInfo

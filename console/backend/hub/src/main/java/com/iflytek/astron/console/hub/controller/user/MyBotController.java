@@ -2,8 +2,8 @@ package com.iflytek.astron.console.hub.controller.user;
 
 import com.iflytek.astron.console.commons.annotation.space.SpacePreAuth;
 import com.iflytek.astron.console.commons.dto.bot.BotModelDto;
-import com.iflytek.astron.console.commons.entity.bot.BotDetail;
-import com.iflytek.astron.console.commons.entity.bot.PromptBotDetail;
+import com.iflytek.astron.console.commons.dto.bot.BotDetail;
+import com.iflytek.astron.console.commons.dto.bot.PromptBotDetail;
 import com.iflytek.astron.console.commons.response.ApiResult;
 import com.iflytek.astron.console.commons.service.bot.ChatBotDataService;
 import com.iflytek.astron.console.commons.util.RequestContextUtil;

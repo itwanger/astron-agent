@@ -1,5 +1,7 @@
 package com.iflytek.astron.console.commons.service.bot;
 
+import com.iflytek.astron.console.commons.dto.bot.BotDetail;
+import com.iflytek.astron.console.commons.dto.bot.PromptBotDetail;
 import com.iflytek.astron.console.commons.entity.bot.*;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -178,4 +180,8 @@ public interface ChatBotDataService {
     Map<String, Object> getVcnDetail(String vcnCode);
 
     List<Integer> getReleaseChannel(String uid, Integer botId);
+
+    ChatBotBase findOne(String uid, Long botId);
+
+    void updateChatBotMarket(ChatBotBase chatBotBase);
 }

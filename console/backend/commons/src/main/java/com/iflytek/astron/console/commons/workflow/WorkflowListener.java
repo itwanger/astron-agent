@@ -5,7 +5,7 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.iflytek.astron.console.commons.constant.RedisKeyConstant;
-import com.iflytek.astron.console.commons.entity.workflow.WorkflowEventData;
+import com.iflytek.astron.console.commons.dto.workflow.WorkflowEventData;
 import com.iflytek.astron.console.commons.entity.chat.ChatReqRecords;
 import com.iflytek.astron.console.commons.service.WssListenerService;
 import com.iflytek.astron.console.commons.util.SseEmitterUtil;
@@ -24,6 +24,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * @author mingsuiyongheng
+ */
 @Slf4j
 @NoArgsConstructor
 public class WorkflowListener extends EventSourceListener {
@@ -48,6 +51,14 @@ public class WorkflowListener extends EventSourceListener {
         this.emitter = emitter;
     }
 
+    /**
+     * Method to handle event source
+     *
+     * @param eventSource Event source object
+     * @param id Event unique identifier
+     * @param type Event type
+     * @param data Event data
+     */
     @Override
     public void onEvent(@NotNull EventSource eventSource, String id, String type, @NotNull String data) {
         log.debug("workflow api sse response, sseId:{}, uid:{}, data:{}", sseId, chatReqRecords.getUid(), data);
@@ -166,7 +177,6 @@ public class WorkflowListener extends EventSourceListener {
      *
      * @param jsonObject LLM return data
      * @param backValue Main message
-     * @return
      */
     private String processWorkFlowInterrupt(JSONObject jsonObject, String backValue) {
         WorkflowEventData eventData = jsonObject.getObject("event_data", WorkflowEventData.class);
@@ -181,6 +191,13 @@ public class WorkflowListener extends EventSourceListener {
         return JSON.toJSONString(eventData.getValue().withMessage(backValue));
     }
 
+    /**
+     * Callback method invoked by event source listener when connection fails
+     *
+     * @param eventSource Event source object
+     * @param t Thrown exception
+     * @param response HTTP response object
+     */
     @Override
     public void onFailure(@NotNull EventSource eventSource, Throwable t, Response response) {
         log.error(".....MassListener failed to establish connection with chain-sse....., sseId: {}, uid: {}, chatId: {}", sseId, chatReqRecords.getUid(), chatReqRecords.getChatId(), t);
@@ -229,9 +246,13 @@ public class WorkflowListener extends EventSourceListener {
         }
     }
 
+    /**
+     * Function to handle debug workflow
+     *
+     * @param jsonObject Input JSON object
+     */
     private void processDeBugWorkFlow(JSONObject jsonObject) {
         // debug url has special handling for end frames, for detailed processing please consult Institute
-        // Engineer Zhang Xu
         if (isDebug) {
             JSONObject node = Optional.ofNullable(jsonObject)
                     .map(obj -> obj.getJSONObject("workflow_step"))
@@ -283,7 +304,7 @@ public class WorkflowListener extends EventSourceListener {
 
         if (chatReqRecords != null) {
             completeData.put("chatId", chatReqRecords.getChatId());
-            completeData.put("requestId", chatReqRecords.getId());
+            completeData.put("reqId", chatReqRecords.getId());
         }
 
         return completeData;
