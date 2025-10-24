@@ -253,7 +253,7 @@ const BaseConfig: React.FC<ChatProps> = ({
   const [publishModalShow, setPublishModalShow] = useState(false);
   const [vcnList, setVcnList] = useState<{ vcn: string }[]>([]);
   const [form] = Form.useForm();
-  const [model, setModel] = useState('spark');
+  const [model, setModel] = useState('星火大模型 Spark X1');
   const [modelOptions, setModelOptions] = useState<ModelListData[]>([]);
   const [pendingModelData, setPendingModelData] = useState<{
     modelId?: string;
@@ -561,29 +561,41 @@ const BaseConfig: React.FC<ChatProps> = ({
 
   // 监听 modelOptions 加载完成，处理待回显的模型数据
   useEffect(() => {
-    if (modelOptions.length > 0 && pendingModelData) {
-      const { modelId, modelDomain } = pendingModelData;
-      handleModelDisplay(modelId, modelDomain);
-      setPendingModelData(null); // 清除待处理数据
+    if (modelOptions.length > 0) {
+      if (pendingModelData) {
+        // 更新模式：处理待回显的模型数据
+        const { modelId, modelDomain } = pendingModelData;
+        handleModelDisplay(modelId, modelDomain);
+        setPendingModelData(null); // 清除待处理数据
+      } else if (model === '星火大模型 Spark X1' || !model) {
+        // 创建模式：如果 model 还是初始值或为空，设置为第一个模型的 uniqueKey
+        const firstModel = modelOptions[0];
+        if (firstModel) {
+          setModel(getModelUniqueKey(firstModel, 0));
+        }
+      }
+
+      // 更新 modelList 中的 model 字段
       const firstModel = modelOptions[0];
-      if (!firstModel) return;
-      setModelList((prevList: any[]) =>
-        prevList.map((item, index) => {
-          // 如果已经有 model 字段，就不更新
-          if (item.model) {
-            return item;
-          }
-          // 否则，设置为第一个 modelOption 的 uniqueKey
-          return {
-            ...item,
-            model: getModelUniqueKey(firstModel, 0),
-            modelName: firstModel.modelName,
-            modelIcon: firstModel.modelIcon,
-            modelDomain: firstModel.modelDomain,
-            modelId: firstModel.modelId,
-          };
-        })
-      );
+      if (firstModel) {
+        setModelList((prevList: any[]) =>
+          prevList.map((item, index) => {
+            // 如果已经有 model 字段且不是初始默认值，就不更新
+            if (item.model && item.model !== '') {
+              return item;
+            }
+            // 否则，设置为第一个 modelOption 的 uniqueKey
+            return {
+              ...item,
+              model: getModelUniqueKey(firstModel, 0),
+              modelName: firstModel.modelName,
+              modelIcon: firstModel.modelIcon,
+              modelDomain: firstModel.modelDomain,
+              modelId: firstModel.modelId,
+            };
+          })
+        );
+      }
     }
   }, [modelOptions, pendingModelData]);
 
