@@ -1196,6 +1196,7 @@
       "enableSignUp": true,
       "clientId": "astron-agent-client",
       "redirectUris": [
+        "http://localhost:80/callback",
         "http://localhost/callback"
       ],
       "tokenFormat": "JWT",
